@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de Soporte OSEP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            height: 100vh;
+            overflow: auto;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #800080 0%, #9b30a0 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(128, 0, 128, 0.3);
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+            margin-bottom: 3px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 0.85em;
+            opacity: 0.95;
+        }
+
+        .breadcrumb {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 8px 0;
+            display: none;
+            flex-shrink: 0;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .breadcrumb.active {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .breadcrumb-item {
+            display: inline-block;
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        .breadcrumb-item:not(:last-child)::after {
+            content: " › ";
+            margin: 0 8px;
+            color: #800080;
+        }
+
+        .breadcrumb-item.current {
+            color: #800080;
+            font-weight: bold;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            margin-top: 8px;
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            color: #800080;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            flex-shrink: 0;
+        }
+
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-right: 10px;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
+            border: 2px solid #800080;
+            color: #800080;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(128, 0, 128, 0.2);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(128, 0, 128, 0.1) 0%, rgba(155, 48, 160, 0.1) 100%);
+            transition: left 0.3s ease;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(128, 0, 128, 0.35);
+            border-color: #9b30a0;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #800080 0%, #9b30a0 100%);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #6b006b 0%, #800080 100%);
+        }
+
+        .btn-back {
+            background: linear-gradient(45deg, #5c2a47 0%, #7d4066 100%);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-bottom: 12px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            width: auto;
+            max-width: 120px;
+            cursor: pointer;
+        }
+
+        .btn-back:hover {
+            background: linear-gradient(135deg, #555 0%, #777 100%);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #f0e6f6 0%, #e6d9f0 100%);
+            border-left: 4px solid #800080;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 12px 0;
+            box-shadow: 0 2px 8px rgba(128, 0, 128, 0.1);
+        }
+
+        .info-box h3 {
+            color: #800080;
+            margin-bottom: 6px;
+            font-size: 1em;
+        }
+
+        .info-box p {
+            color: #333;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+
+        .btn-back-flotante.visible {
+            display: inline-block;
+        }
+        
+        .action-steps h3 {
+            font-size: 1em;
+            margin-bottom: 10px;
+            color: #800080;
+        }
+
+        .action-steps h4 {
+            font-size: 0.95em;
+            margin-top: 12px;
+            color: #800080;
+        }
+
+        .action-steps ol, .action-steps ul {
+            margin-left: 20px;
+        }
+
+        .action-steps li {
+            margin: 8px 0;
+            color: #333;
+            line-height: 1.5;
+            font-size: 0.9em;
+        }
+
+        .action-steps strong {
+            color: #800080;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+            border-left: 4px solid #ff9800;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .guide-link {
+            display: inline-block;
+            background: #800080;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            text-decoration: none;
+            margin: 8px 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(128, 0, 128, 0.3);
+            font-size: 0.85em;
+            cursor: pointer;
+        }
+
+        .guide-link:hover {
+            background: #9b30a0;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(128, 0, 128, 0.4);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .icon {
+            font-size: 1.2em;
+            margin-right: 8px;
+        }
+
+        .scrollable-content::-webkit-scrollbar,
+        .content-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-track,
+        .content-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb,
+        .content-wrapper::-webkit-scrollbar-thumb {
+            background: #800080;
+            border-radius: 10px;
+        }
+
+        .scrollable-content::-webkit-scrollbar-thumb:hover,
+        .content-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #9b30a0;
+        }
+
+        .two-column {
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+            margin-top: 12px;
+            width: 100%;
+        }
+
+        .two-column .left {
+            flex: 0 0 42%;
+            min-width: 260px;
+        }
+
+        .two-column .left .button-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .two-column .right {
+            flex: 1 1 58%;
+            min-width: 300px;
+            max-height: calc(80vh - 120px);
+            overflow-y: auto;
+            padding: 0px;
+        }
+
+        .two-column .right {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+        }
+
+        .two-column .right .action-steps:first-of-type {
+            margin-top: 0 !important;
+        }
+
+        .two-column .right .action-steps {
+            margin-top: 4px !important;
+        }
+
+        .two-column .left,
+        .two-column .right {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .two-column .right .action-steps,
+        .two-column .right .info-box,
+        .two-column .right .warning-box {
+            margin-bottom: 12px;
+            border-radius: 10px;
+        }
+
+        .two-column .right .sticky-card {
+            position: sticky;
+            top: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .two-column {
+                flex-direction: column;
+            }
+            .two-column .left .button-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+            .two-column .right {
+                max-height: none;
+                overflow: visible;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-card {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* MODAL PARA PDFs */
+        .pdf-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .pdf-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pdf-modal-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .pdf-modal-header {
+            background: linear-gradient(135deg, #800080 0%, #9b30a0 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pdf-modal-header h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+
+        .pdf-close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            padding: 5px 15px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .pdf-close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .pdf-iframe {
+            width: 100%;
+            height: calc(100% - 60px);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ENCABEZADO -->
+        <div class="header">
+            <h1>🔧 Guía Interactiva de Soporte OSEP</h1>
+            <p>📞 Guía Interactiva de ayuda para operadores - Consultas telefónicas y presenciales</p>
+        </div>
+
+        <!-- BREADCRUMB -->
+        <div id="breadcrumb" class="breadcrumb">
+            <span class="breadcrumb-item">Inicio</span>
+        </div>
+
+        <!-- CONTENEDOR CON SCROLL -->
+        <div class="content-wrapper">
+            <!-- PANTALLA INICIAL -->
+            <div id="screen-inicio" class="main-card">
+                <h2 class="section-title">Seleccione el Contexto de la Consulta</h2>
+                <div class="scrollable-content">
+                    <div class="button-grid">
+                        <button class="btn btn-primary" onclick="selectContexto('afiliado')">
+                            <span class="icon">👤</span>
+                            Afiliado
+                        </button>
+                        <button class="btn btn-primary" onclick="selectContexto('empleado')">
+                            <span class="icon">💼</span>
+                            Empleado
+                        </button>
+                        <button class="btn btn-primary" onclick="selectContexto('farmacia')">
+                            <span class="icon">💊</span>
+                            Prestador - Farmacia
+                        </button>
+                        <button class="btn btn-primary" onclick="selectContexto('profesional')">
+                            <span class="icon">👨‍⚕️</span>
+                            Prestador - Profesional
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANTALLA: AFILIADO -->
+            <div id="screen-afiliado" class="main-card hidden">
+                
+                <h2 class="section-title">Consulta: No puedo ingresar a Mi OSEP</h2>
+                
+                <div class="scrollable-content">
+                    <div class="info-box">
+                        <h3>Paso 1: Verificar instalación de la aplicación</h3>
+                        <p>Pregunte al afiliado: <strong>¿Tiene instalada la app correcta?</strong> (ícono violeta con letras blancas)</p>
+                    </div>
+
+                    <div class="button-grid">
+                        <button class="btn" onclick="showAfiliadoNoApp()">
+                            <span class="icon">❌</span>
+                            NO tiene la app instalada
+                        </button>
+                        <button class="btn" onclick="showAfiliadoSiApp()">
+                            <span class="icon">✅</span>
+                            SÍ tiene la app instalada
+                        </button>
+                    </div>
+
+                    <!-- NO tiene app -->
+                    <div id="afiliado-no-app" class="hidden">
+                        <div class="action-steps">
+                            <h3>Orientación para instalación alternativa</h3>
+                            <p>Recomiende ingresar desde el navegador a: <strong>https://osepmendoza.com.ar/web/</strong></p>
+                            
+                            <h4>Para ANDROID:</h4>
+                            <ol>
+                                <li>Visualizar la pantalla de ingreso</li>
+                                <li>Ir al margen superior derecho</li>
+                                <li>Seleccionar: "Agregar a favoritos ⭐" o "Agregar a pantalla principal"</li>
+                            </ol>
+
+                            <h4>Para IPHONE (Safari):</h4>
+                            <ol>
+                                <li>Ingresar a la página deseada</li>
+                                <li>Tocar el botón "Compartir"</li>
+                                <li>Seleccionar "Añadir a favoritos"</li>
+                                <li>Modificar el nombre si lo desea y tocar "Guardar"</li>
+                            </ol>
+
+                            <a class="guide-link" onclick="mostrarPDF('1 REGISTRO DE USUARIO Y CONTRASEÑA en Android.pdf', 'Guía Rápida - Configurar URL')">📖 Ver Guía Rápida</a>
+                        </div>
+                    </div>
+
+                    <!-- SÍ tiene app -->
+                    <div id="afiliado-si-app" class="hidden">
+                        <div class="info-box">
+                            <h3>Identificar el tipo de error</h3>
+                            <p>¿Qué error aparece cuando intenta ingresar con usuario y contraseña?</p>
+                        </div>
+
+                        <!-- CONTENEDOR DE DOS COLUMNAS -->
+                        <div class="two-column">
+                            <!-- IZQUIERDA: botones -->
+                            <div class="left">
+                                <div class="button-grid">
+                                    <button class="btn" onclick="showAfiliadoError('no-usuario')">
+                                        <span class="icon">👤</span> No tengo usuario
+                                    </button>
+                                    <button class="btn" onclick="showAfiliadoError('credenciales')">
+                                        <span class="icon">🔑</span> Credenciales incorrectas
+                                    </button>
+                                    <button class="btn" onclick="showAfiliadoError('pantalla-blanco')">
+                                        <span class="icon">🖥️</span> Pantalla en blanco
+                                    </button>
+                                    <button class="btn" onclick="showAfiliadoError('no-email')">
+                                        <span class="icon">✉️</span> No llega email
+                                    </button>
+                                    <button class="btn" onclick="showAfiliadoError('datos-invalidos')">
+                                        <span class="icon">⚠️</span> Datos inválidos
+                                    </button>
+                                    <button class="btn" onclick="showAfiliadoError('cerrar-sesion')">
+                                        <span class="icon">↩️</span> Cerrar sesión
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- DERECHA: Área de acción -->
+                            <div class="right">
+                                <div id="afiliado-no-usuario" class="action-steps hidden sticky-card">
+                                    <h3>Procedimiento: No tengo usuario</h3>
+                                    <ol>
+                                        <li><strong>Solicitar DNI</strong> y verificar en SISAO /Sistemas de Afiliaciones que exista el afiliado</li>
+                                        <li><strong>Corroborar</strong> que se utilice el número de afiliado vigente</li>
+                                        <li><strong>Identificar:</strong> ¿Tiene usuario generado?
+                                            <ul style="margin-top: 8px;">
+                                                <li><strong>NO:</strong> Orientar al procedimiento para <strong>Crear Usuario</strong></li>
+                                                <li><strong>SÍ:</strong> Pedir correo y guiar a <strong>"¿Olvidó usuario/contraseña?"</strong></li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                    <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-4" class="guide-link" target="_blank">📖 Ver Guía para Crear Usuario</a>
+                                    <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-5" class="guide-link" target="_blank">📖 Ver Guía de ¿Olvidó usuario/contraseña?</a>   
+                                </div>
+
+                                <div id="afiliado-credenciales" class="action-steps hidden sticky-card">
+                                    <h3>Procedimiento: Credenciales incorrectas</h3>
+                                    <ol>
+                                        <li><strong>Solicitar DNI</strong> y verificar usuario</li>
+                                        <li><strong>Pedir correo electrónico vigente</strong></li>
+                                        <li><strong>Verificar</strong> en admin o actualizar</li>
+                                        <li><strong>Guiar</strong> a "¿Olvidó usuario/contraseña?"</li>
+                                    </ol>
+                                    <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-5" class="guide-link" target="_blank">📖 Ver Guía </a>
+                                </div>
+
+                                <div id="afiliado-pantalla-blanco" class="action-steps hidden sticky-card">
+                                    <h3>Solución: Pantalla en blanco</h3>
+                                    <ol>
+                                        <li><strong>Verificar</strong> conexión a internet</li>
+                                        <li><strong>Borrar</strong> caché y cookies</li>
+                                        <li><strong>Reiniciar</strong> el dispositivo</li>
+                                    </ol>
+                                </div>
+
+                                <div id="afiliado-no-email" class="action-steps hidden sticky-card">
+                                    <h3>Procedimiento: No llega email</h3>
+                                    <div class="warning-box">
+                                        <strong>⚠️ IMPORTANTE:</strong> Solo lo gestiona el Afiliado directamente.
+                                    </div>
+                                    <ol>
+                                        <li><strong>Solicitar DNI</strong> y verificar</li>
+                                        <li><strong>Pedir correo vigente</strong></li>
+                                        <li><strong>Verificar/actualizar</strong> en admin</li>
+                                    </ol>
+                                    
+                                </div>
+
+                                <div id="afiliado-datos-invalidos" class="action-steps hidden sticky-card">
+                                    <h3>Solución: Datos inválidos</h3>
+                                    <ol>
+                                        <li><strong>Solicitar DNI</strong> y revisar datos</li>
+                                        <li><strong>Verificar</strong> número de afiliado vigente</li>
+                                        <li><strong>Si error en fecha nacimiento:</strong> orientar a afiliaciones</li>
+                                    </ol>
+                                </div>
+
+                                <div id="afiliado-cerrar-sesion" class="action-steps hidden sticky-card">
+                                    <h3>Solución: Cerrar sesión</h3>
+                                    <ul style="margin-left: 20px; margin-top: 8px;">
+                                        <li>Hacer clic en ícono de "personita"</li>
+                                        <li>Elegir opción "SALIR"</li>
+                                        <li>O tocar rectángulo con flecha (arriba derecha)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANTALLA: EMPLEADO -->
+            <div id="screen-empleado" class="main-card hidden">
+                
+                <h2 class="section-title">Consultas de Empleado</h2>
+                
+                <div class="scrollable-content">
+                    <div class="info-box">
+                        <h3>Seleccione el tipo de consulta</h3>
+                        <p>Elija la opción que corresponda a la consulta del empleado</p>
+                    </div>
+
+                    
+                        <button class="btn" onclick="showEmpleadoConsulta('correo')">
+                            <span class="icon">📧</span>
+                            Correo Electrónico Institucional
+                        </button>
+                        <button class="btn" onclick="showEmpleadoConsulta('sisao')">
+                            <span class="icon">💻</span>
+                            SISAO
+                        </button>
+                        <button class="btn" onclick="showEmpleadoConsulta('agendas')">
+                            <span class="icon">📅</span>
+                            Problemas de Agendas 
+                        </button>
+                        <button class="btn" onclick="showEmpleadoConsulta('pc-tecnico')">
+                            <span class="icon">🔧</span>
+                            Inconvenientes Técnicos PC
+                        </button>
+                        <button class="btn" onclick="showEmpleadoConsulta('gde')">
+                            <span class="icon">📁</span>
+                            GDE
+                        </button>
+                        <button class="btn" onclick="showEmpleadoConsulta('sga')">
+                            <span class="icon">📊</span>
+                            SGA
+                        </button>
+                        <button class="btn" onclick="showEmpleadoConsulta('nextcloud')">
+                            <span class="icon">☁️</span>
+                            Nextcloud
+                        </button>
+                        <button class="btn" onclick="showEmpleadoConsulta('siga')">
+                            <span class="icon">📋</span>
+                            SIGA
+                        </button>
+                                                                  
+
+                    <!-- Correo Institucional -->
+                    <div id="emp-correo" class="hidden">
+                        <div class="action-steps">
+                            <h3>Correo Electrónico Institucional (Zimbra)</h3>
+                            
+                            <div class="info-box">
+                                <h3>Pregunta inicial</h3>
+                                <p><strong>¿Puede acceder a la página de login del Zimbra?</strong></p>
+                            </div>
+                            <div class="info-box">
+                            <h4>SI puede acceder:</h4>
+                            <ol>
+                            </div>
+                                <li>Consultar sobre el usuario que está utilizando tal cual lo escribe (<strong>siempre el propio, nunca se podrá gestionar por otro agente</strong>)</li>
+                                <li>Solicitar DNI y consultar con el administrador de correos o LDAP</li>
+                                <li>¿El usuario ofrecido coincide con el registrado en Zimbra?
+                                    <ul style="margin-top: 8px;">
+                                        <li><strong>SÍ:</strong> Solicitar al administrador de Zimbra el blanqueo de contraseña. Informar que todos los accesos a los servicios LDAP serán actualizados</li>
+                                        <li><strong>NO:</strong> Solicitar que su jefe realice el pedido a través de GDE pidiendo la creación de su cuenta de correo correspondiente</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <div class="warning-box">
+                                <strong>⚠️ Causas comunes de bloqueo:</strong>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li><strong>Error 400:</strong> El correo está con capacidad máxima y nunca lo han limpiado</li>
+                                    <li><strong>Bloqueo automático:</strong> No ingresar al correo durante más de 3 meses</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SISAO -->
+                    <div id="emp-sisao" class="hidden">
+                        <div class="action-steps">
+                            <h3>SISAO</h3>
+                            
+                            <div class="info-box">
+                                <h3>Pregunta inicial</h3>
+                                <p><strong>¿En qué instancia no puede ingresar a SISAO?</strong></p>
+                            </div>
+                            
+                            <div class="info-box">
+                            <h4>SI sabe su usuario y correo:</h4>
+                            <p>Si se olvido la contraseña llamar al 0810-810-8222 solicitando el blanqueo de contraseña.</p>
+                            <p>Si lo que solicita es cambiar la contraseña, se realiza unicamente desde el correo institucional.</p>
+
+                            <h4>NO sabe su usuario:</h4>
+                            <ol>
+                                <li>Pedir nombre de usuario para ver si tiene un usuario en SISAO</li>
+                                <li>Consultar si el correo registrado es el correcto o hay que modificar</li>
+                            </ol>
+                            </div>
+                            <h4>Problemas específicos:</h4>
+                            
+                            <div class="info-box">
+                                <h3>No abre la ventana del firmador</h3>
+                                <p>La pantalla se pone en blanco al intentar firmar</p>
+                                <ul style="margin-left: 20px;">
+                                    <li>Debe habilitar las ventanas emergentes en el navegador Chrome</li>
+                                    <li>Restablecer la página (F5)</li>
+                                    <li>Volver a firmar las recetas</li>
+                                </ul>
+                            </div>
+
+                            <div class="info-box">
+                                <h3>No recuerdo la contraseña para firmar</h3>
+                                <p><strong>Solución:</strong> Debe solicitar nuevamente turno para que se le haga nuevamente el proceso de la firma</p>
+                            </div>
+
+                            <div class="info-box">
+                                <h3>Baneo de contraseña</h3>
+                                <p>Debe esperar 15 minutos para que se restablezca la página y pueda volver a firmar</p>
+                            </div>
+
+                            <div class="info-box">
+                                <h3>Pantalla en blanco</h3>
+                                <p>Recomendar que limpie los cookies y caché del navegador</p>
+                            </div>
+
+                            <div class="info-box">
+                                <h3>Cerrar sesión</h3>
+                                <ul style="margin-left: 20px;">
+                                    <li>Hacer clic en personita y elegir la opción SALIR</li>
+                                    <li>O arriba a la derecha tocar el rectángulo con una flecha</li>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    <!-- PC Técnico -->
+                    <div id="emp-pc-tecnico" class="hidden">
+                        <div class="action-steps">
+                            <h3>Inconvenientes técnicos en su PC de trabajo</h3>
+                            
+                            <p><strong>Indagar en qué instancia no puede realizar en su PC</strong></p>
+
+                            <h4>SI sabe su usuario y correo:</h4>
+                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
+
+                            <h4>NO sabe su usuario:</h4>
+                            <ol>
+                                <li>Pedir nombre de usuario para ver si tiene un usuario en SISAO</li>
+                                <li>Consultar si el correo registrado es el correcto o hay que modificar</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- GDE -->
+                    <div id="emp-gde" class="hidden">
+                        <div class="action-steps">
+                            <h3>GDE - Gestión Documental Electrónica</h3>
+                            
+                            <div class="warning-box">
+                                <strong>⚠️ VERIFICAR:</strong> Esta sección requiere verificación con el equipo técnico
+                            </div>
+
+                            <p><strong>Indagar en qué instancia no puede realizar en GDE</strong></p>
+
+                            <h4>SI sabe su usuario y correo:</h4>
+                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
+
+                            <h4>NO sabe su usuario:</h4>
+                            <ol>
+                                <li>Pedir nombre de usuario para ver si tiene un usuario en GDE</li>
+                                <li>Solicitar captura de pantalla para verificar el error</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- SGA -->
+                    <div id="emp-sga" class="hidden">
+                        <div class="action-steps">
+                            <h3>SGA - Sistema de Gestión Administrativa</h3>
+                            
+                            <div class="warning-box">
+                                <strong>⚠️ VERIFICAR:</strong> Esta sección requiere verificación con el equipo técnico
+                            </div>
+
+                            <p><strong>Indagar en qué instancia no puede realizar en SGA</strong></p>
+
+                            <h4>SI sabe su usuario y correo:</h4>
+                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
+
+                            <h4>NO sabe su usuario:</h4>
+                            <ol>
+                                <li>Indicar que se debe comunicar a la oficina de Personal</li>
+                                <li>Comunicarse a través de ALMA o la página web</li>
+                                <li>Colocar los datos que solicita la aplicación</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Nextcloud -->
+                    <div id="emp-nextcloud" class="hidden">
+                        <div class="action-steps">
+                            <h3>Nextcloud - Almacenamiento en la Nube</h3>
+                            
+                            <div class="warning-box">
+                                <strong>⚠️ VERIFICAR:</strong> Esta sección requiere verificación con el equipo técnico
+                            </div>
+
+                            <p><strong>Indagar en qué instancia no puede realizar en Nextcloud</strong></p>
+
+                            <h4>SI sabe su usuario y correo:</h4>
+                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
+
+                            <h4>NO sabe su usuario:</h4>
+                            <ol>
+                                <li>Pedir nombre de usuario para ver si tiene un usuario en LDAP</li>
+                                <li>Solicitar captura de pantalla para verificar el error</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- SIGA -->
+                    <div id="emp-siga" class="hidden">
+                        <div class="action-steps">
+                            <h3>SIGA - Sistema Integrado de Gestión Administrativa</h3>
+                            
+                                <p>    <li> Indagar en qué instancia no puede realizar en SIGA </li> </p>
+                           
+    <p>    <li>  En caso de requerir escalamiento de la solución,  derivar la consultar a <strong> Eugenia Alfonso (eugenia.alfonso@osep.mendoza.gov.ar)</strong> o <strong>Florencia Vincenti (florencia.vincenti@osep.mendoza.gov.ar)</strong> </li></p>                        </div>
+                    </div>
+                    
+                  <!-- Problemas de Agendas -->
+                    <div id="emp-agendas" class="hidden">
+                        <div class="action-steps">
+                            <h3>Problemas de Convenio</h3>
+                                
+                                <ul style="margin-left: 20px;">
+                                    <li>1. Pedir matrícula,revisar en sistemas si tiene registrado usuario y convenio.</li>
+                                    <li>2. Corroborar que el Empleado use el usuario correcto y que este dentro de dicho convenio.</li>
+                                    <li>3. Si el error se encuentra en el convenio, orientar para que solicite la configuración de dicho convenio a Convenios para que corrija ese dato. Llamando a los números <strong>4615876-4615051.</strong></li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANTALLA: FARMACIA -->
+            <div id="screen-farmacia" class="main-card hidden">
+                <button class="btn btn-back" onclick="goBack()">⬅ Volver</button>
+                <h2 class="section-title">Consulta: Problemas con una receta</h2>
+                
+                <div class="scrollable-content">
+                    <div class="info-box">
+                        <h3>Pregunta Inicial</h3>
+                        <p><strong>¿La farmacia ha consumido la receta?</strong></p>
+                    </div>
+
+                    <div class="button-grid">
+                        <button class="btn" onclick="showFarmaciaConsumo('si')">
+                            <span class="icon">✅</span>
+                            SÍ, ya consumió la receta
+                        </button>
+                        <button class="btn" onclick="showFarmaciaConsumo('no')">
+                            <span class="icon">❌</span>
+                            NO, no la ha consumido
+                        </button>
+                    </div>
+
+                    <div id="farmacia-si" class="action-steps hidden">
+                        <h3>Acción: Derivar a Auditoría</h3>
+                        <p><strong>Sugerir y dar contacto</strong> para que se comunique con Auditoría de Farmacias.</p>
+                    </div>
+
+                    <div id="farmacia-no" class="hidden">
+                        <div class="action-steps">
+                            <h3>Procedimiento de verificación en SISAO</h3>
+                            <ol>
+                                <li><strong>Solicitar:</strong> Número de receta y afiliado</li>
+                                <li><strong>Consultar</strong> simulación en SISAO: Farmacia → Receta → Transacción</li>
+                                <li><strong>Leer mensaje</strong> y actuar según corresponda:</li>
+                            </ol>
+                        </div>
+
+                        <div class="button-grid">
+                            <button class="btn" onclick="showFarmaciaError('consumida')">Receta consumida</button>
+                            <button class="btn" onclick="showFarmaciaError('token')">TOKEN inválido</button>
+                            <button class="btn" onclick="showFarmaciaError('prescriptor')">No coincide prescriptor</button>
+                            <button class="btn" onclick="showFarmaciaError('porcentaje')">No coincide porcentaje</button>
+                        </div>
+
+                        <div id="farmacia-receta-consumida" class="info-box hidden">
+                            <h3>Receta ya consumida</h3>
+                            <p><strong>Acción:</strong> Dar lugar y fecha del consumo.</p>
+                        </div>
+
+                        <div id="farmacia-token-invalido" class="info-box hidden">
+                            <h3>TOKEN inválido</h3>
+                            <p><strong>Acción:</strong> Asegurarse de recibir token vigente del afiliado correcto.</p>
+                        </div>
+
+                        <div id="farmacia-no-coincide-prescriptor" class="info-box hidden">
+                            <h3>No coincide prescriptor</h3>
+                            <p><strong>Acción:</strong> Revisar y corregir carga manual en la Farmacia.</p>
+                        </div>
+
+                        <div id="farmacia-no-coincide-porcentaje" class="info-box hidden">
+                            <h3>No coincide porcentaje</h3>
+                            <p><strong>Acción:</strong> Revisar y corregir carga manual en la Farmacia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANTALLA: PROFESIONAL -->
+            <div id="screen-profesional" class="main-card hidden">
+                <button class="btn btn-back" onclick="goBack()">⬅ Volver</button>
+                <h2 class="section-title">Consulta: No puedo ingresar a SISAO o Firmar</h2>
+                
+                <div class="scrollable-content">
+                    <div class="info-box">
+                        <h3>Pregunta Inicial</h3>
+                        <p><strong>¿Sabe cuál es su usuario y correo registrado?</strong></p>
+                    </div>
+
+                    <div class="button-grid">
+                        <button class="btn" onclick="showProfesionalSabe('si')">
+                            <span class="icon">✅</span>
+                            SÍ, sé mi usuario y correo
+                        </button>
+                        <button class="btn" onclick="showProfesionalSabe('no')">
+                            <span class="icon">❌</span>
+                            NO sé mi usuario/correo
+                        </button>
+                    </div>
+
+                    <div id="profesional-si-sabe" class="action-steps hidden">
+                        <h3>Solución: Recuperación de acceso</h3>
+                        <p><strong>Indicar:</strong> Debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar.</p>
+                    </div>
+
+                    <div id="profesional-no-sabe" class="hidden">
+                        <div class="action-steps">
+                            <h3>Procedimiento de verificación</h3>
+                            <ol>
+                                <li><strong>Solicitar matrícula</strong> para verificar usuario</li>
+                                <li><strong>Consultar</strong> si correo es correcto o hay que modificar</li>
+                                <li><strong>Verificar</strong> si tiene firma digital registrada</li>
+                            </ol>
+                        </div>
+
+                        <h3 style="color: #800080; margin: 20px 0 10px;">Problemas específicos:</h3>
+                        <div class="button-grid">
+                            <button class="btn" onclick="showProfesionalProblema('usuario')">Usuario/contraseña incorrecta</button>
+                            <button class="btn" onclick="showProfesionalProblema('telefono')">Cambié de teléfono</button>
+                            <button class="btn" onclick="showProfesionalProblema('token')">Recuperar Token</button>
+                            <button class="btn" onclick="showProfesionalProblema('firmador')">No abre firmador</button>
+                            <button class="btn" onclick="showProfesionalProblema('contrasenia')">No recuerdo contraseña firma</button>
+                            <button class="btn" onclick="showProfesionalProblema('baneo')">Baneo de contraseña</button>
+                            <button class="btn" onclick="showProfesionalProblema('pantalla-blanco')">Pantalla en blanco</button>
+                            <button class="btn" onclick="showProfesionalProblema('cerrar-sesion')">Cerrar sesión</button>
+                            <button class="btn" onclick="showProfesionalProblema('olvido-proceso')">Ya hice "Olvidó contraseña"</button>
+                        </div>
+
+                        <div id="prof-usuario-incorrecto" class="action-steps hidden">
+                            <h3>Solución: Usuario/contraseña incorrectos</h3>
+                            <ol>
+                                <li><strong>Solicitar matrícula</strong> y revisar en sistemas</li>
+                                <li><strong>Corroborar</strong> que tenga usuario generado vigente</li>
+                                <li><strong>Orientar</strong> para que se comunique con Oficina de Prestadores</li>
+                                <li><strong>Recuperar</strong> usuario y contraseña mediante "¿Olvidó su usuario y/o contraseña?"</li>
+                            </ol>
+                        </div>
+
+                        <div id="prof-cambio-telefono" class="action-steps hidden">
+                            <h3>Solución: Cambió de teléfono</h3>
+                            <p><strong>Indicar el siguiente procedimiento:</strong></p>
+                            <ul style="margin-left: 20px; margin-top: 8px;">
+                                <li>Ingresar en la esquina superior derecha de la pantalla</li>
+                                <li>Seleccionar la dirección de correo electrónico asociada a la cuenta</li>
+                                <li>Configurar nuevamente la Contraseña de un Solo Uso (OTP)</li>
+                            </ul>
+                        </div>
+
+                        <div id="prof-recuperar-token" class="action-steps hidden">
+                            <h3>Solución: Recuperar Token</h3>
+                            <p><strong>Solicitar envío de email a:</strong></p>
+                            <ul style="margin-left: 20px; margin-top: 8px;">
+                                <li>Dirección: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13607c637c6167764c607a6067767e7260537c6076633d7e767d777c69723d747c653d7261">[email&#160;protected]</a></strong></li>
+                                <li>El usuario recibirá un instructivo por email</li>
+                                <li>Seguir las instrucciones para blanquear el token</li>
+                                <li>Generar un nuevo token siguiendo el proceso indicado</li>
+                            </ul>
+                        </div>
+
+                        <div id="prof-no-abre-firmador" class="action-steps hidden">
+                            <h3>Solución: No abre ventana del firmador</h3>
+                            <p>La pantalla muestra mensaje en blanco al intentar firmar:</p>
+                            <ul style="margin-left: 20px; margin-top: 8px;">
+                                <li>Solicitar que <strong>habilite las ventanas emergentes</strong> en el navegador</li>
+                                <li>En Chrome: verificar configuración de ventanas emergentes</li>
+                                <li><strong>Restablecer la página</strong> (F5 o botón actualizar)</li>
+                                <li>Intentar firmar nuevamente las recetas</li>
+                            </ul>
+                        </div>
+
+                        <div id="prof-olvido-contrasenia" class="action-steps hidden">
+                            <h3>Solución: Olvidó contraseña para firmar</h3>
+                            <p><strong>Proceso requerido:</strong></p>
+                            <ul style="margin-left: 20px; margin-top: 8px;">
+                                <li>Debe <strong>solicitar nuevamente turno presencial</strong></li>
+                                <li>Se realizará el proceso de generación de firma digital nuevamente</li>
+                                <li>Contactar con la Oficina de Prestadores para agendar turno</li>
+                            </ul>
+                        </div>
+
+                        <div id="prof-baneo-contrasenia" class="action-steps hidden">
+                            <h3>Solución: Baneo de contraseña</h3>
+                            <p>Sistema bloqueado temporalmente:</p>
+                            <ul style="margin-left: 20px; margin-top: 8px;">
+                                <li>El sistema muestra mensaje de bloqueo al intentar firmar</li>
+                                <li><strong>Debe esperar 15 minutos</strong> para que se restablezca</li>
+                                <li>No intentar ingresar durante el tiempo de espera</li>
+                                <li>Transcurrido el tiempo, la página se restablecerá automáticamente</li>
+                                <li>Podrá volver a firmar normalmente</li>
+                            </ul>
+                        </div>
+
+                        <div id="prof-pantalla-blanco" class="action-steps hidden">
+                            <h3>Solución: Pantalla en blanco</h3>
+                            <p><strong>Recomendar limpieza de navegador:</strong></p>
+                            <ol>
+                                <li>Limpiar cookies del navegador</li>
+                                <li>Limpiar caché del navegador</li>
+                                <li>Cerrar y volver a abrir el navegador</li>
+                                <li>Intentar ingresar nuevamente a la aplicación</li>
+                            </ol>
+                        </div>
+
+                        <div id="prof-cerrar-sesion" class="action-steps hidden">
+                            <h3>Solución: No sabe cómo cerrar sesión</h3>
+                            <p><strong>Opciones para cerrar sesión:</strong></p>
+                            <ul style="margin-left: 20px; margin-top: 8px;">
+                                <li><strong>Opción 1:</strong> Hacer clic en el ícono de personita y elegir "SALIR"</li>
+                                <li><strong>Opción 2:</strong> En la esquina superior derecha, tocar el rectángulo con flecha</li>
+                                <li><strong>Opción 3:</strong> Buscar el ícono de puerta con flecha para salir</li>
+                            </ul>
+                        </div>
+
+                        <div id="prof-olvido-proceso" class="action-steps hidden">
+                            <h3>Ya realizó "Olvidó usuario/contraseña"</h3>
+                            <div class="info-box">
+                                <h3>¿Qué situación se presenta?</h3>
+                            </div>
+                            <div class="button-grid">
+                                <button class="btn" onclick="showSubProblema('datos-incorrectos')">Le figura "Datos Incorrectos"</button>
+                                <button class="btn" onclick="showSubProblema('no-llega-email')">No le llega el email de recuperación</button>
+                            </div>
+                            
+                            <div id="subprob-datos-incorrectos" class="info-box hidden">
+                                <h3>Datos Incorrectos</h3>
+                                <p><strong>Acción:</strong> Verificar los datos ingresados y asegurar que coincidan con los registrados en el sistema. Si persiste, contactar Oficina de Prestadores.</p>
+                            </div>
+
+                            <div id="subprob-no-llega-email" class="info-box hidden">
+                                <h3>No llega email de recuperación</h3>
+                                <ul style="margin-left: 20px; margin-top: 8px;">
+                                    <li>Verificar carpeta de spam/correo no deseado</li>
+                                    <li>Confirmar que el correo electrónico esté correctamente registrado</li>
+                                    <li>Si el correo es incorrecto, contactar Oficina de Prestadores para actualización</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL PARA MOSTRAR PDFs -->
+        <div id="pdfModal" class="pdf-modal">
+            <div class="pdf-modal-content">
+                <div class="pdf-modal-header">
+                    <h3 id="pdfTitulo">Guía Rápida</h3>
+                    <button class="pdf-close-btn" onclick="cerrarPDF()">✕</button>
+                </div>
+                <iframe id="pdfIframe" class="pdf-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        let navigationHistory = ['inicio'];
+
+        function selectContexto(contexto) {
+            hideAllScreens();
+            document.getElementById('screen-' + contexto).classList.remove('hidden');
+            navigationHistory.push(contexto);
+            updateBreadcrumb(contexto);
+        }
+
+        function goBack() {
+            if (navigationHistory.length > 1) {
+                hideAllScreens();
+                hideAllSubsections();
+                
+                navigationHistory.pop();
+                
+                const previousScreen = navigationHistory[navigationHistory.length - 1];
+                if (previousScreen === 'inicio') {
+                    document.getElementById('screen-inicio').classList.remove('hidden');
+                    document.getElementById('breadcrumb').classList.remove('active');
+                } else {
+                    document.getElementById('screen-' + previousScreen).classList.remove('hidden');
+                    updateBreadcrumb(previousScreen);
+                }
+            }
+        }
+
+        function hideAllScreens() {
+            const screens = ['inicio', 'afiliado', 'empleado', 'farmacia', 'profesional'];
+            screens.forEach(screen => {
+                document.getElementById('screen-' + screen).classList.add('hidden');
+            });
+        }
+
+        function hideAllSubsections() {
+            document.querySelectorAll('.action-steps, .info-box').forEach(el => {
+                if (el.id && el.id !== 'breadcrumb' && !el.parentElement.classList.contains('info-box')) {
+                    el.classList.add('hidden');
+                }
+            });
+        }
+
+        function updateBreadcrumb(current) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            const titles = {
+                'afiliado': 'Afiliado',
+                'empleado': 'Empleado',
+                'farmacia': 'Prestador - Farmacia',
+                'profesional': 'Prestador - Profesional'
+            };
+
+            const botonVolver = ['empleado', 'afiliado'].includes(current)
+    ? `<button class="btn btn-back" onclick="goBack()">⬅ Volver</button>`
+    : '';
+
+        breadcrumb.innerHTML =
+    '<button class="btn btn-back" onclick="goBack()">⬅ Volver</button>' +
+    '<span class="breadcrumb-item">Inicio</span>' +
+    '<span class="breadcrumb-item current">' + titles[current] + '</span>';
+            breadcrumb.classList.add('active');
+        }
+
+        // FUNCIONES SECCIÓN AFILIADO
+        function showAfiliadoNoApp() {
+            document.getElementById('afiliado-si-app').classList.add('hidden');
+            document.getElementById('afiliado-no-app').classList.remove('hidden');
+        }
+
+        function showAfiliadoSiApp() {
+            document.getElementById('afiliado-no-app').classList.add('hidden');
+            document.getElementById('afiliado-si-app').classList.remove('hidden');
+        }
+
+        function showAfiliadoError(tipo) {
+            const errores = [
+                'afiliado-no-usuario',
+                'afiliado-credenciales',
+                'afiliado-pantalla-blanco',
+                'afiliado-no-email',
+                'afiliado-datos-invalidos',
+                'afiliado-cerrar-sesion'
+            ];
+            errores.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            const target = document.getElementById('afiliado-' + tipo);
+            if (target) target.classList.remove('hidden');
+        }
+
+        // FUNCIONES SECCIÓN EMPLEADO
+        function showEmpleadoConsulta(tipo) {
+            const consultas = [
+            'emp-correo',
+            'emp-sisao',
+            'emp-pc-tecnico',
+            'emp-gde',
+            'emp-sga',
+            'emp-nextcloud',
+            'emp-siga',
+            'emp-agendas'  
+        ];
+            consultas.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            document.getElementById('emp-' + tipo).classList.remove('hidden');
+        }
+
+        // FUNCIONES SECCIÓN FARMACIA
+        function showFarmaciaConsumo(respuesta) {
+            if (respuesta === 'si') {
+                document.getElementById('farmacia-no').classList.add('hidden');
+                document.getElementById('farmacia-si').classList.remove('hidden');
+            } else {
+                document.getElementById('farmacia-si').classList.add('hidden');
+                document.getElementById('farmacia-no').classList.remove('hidden');
+            }
+        }
+
+        function showFarmaciaError(tipo) {
+            const mensajes = [
+                'farmacia-receta-consumida',
+                'farmacia-token-invalido',
+                'farmacia-no-coincide-prescriptor',
+                'farmacia-no-coincide-porcentaje'
+            ];
+            mensajes.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+
+            const idMap = {
+                'consumida': 'farmacia-receta-consumida',
+                'token': 'farmacia-token-invalido',
+                'prescriptor': 'farmacia-no-coincide-prescriptor',
+                'porcentaje': 'farmacia-no-coincide-porcentaje'
+            };
+            document.getElementById(idMap[tipo]).classList.remove('hidden');
+        }
+
+        // FUNCIONES SECCIÓN PROFESIONAL
+        function showProfesionalSabe(respuesta) {
+            if (respuesta === 'si') {
+                document.getElementById('profesional-no-sabe').classList.add('hidden');
+                document.getElementById('profesional-si-sabe').classList.remove('hidden');
+            } else {
+                document.getElementById('profesional-si-sabe').classList.add('hidden');
+                document.getElementById('profesional-no-sabe').classList.remove('hidden');
+            }
+        }
+
+        function showProfesionalProblema(tipo) {
+            const allProblemas = [
+                'prof-usuario-incorrecto',
+                'prof-cambio-telefono',
+                'prof-recuperar-token',
+                'prof-no-abre-firmador',
+                'prof-olvido-contrasenia',
+                'prof-baneo-contrasenia',
+                'prof-pantalla-blanco',
+                'prof-cerrar-sesion',
+                'prof-olvido-proceso'
+            ];
+            
+            allProblemas.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.classList.add('hidden');
+                }
+            });
+
+            const idMap = {
+                'usuario': 'prof-usuario-incorrecto',
+                'telefono': 'prof-cambio-telefono',
+                'token': 'prof-recuperar-token',
+                'firmador': 'prof-no-abre-firmador',
+                'contrasenia': 'prof-olvido-contrasenia',
+                'baneo': 'prof-baneo-contrasenia',
+                'pantalla-blanco': 'prof-pantalla-blanco',
+                'cerrar-sesion': 'prof-cerrar-sesion',
+                'olvido-proceso': 'prof-olvido-proceso'
+            };
+            
+            const targetId = idMap[tipo];
+            if (targetId) {
+                document.getElementById(targetId).classList.remove('hidden');
+            }
+        }
+
+        function showSubProblema(tipo) {
+            document.getElementById('subprob-datos-incorrectos').classList.add('hidden');
+            document.getElementById('subprob-no-llega-email').classList.add('hidden');
+            
+            if (tipo === 'datos-incorrectos') {
+                document.getElementById('subprob-datos-incorrectos').classList.remove('hidden');
+            } else if (tipo === 'no-llega-email') {
+                document.getElementById('subprob-no-llega-email').classList.remove('hidden');
+            }
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Guía Interactiva OSEP cargada correctamente');
+        });
+
+        // FUNCIÓN PARA MOSTRAR PDFs EN MODAL
+        function mostrarPDF(nombreArchivo, titulo) {
+            const modal = document.getElementById('pdfModal');
+            const iframe = document.getElementById('pdfIframe');
+            const tituloElement = document.getElementById('pdfTitulo');
+            
+            // Configurar título y ruta del PDF
+            tituloElement.textContent = titulo;
+            iframe.src = nombreArchivo;
+            
+            // Mostrar modal
+            modal.classList.add('active');
+        }
+
+        function cerrarPDF() {
+            const modal = document.getElementById('pdfModal');
+            const iframe = document.getElementById('pdfIframe');
+            
+            // Ocultar modal y limpiar iframe
+            modal.classList.remove('active');
+            iframe.src = '';
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('pdfModal');
+            if (event.target === modal) {
+                cerrarPDF();
+            }
+        });
+    </script>
+</body>
+</html>
+                
+
+
+
+
+  <!-- !Problemas de Convenios</h3>   Línea 882: Cambia el título 
+                            <ol>                                                 
+                            
