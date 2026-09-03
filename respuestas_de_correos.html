@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📖 Reglas de Respuesta - OSEP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Verdana;
+            background: linear-gradient(135deg, #800080 0%, #9932cc 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(128, 0, 128, 0.2);
+        }
+
+        .header h1 {
+            color: #800080;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .menu {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(128, 0, 128, 0.2);
+        }
+
+        .menu h2 {
+            color: #800080;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .menu-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, #800080, #9932cc);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(128, 0, 128, 0.3);
+            font-family: Verdana;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(128, 0, 128, 0.4);
+            background: linear-gradient(135deg, #9932cc, #800080);
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(128, 0, 128, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(128, 0, 128, 0.2);
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section h3 {
+            color: #800080;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            font-weight: 600;
+            border-bottom: 2px solid #800080;
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .content-section a {
+            color: #800080;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .content-section a:hover {
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #f35f09, hsl(34, 4%, 35%));
+            color: white;
+            box-shadow: 0 4px 15px rgba(128, 0, 128, 0.3);
+        }
+
+        .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(128, 0, 128, 0.4);
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #66df56, #535252);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-volver-panel {
+            background: linear-gradient(135deg, #430a44, #9b30a0);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.95em;
+            display: block;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+        .btn-volver-panel:hover {
+            background: linear-gradient(135deg, #6a1a6b, #b040b5);
+        }
+        .btn-back:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #800080, #9932cc);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(128, 0, 128, 0.4);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            font-weight: 600;
+        }
+
+        .copy-notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .menu-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📖 Reglas de Respuesta OSEP</h1>
+        </div>
+
+        <div class="menu" id="menu">
+            <button class="btn-volver-panel" onclick="window.location.href='index.html'">⬅ Volver al Panel</button>   
+            <h2>Índice de Contenidos</h2>
+            <div class="menu-list">
+                <button class="menu-item" onclick="showSection('usuario-password')">
+                    🔑 Usuario y Contraseña
+                </button>
+                <button class="menu-item" onclick="showSection('cambio-correo')">
+                    📧 Solicitando Cambio de Correo
+                </button>
+                <button class="menu-item" onclick="showSection('token')">
+                    🔐 TOKEN
+                </button>
+                <button class="menu-item" onclick="showSection('afiliaciones')">
+                    👥 Afiliaciones
+                </button>
+                <button class="menu-item" onclick="showSection('certificados')">
+                    📋 Certificados
+                </button>
+                <button class="menu-item" onclick="showSection('laboratorio')">
+                    🔬 Laboratorio, análisis o resultados
+                </button>
+                <button class="menu-item" onclick="showSection('sga')">
+                    💼 SGA
+                </button>
+                <button class="menu-item" onclick="showSection('firma-digital')">
+                    ✏️ Firma Digital
+                </button>
+                <button class="menu-item" onclick="showSection('otp')">
+                    🔢 OTP o que no se genera
+                </button>
+                <button class="menu-item" onclick="showSection('prestador')">
+                    🏥 Prestador con usuario bloqueado
+                </button>
+                <button class="menu-item" onclick="showSection('caso-defecto')">
+                    ❓ Caso por defecto
+                </button>
+            </div>
+        </div>
+
+        <div class="content-section" id="usuario-password">
+            <h3>🔑 Usuario y Contraseña (sin mencionar correo/email)</h3>
+            <div class="copyable-content">
+                <p>Para recuperar tus credenciales de ingreso a Mi Osep, hacé clic en <strong>¿Olvidó su usuario o contraseña?</strong> desde el siguiente vínculo: <a href="https://www.osep.mendoza.gov.ar/webapp_pri/action/index" target="_blank"><strong>https://www.osep.mendoza.gov.ar/webapp_pri/action/index</strong></a>. Sigue atentamente los pasos indicados allí.</p>
+                <p>También puedes guiarte en el siguiente enlace: <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-5" target="_blank"><strong>https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-5</strong></a>.</p>
+                <p>De requerir mayor asistencia, favor de enviarnos el número de su DNI y el de un teléfono para contactar (en caso de ser necesario). También puede comunicarse vía WhatsApp al <strong>2612058800</strong> (Seleccionar <strong>Otros Servicios / Soporte de Sistemas / Soy Afiliado</strong> para asesoramiento sobre el uso de la aplicación MI OSEP).</p>
+                <p><strong>IMPORTANTE: En este WhatsApp, también puede solicitar su TOKEN.</strong></p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('usuario-password')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="cambio-correo">
+            <h3>📧 Solicitando Cambio de Correo</h3>
+            <div class="copyable-content">
+                <p>Hemos recibido su consulta. Un operador se contactará con usted a la brevedad para transmitirle información personalizada y segura.</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('cambio-correo')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="token">
+            <h3>🔐 TOKEN</h3>
+            <div class="copyable-content">
+                <p>Puedes generar tu token desde tu app móvil de Mi Osep o enviá un mensaje al WhatsApp <strong>2612058800</strong> con la palabra Hola, luego elegí TOKEN y seguí los pasos que indica el sistema.</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('token')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="afiliaciones">
+            <h3>👥 Afiliaciones (alta, baja, pagos)</h3>
+            <div class="copyable-content">
+                <p>Para consultas sobre afiliaciones, llamá a la Oficina de Afiliaciones al (261) 4615024 / 4615071 o escribinos por WhatsApp al <strong>2612058800</strong> (opción <strong>Trámites / Afiliaciones</strong>).</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('afiliaciones')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="certificados">
+            <h3>📋 Certificados (anulado, vencido, carga, ausentismo, rechazado, involuntario, incorrecto)</h3>
+            <div class="copyable-content">
+                <p>Si no podés cargar tu certificado de ausentismo, necesitamos establecer primero si podés acceder correctamente a la app Mi OSEP. Si el problema es de acceso, podés recuperar tus datos desde: <a href="https://www.osep.mendoza.gov.ar/webapp_pri/action/index" target="_blank"><strong>https://www.osep.mendoza.gov.ar/webapp_pri/action/index</strong></a>, haciendo clic en <strong>¿Olvidó su usuario o contraseña?</strong> y completar los datos que se piden.</p>
+                <p>Si ya estás dentro de Mi OSEP y tenés dudas sobre cómo cargarlo, puedes instruirte con esta guía <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=21#section-1" target="_blank"><strong>https://portaltic.osep.mendoza.gov.ar/course/view.php?id=21#section-1</strong></a></p>
+                <p>También puedes comunicarte con nosotros vía WhatsApp al <strong>2612058800</strong> (Seleccionar <strong>Otros Servicios / Soporte de Sistemas / Soy Afiliado</strong> para asesoramiento sobre el uso de la aplicación Mi OSEP).</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('certificados')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="laboratorio">
+            <h3>🔬 Laboratorio, análisis o resultados</h3>
+            <div class="copyable-content">
+                <p>Para sacar turnos o ver resultados de laboratorio, enviá Hola al WhatsApp <strong>2612058800</strong> y elegí <strong>Laboratorio / Turnos</strong> o <strong>Consultar Resultados</strong>.</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('laboratorio')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="sga">
+            <h3>💼 SGA</h3>
+            <div class="copyable-content">
+                <p>Si no podés ingresar al SGA, enviá Hola al WhatsApp <strong>2612058800</strong> y seleccioná <strong>Recursos Humanos > Mesa de Ayuda SGA</strong>.</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('sga')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="firma-digital">
+            <h3>✏️ Firma Digital</h3>
+            <div class="copyable-content">
+                <p>Para recuperar tu Firma Digital, llamá a Mesa de Ayuda al <strong>0810-810-8222</strong> o escribí a: <strong>soporte_sistemas@osep.mendoza.gov.ar</strong>.</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('firma-digital')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="otp">
+            <h3>🔢 OTP o que no se genera</h3>
+            <div class="copyable-content">
+                <p>Si tenés problemas con el OTP, llamá al <strong>0810-810-8222</strong> o comunicate por WhatsApp al <strong>2612058800</strong> (opción OTP).</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('otp')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="prestador">
+            <h3>🏥 Prestador con usuario bloqueado o clave de acceso</h3>
+            <div class="copyable-content">
+                <p>Para problemas con tu usuario de prestador, contactá a la Oficina de Prestadores al <strong>(261) 4615027</strong> o escribí a <strong>prestadoresosep@osep.mendoza.gov.ar</strong>.</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('prestador')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+
+        <div class="content-section" id="caso-defecto">
+            <h3>❓ Caso por defecto (no encaja en categorías anteriores)</h3>
+            <div class="copyable-content">
+                <p>Hemos recibido su consulta. Un operador se contactará con usted a la brevedad para transmitirle información personalizada y segura.</p>
+            </div>
+            <div class="button-group">
+                <button class="btn btn-copy" onclick="copyContent('caso-defecto')">📋 Copiar Texto</button>
+                <button class="btn btn-back" onclick="backToMenu()">↩️ Volver al Menú</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copy-notification" id="copyNotification">
+        ¡Contenido HTML copiado al portapapeles! ✅
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar el menú
+            document.getElementById('menu').style.display = 'none';
+            
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Scroll hacia arriba
+            window.scrollTo(0, 0);
+        }
+
+        function backToMenu() {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Mostrar el menú
+            document.getElementById('menu').style.display = 'block';
+            
+            // Scroll hacia arriba
+            window.scrollTo(0, 0);
+        }
+
+        async function copyContent(sectionId) {
+            const section = document.getElementById(sectionId);
+            const copyableContent = section.querySelector('.copyable-content');
+            
+            // Obtener el HTML completo del contenido copiable preservando saltos de línea
+            let htmlContent = copyableContent.innerHTML;
+            
+            // Asegurar que los párrafos se conviertan en saltos de línea apropiados
+            // Reemplazar </p><p> con </p><br><p> para mantener espaciado
+            htmlContent = htmlContent.replace(/<\/p>\s*<p>/g, '</p><br><p>');
+            
+            try {
+                // Intentar usar la API moderna del portapapeles para HTML
+                if (navigator.clipboard && navigator.clipboard.write) {
+                    const clipboardItem = new ClipboardItem({
+                        'text/html': new Blob([htmlContent], { type: 'text/html' }),
+                        'text/plain': new Blob([getFormattedText(copyableContent)], { type: 'text/plain' })
+                    });
+                    
+                    await navigator.clipboard.write([clipboardItem]);
+                    showCopyNotification();
+                } else if (navigator.clipboard && navigator.clipboard.writeText) {
+                    // Fallback a texto plano formateado si no soporta HTML
+                    await navigator.clipboard.writeText(getFormattedText(copyableContent));
+                    showCopyNotification();
+                } else {
+                    // Fallback para navegadores más antiguos
+                    fallbackCopyHtmlToClipboard(htmlContent, getFormattedText(copyableContent));
+                }
+            } catch (err) {
+                console.warn('Error al copiar con la API moderna, usando fallback:', err);
+                fallbackCopyHtmlToClipboard(htmlContent, getFormattedText(copyableContent));
+            }
+        }
+        
+        function getFormattedText(element) {
+            // Función para extraer texto manteniendo estructura y saltos de línea
+            let text = '';
+            const paragraphs = element.querySelectorAll('p');
+            
+            paragraphs.forEach((p, index) => {
+                // Obtener el texto del párrafo
+                text += p.textContent || p.innerText;
+                
+                // Agregar doble salto de línea entre párrafos (excepto en el último)
+                if (index < paragraphs.length - 1) {
+                    text += '\n\n';
+                }
+            });
+            
+            return text;
+        }
+        
+        function fallbackCopyHtmlToClipboard(htmlContent, textContent) {
+            // Crear un elemento temporal para la copia
+            const tempDiv = document.createElement('div');
+            tempDiv.style.position = 'fixed';
+            tempDiv.style.top = '0';
+            tempDiv.style.left = '0';
+            tempDiv.style.width = '2em';
+            tempDiv.style.height = '2em';
+            tempDiv.style.padding = '0';
+            tempDiv.style.border = 'none';
+            tempDiv.style.outline = 'none';
+            tempDiv.style.boxShadow = 'none';
+            tempDiv.style.background = 'transparent';
+            tempDiv.innerHTML = htmlContent;
+            tempDiv.contentEditable = true;
+            
+            document.body.appendChild(tempDiv);
+            
+            // Seleccionar el contenido
+            const range = document.createRange();
+            range.selectNodeContents(tempDiv);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyNotification();
+                } else {
+                    console.error('Error al copiar HTML con execCommand');
+                    // Intentar copiar solo texto como último recurso
+                    fallbackCopyTextOnly(textContent);
+                }
+            } catch (err) {
+                console.error('Error al ejecutar comando de copiado HTML:', err);
+                fallbackCopyTextOnly(textContent);
+            }
+            
+            document.body.removeChild(tempDiv);
+        }
+        
+        function fallbackCopyTextOnly(textContent) {
+            const textArea = document.createElement('textarea');
+            textArea.value = textContent;
+            textArea.style.position = 'fixed';
+            textArea.style.top = '0';
+            textArea.style.left = '0';
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            textArea.style.padding = '0';
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            textArea.style.background = 'transparent';
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyNotification();
+                } else {
+                    console.error('Error al copiar texto con execCommand');
+                }
+            } catch (err) {
+                console.error('Error al ejecutar comando de copiado de texto:', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Inicializar mostrando el menú
+        document.addEventListener('DOMContentLoaded', () => {
+            backToMenu();
+        });
+    </script>
+</body>
+</html>

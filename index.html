@@ -1,1382 +1,2499 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva de Soporte OSEP</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> TELAG — Plataforma Intuitiva del Conocimiento Operativo  ·  Soporte de Sistemas - Gerencia de TIC de OSEP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: Verdana, Geneva, sans-serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
-            height: 100vh;
-            overflow: auto;
-            padding: 10px;
-        }
+  :root {
+    --osep:#4a0a49;
+    --osep-dark: #4a0a49;
+    --osep-btn: #4f4d4f;
+    --osep-light: #f5e7f2;
+    --osep-mid: #c97fc8;
+    --bg: #f4f3f7;
+    --surface: #ffffff;
+    --surface2: #f9f8fb;
+    --border: rgba(122,28,121,0.13);
+    --border2: rgba(44, 1, 43, 0.25);
+    --text: #1d1f40;
+    --text2: #5c5a6e;
+    --text3: #9390a8;
+    --green: #1a7a3e;
+    --green-bg: #e8f7ec;
+    --red: #a3201e;
+    --red-bg: #fdeaea;
+    --orange: #b85e0a;
+    --orange-bg: #fdf0e0;
+    --blue: #185fa5;
+    --blue-bg: #e6f1fb;
+    --radius: 10px;
+    --radius-lg: 14px;
+    --shadow: 0 10px 12px rgba(32, 1, 32, 0.08);
+    --shadow-sm: 0 4px 4px rgba(0,0,0,0.07);
+    --grad-afiliado:#4a0a49  #ff8c00;
+    --grad-empleado: #4a0a49 #08f22b;
+    --grad-profesional:#4a0a49  #0995f9;
+    --grad-farmacia: #4a0a49  #f9d432;
+    --color-afiliado: #ff8c00;
+    --color-empleado: #08f22b;
+    --color-profesional: #0995f9;
+    --color-farmacia: #f9d432;
+    --icon-stroke: #1d1f40;
+  }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+  body {
+    font-family: 'Nunito Sans', Verdana, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
 
-        .header {
-            background: linear-gradient(135deg, #800080 0%, #9b30a0 100%);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(128, 0, 128, 0.3);
-            text-align: center;
-            flex-shrink: 0;
-        }
+/* ── HEADER ── */
+.app-header {
+  background: linear-gradient(135deg, var(--osep-dark) 0%, var(--osep) 100%);
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Asegura que el header esté por encima de cualquier elemento */
+  box-shadow: 0 2px 16px rgba(74,10,73,0.25);
+  overflow: visible;
+}
 
-        .header h1 {
-            font-size: 1.5em;
-            margin-bottom: 3px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+.app-header {
+    background: linear-gradient(135deg, var(--osep-dark) 0%, var(--osep) 100%);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(74,10,73,0.25);
+  }
+  .header-logo {
+    height: 46px; width: auto;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .header-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 48px;
+    background: transparent;
+}
+  .header-title { color: #fff; font-size: 18px; font-weight: 900; }
+  .header-sub { color: rgba(255,255,255,0.7); font-size: 16px; margin-top: 1px; }
+  .header-badge {
+    margin-left: auto;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: .05em;
+    border: 1px solid rgba(255,255,255,0.2);
+    white-space: nowrap;
+  }
 
-        .header p {
-            font-size: 0.85em;
-            opacity: 0.95;
-        }
+  /* ── LAYOUT ── */
+  .main-wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 110px 1rem 4rem; 
+  }
 
-        .breadcrumb {
-            background: white;
-            padding: 8px 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin: 8px 0;
-            display: none;
-            flex-shrink: 0;
-            align-items: center;
-            gap: 12px;
-        }
+  .workspace {
+    display: flex;
+    align-items: stretch;
+  }
 
-        .breadcrumb.active {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+ .roles-sidebar {
+    flex-shrink: 0;
+    width: 185px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: fixed;  
+    top: 80px; 
+    z-index: 10;
+    padding-bottom: 12px;  
+  }
+  .roles-sidebar .role-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 40px;
+    padding: 10px 14px 10px 16px;
+  }
+  .roles-sidebar .role-icon {
+    width: 22px; height: 22px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  .roles-sidebar .role-name {
+    font-size: 13px;
+    flex: 1;
+  }
 
-        .breadcrumb-item {
-            display: inline-block;
-            color: #666;
-            font-size: 0.85em;
-        }
+  .content-col {
+    flex: 1;
+    min-width: 0;
+    margin-left: 210px;
+    padding-top:180px;
+    min-height: 0;
+  }
+  .search-card {
+    position: fixed;
+    top: 80px;
+    left:57%;
+    transform: translateX(-50%);
+    width: calc(100% - 260px);
+    max-width: 700px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    z-index: 900;
+  }
+  .search-label {
+    font-size: 14px; font-weight: 600; letter-spacing: .08em;
+    color: var(--text2); text-transform:full-width;
+    margin-bottom: 6px; display: flex; align-items: center; gap: 6px;
+  }
+  .search-row { display: flex; gap: 8px; }
+  .search-input {
+    flex: 1; height: 35px; padding: 0 14px;
+    border-radius: var(--radius); border: 1.5px solid var(--border2);
+    font-size: 13px; font-family: verdana, sans-serif;
+    background: var(--surface2); color: var(--text);
+    outline: none; transition: border-color .15s;
+  }
+  .search-input:focus { border-color: var(--osep); background: #fff; }
+  .search-input::placeholder { color: var(--text3); }
+  .search-btn {
+    height: 35px; padding: 0 20px;
+    border-radius: var(--radius); border: none;
+    background: var(--osep); color: #fff;
+    font-size: 12px; font-weight: 600; font-family: verdana, sans-serif;
+    cursor: pointer; white-space: nowrap;
+    transition: background .15s;
+  }
+  .search-btn:hover { background: var(--osep-dark); }
+  .search-hints {
+    margin-top: 10px; font-size: 12px; color: var(--text3);
+    line-height: 1.5;
+  }
+  .search-hints strong { color: var(--text2); }
+  .hint-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
+  .hint-tag {
+    background: var(--osep-light); color: var(--osep);
+    padding: 2px 10px; border-radius: 20px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    border: 1px solid rgba(122,28,121,0.2);
+    transition: background .12s;
+  }
+  .hint-tag:hover { background: #ebccea; }
 
-        .breadcrumb-item:not(:last-child)::after {
-            content: " › ";
-            margin: 0 8px;
-            color: #800080;
-        }
+  .hint-tag-dynamic {
+    border-style: dashed;
+    font-style: italic;
+    opacity: 0.92;
+  }
+  .hint-tag-dynamic:hover {
+    opacity: 1;
+    filter: brightness(0.93);
+  }
 
-        .breadcrumb-item.current {
-            color: #800080;
-            font-weight: bold;
-        }
+  /* Search results */
+  .search-results { margin-top: 12px; display: none; }
+  .search-results.show { display: block; }
+  .result-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: var(--radius);
+    background: var(--surface2); margin-bottom: 6px;
+    cursor: pointer; border: 1px solid var(--border);
+    transition: border-color .12s, background .12s;
+  }
+  .result-item:hover { border-color: var(--osep); background: var(--osep-light); }
+  .result-icon svg { width: 20px; height: 20px; stroke: var(--icon-stroke);}
+  .result-topic { font-size: 14px; font-weight: 600; color: var(--text); }
+  .no-result { font-size: 14px; color: var(--text3); padding: 8px 4px; }
+  .result-badge {
+    display: inline-block; padding: 2px 9px;
+    border-radius: 20px; font-size: 11px; font-weight: 700;
+    margin-left: 4px; white-space: nowrap;
+  }
+  .badge-afil { background: var(--blue-bg); color: var(--blue); }
+  .badge-empl { background: var(--green-bg); color: var(--green); }
+  .badge-pres { background: var(--orange-bg); color: var(--orange); }
+  .badge-farm { background: var(--osep-light); color: var(--osep); }
 
-        .content-wrapper {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            margin-top: 8px;
-        }
+  /* ── ROLES ── */
+  .section-label {
+    font-size: 14px; font-weight: 600; letter-spacing: .08em;
+    color: var(--text2); text-transform:full-width;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .roles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+  .role-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--border);
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .role-card:hover { border-color: var(--osep-mid); box-shadow: var(--shadow); }
+  .role-card.active {
+    border: 2px solid var(--osep);
+    background: var(--osep-light);
+    box-shadow: var(--shadow);
+  }
+  
+  .role-name { font-size: 14px; font-weight: 700; color: var(--text); }
 
-        .main-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
+  .role-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 10px;
+  }
 
-        .section-title {
-            color: #800080;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e0e0e0;
-            flex-shrink: 0;
-        }
+  /* ── TREE AREA ── */
+  .tree-area {
+    position: fixed;
+    top: 280px;
+    left:57%;
+    transform: translateX(-50%);
+    width: calc(100% - 260px);
+    max-width: 700px;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    padding: 0rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    z-index: 1;
+    height: calc(100vh - 280px - 16px);
+    overflow-y: auto;
+  }
 
-        .scrollable-content {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding-right: 10px;
-        }
+  .scroll-fade {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,0), var(--surface));
+  }
 
-        .button-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 12px;
-            margin-bottom: 15px;
-        }
+  .tree-area.dimmed {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 
-        .btn {
-            background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%);
-            border: 2px solid #800080;
-            color: #800080;
-            padding: 12px 15px;
-            border-radius: 10px;
-            font-size: 0.95em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 3px 10px rgba(128, 0, 128, 0.2);
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-        }
+  .tree-area::-webkit-scrollbar { width: 9px; }
+  .tree-area::-webkit-scrollbar-thumb {
+    background: rgba(21, 20, 20, 0.2);
+    border-radius: 10px;
+  }
+  .tree-area.show { display: block; }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(128, 0, 128, 0.1) 0%, rgba(155, 48, 160, 0.1) 100%);
-            transition: left 0.3s ease;
-        }
+  /* ── MAPA DE CONTENIDOS ── */
+  .map-toggle-btn {
+    font-size: 11px; font-weight: 600; color: var(--osep);
+    background: var(--osep-light); border: 1px solid rgba(152, 2, 152, 0.2);
+    border-radius: 20px; padding: 3px 12px; cursor: pointer;
+    transition: background .15s; display:inline-flex; align-items:center; gap:5px;
+  }
+  .map-toggle-btn:hover { background: #ebe9eb; }
+  .content-map { display:flex; flex-direction:column; gap:10px; margin-bottom:6px; }
+  .map-section { border-radius:var(--radius); overflow:hidden; border:1px solid var(--border); }
+  .map-section-header {
+    display:flex; align-items:center; gap:10px; padding:10px 14px;
+    cursor:pointer; font-weight:700; font-size:14px; transition:background .15s; user-select:none;
+  }
+  .map-section-header:hover { filter:brightness(0.96); }
+  .map-section-badge {
+    width:26px; height:26px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:11px; flex-shrink:0;
+  }
+  .map-section-title { flex:1; }
+  .map-section-count {
+    font-size:11px; font-weight:600; opacity:.7; border-radius:20px;
+    padding:2px 8px; background:rgba(255,255,255,0.35);
+  }
+  .map-chevron { width:16px; height:16px; transition:transform .2s; flex-shrink:0; }
+  .map-section.open .map-chevron { transform:rotate(90deg); }
+  .map-items { display:none; flex-direction:column; background:var(--surface2); }
+  .map-section.open .map-items { display:flex; }
+  .map-group-label {
+    font-size:11px; font-weight:700; letter-spacing:.08em; color:var(--text3);
+    text-transform:uppercase; padding:8px 14px 4px; border-top:1px solid var(--border);
+  }
+  .map-group-label:first-child { border-top:none; }
+  .map-item-btn {
+    display:flex; align-items:center; gap:10px;
+    padding:8px 14px 8px 22px; background:none; border:none; cursor:pointer;
+    text-align:left; font-family:inherit; font-size:13px; color:var(--text);
+    transition:background .12s; border-top:1px solid rgba(0,0,0,0.04);
+  }
+  .map-item-btn:hover { background:rgba(122,28,121,0.07); }
+  .map-item-code {
+    font-size:10px; font-weight:700; font-family:monospace;
+    padding:2px 6px; border-radius:4px; flex-shrink:0;
+    background:rgba(0,0,0,0.07); color:var(--text2);
+  }
+  .map-item-label { flex:1; line-height:1.35; }
+  .map-item-arrow { color:var(--text3); font-size:14px; flex-shrink:0; }
 
-        .btn:hover::before {
-            left: 0;
-        }
+  .map-sec-afil .map-section-header { background:rgba(255,140,0,0.13); color:#7a3b00; }
+  .map-sec-afil .map-section-badge  { background:rgba(255,140,0,0.25); color:#8c4000; }
+  .map-sec-empl .map-section-header { background:rgba(8,200,40,0.10); color:#1a5a2e; }
+  .map-sec-empl .map-section-badge  { background:rgba(8,200,40,0.22); color:#1a5a2e; }
+  .map-sec-pres .map-section-header { background:rgba(9,149,249,0.13); color:#1a4a8c; }
+  .map-sec-pres .map-section-badge  { background:rgba(9,149,249,0.22); color:#1a4a8c; }
+  .map-sec-farm .map-section-header { background:rgba(200,168,0,0.13); color:#5a4200; }
+  .map-sec-farm .map-section-badge  { background:rgba(200,168,0,0.25); color:#5a4200; }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(128, 0, 128, 0.35);
-            border-color: #9b30a0;
-        }
+  .tree-header {
+    position: sticky;
+    padding-top: 20px;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+  .tree-topic-list { padding-top: 5px; }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #800080 0%, #9b30a0 100%);
-            color: white;
-            border: none;
-        }
+  /* Breadcrumb */
+  .breadcrumb {
+    display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+    font-size: 13px; color: var(--text3);
+    margin-bottom: 1.1rem;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .breadcrumb .bc-link { color: var(--osep); font-weight: 700; cursor: pointer; text-decoration: none; font-size: 16px; }
+  .breadcrumb .bc-link:hover { text-decoration: underline; }
+  .breadcrumb .bc-sep { color: var(--text3); }
+  .breadcrumb .bc-current { color: var(--text2); font-weight: 700; font-size: 16px; }
 
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #6b006b 0%, #800080 100%);
-        }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 15px; color: var(--osep); cursor: pointer;
+    background: none; border: none; font-family: verdana, sans-serif;
+    font-weight: 600; padding: 0; margin-bottom: 1rem;
+    transition: opacity .12s;
+  }
+  .back-btn:hover { opacity: .75; }
 
-        .btn-back {
-            background: linear-gradient(45deg, #5c2a47 0%, #7d4066 100%);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            font-size: 0.85em;
-            display: inline-block;
-            margin-bottom: 12px;
-            flex-shrink: 0;
-            border-radius: 8px;
-            width: auto;
-            max-width: 120px;
-            cursor: pointer;
-        }
+  .tree-topic-list { display: flex; flex-direction: column; gap: 7px; }
+  .topic-btn {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    cursor: pointer; font-size: 14px; font-weight: 500;
+    color: var(--text); text-align: left;
+    font-family: verdana, sans-serif;
+    transition: border-color .12s, background .12s;
+  }
+  .topic-btn:hover { border-color: var(--osep); background: var(--osep-light); }
+  .topic-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--osep-light); color: var(--osep);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; flex-shrink: 0;
+  }
 
-        .btn-back:hover {
-            background: linear-gradient(135deg, #555 0%, #777 100%);
-        }
+  .step-q {
+    font-size: 15px; font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px; line-height: 1.5;
+    padding: 12px 14px;
+    background: var(--surface2);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--osep);
+  }
+  .step-choices { display: flex; flex-direction: column; gap: 7px; }
+  .choice-btn {
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border2);
+    background: var(--surface2);
+    cursor: pointer; font-size: 14px; font-weight: 500;
+    color: var(--text); text-align: left;
+    font-family: verdana, sans-serif;
+    transition: border-color .12s, background .12s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .choice-btn:hover { background: var(--osep-light); border-color: var(--osep); }
+  .choice-btn.choice-si { border-left: 4px solid var(--green); }
+  .choice-btn.choice-no { border-left: 4px solid var(--red); }
+  .choice-dot-si { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+  .choice-dot-no { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+  .choice-dot-neu { width: 8px; height: 8px; border-radius: 50%; background: var(--osep-mid); flex-shrink: 0; }
 
-        .info-box {
-            background: linear-gradient(135deg, #f0e6f6 0%, #e6d9f0 100%);
-            border-left: 4px solid #800080;
-            padding: 12px;
-            border-radius: 6px;
-            margin: 12px 0;
-            box-shadow: 0 2px 8px rgba(128, 0, 128, 0.1);
-        }
+  .info-box {
+    background: var(--blue-bg);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 12px 16px;
+    font-size: 14px; line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+  .info-box .box-label {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em;
+    color: var(--blue); text-transform: uppercase; margin-bottom: 5px;
+  }
+  .action-box {
+    background: var(--osep-light);
+    border-left: 4px solid var(--osep);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 16px;
+    font-size: 14px; line-height: 1.75;
+    color: var(--text);
+  }
+  .action-box .box-label {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em;
+    color: var(--osep); text-transform: uppercase; margin-bottom: 6px;
+  }
+  .escalate-box {
+    background: var(--orange-bg);
+    border-left: 4px solid var(--orange);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 14px 16px;
+    font-size: 14px; line-height: 1.75;
+    color: var(--text);
+  }
+  .escalate-box .box-label {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em;
+    color: var(--orange); text-transform: uppercase; margin-bottom: 6px;
+  }
 
-        .info-box h3 {
-            color: #800080;
-            margin-bottom: 6px;
-            font-size: 1em;
-        }
+  .telag-info-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    stroke-width:2.2;
+    margin-left: 4px;
+    position: relative;
+    top: 4px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: rgba(255,255,255,0.92);
+    font-size: 11px;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    backdrop-filter: blur(4px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 6px rgba(0,0,0,0.18);
+    transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .telag-info-btn:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.45);
+    transform: translateY(-1px) scale(1.06);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), 0 4px 12px rgba(0,0,0,0.25);
+  }
 
-        .info-box p {
-            color: #333;
-            line-height: 1.5;
-            font-size: 0.9em;
-        }
+  .telag-popover {
+    display: none;
+    position: fixed;
+    top: 74px;
+    left: 100px;
+    width: 270px;
+    background: #fff;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(74,10,73,0.22);
+    padding: 1rem 1.1rem;
+    z-index: 1100;
+    border: 1px solid var(--border2);
+  }
+  .telag-popover.open { display: block; }
+  .telag-popover-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--osep);
+    margin-bottom: 6px;
+    letter-spacing: .03em;
+  }
+  .telag-popover-body {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text2);
+  }
+  .telag-popover-body em {
+    color: var(--osep);
+    font-style: normal;
+    font-weight: 700;
+  }
+  .telag-wrapper {
+    position: relative;
+    display: inline-block;
+    z-index: 1100;
+  }
 
-        .btn-back-flotante.visible {
-            display: inline-block;
-        }
-        
-        .action-steps h3 {
-            font-size: 1em;
-            margin-bottom: 10px;
-            color: #800080;
-        }
+  .steps-list { list-style: none; padding: 0; margin: 6px 0 0; }
+  .steps-list li {
+    display: flex; gap: 10px; align-items: flex-start;
+    margin-bottom: 8px; font-size: 14px;
+  }
+  .step-num {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--osep); color: #fff;
+    font-size: 11px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-num-orange { background: var(--orange); }
 
-        .action-steps h4 {
-            font-size: 0.95em;
-            margin-top: 12px;
-            color: #800080;
-        }
+  .link-chip {
+    display: inline-flex; align-items: center; gap: 3px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    background: rgba(122,28,121,0.1); color: var(--osep);
+    font-size: 14px; font-weight: 700;
+    margin: 2px 1px; text-decoration: none;
+    border: 1px solid rgba(122,28,121,0.2);
+    transition: background .12s;
+    word-break: break-all;
+    vertical-align: middle;
+  }
+  .link-chip:hover { background: rgba(122,28,121,0.2); }
+  .link-chip-orange {
+    background: rgba(184,94,10,0.1); color: var(--orange);
+    border-color: rgba(184,94,10,0.2);
+  }
+  .link-chip-orange:hover { background: rgba(184,94,10,0.2); }
 
-        .action-steps ol, .action-steps ul {
-            margin-left: 20px;
-        }
+  .action-footer { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .btn-secondary {
+    padding: 9px 16px;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border2);
+    background: var(--surface2);
+    cursor: pointer; font-size: 12px; font-weight: 600;
+    color: var(--text2); font-family: verdana, sans-serif;
+    transition: border-color .12s, background .12s;
+  }
+  .btn-secondary:hover { border-color: var(--osep); background: var(--osep-light); color: var(--osep); }
 
-        .action-steps li {
-            margin: 8px 0;
-            color: #333;
-            line-height: 1.5;
-            font-size: 0.9em;
-        }
+  .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 4px 18px;
+    border-radius: var(--radius);
+    border: none;
+    background: var(--osep);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    font-family: verdana, sans-serif;
+    transition: background .15s;
+    white-space: nowrap;
+    align-self: stretch;
+    justify-content: center;
+    word-break: break-all;
+    position: relative;
+    top: 4px;
+  }
+  .btn-icon:hover { background: var(--osep-dark); }
+  .btn-icon svg {
+    width: 17px;
+    height: 17px;
+    stroke: #fff;
+    stroke-width: 2.2;
+    flex-shrink: 0;
+  }
 
-        .action-steps strong {
-            color: #800080;
-        }
+  .btn-nueva {
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    border: none;
+    background: var(--osep);
+    cursor: pointer; font-size: 12px; font-weight: 700;
+    color: #fff; font-family: verdana, sans-serif;
+    transition: background .15s;
+  }
+  .btn-nueva:hover { background: var(--osep-dark); }
 
-        .warning-box {
-            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
-            border-left: 4px solid #ff9800;
-            padding: 10px;
-            border-radius: 6px;
-            margin: 10px 0;
-            font-size: 0.9em;
-        }
+  /* ── MODAL PDF ── */
+  .pdf-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+  .pdf-modal-overlay.open { display: flex; }
+  .pdf-modal-box {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 1rem;
+    width: 90vw;
+    max-width: 860px;
+    height: 88vh;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .pdf-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .pdf-modal-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text2);
+  }
+  .pdf-modal-close {
+    background: var(--osep-light);
+    border: none;
+    color: var(--osep);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: verdana, sans-serif;
+  }
+  .pdf-modal-close:hover { background: #ebccea; }
+  .pdf-modal-frame {
+    flex: 1;
+    border: none;
+    border-radius: var(--radius);
+    width: 100%;
+  }
 
-        .guide-link {
-            display: inline-block;
-            background: #800080;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 6px;
-            text-decoration: none;
-            margin: 8px 3px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 6px rgba(128, 0, 128, 0.3);
-            font-size: 0.85em;
-            cursor: pointer;
-        }
+  .app-footer {
+    text-align: center; padding: 2rem 1rem 1rem;
+    font-size: 14px; color: var(--text3);
+  }
 
-        .guide-link:hover {
-            background: #9b30a0;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(128, 0, 128, 0.4);
-        }
+  @media (max-width: 600px) {
+    .roles-grid { grid-template-columns: repeat(2, 1fr); }
+    .header-badge { display: none; }
+    .tree-area { padding: 1rem; }
+    .main-wrap { padding: 1rem .75rem 3rem; }
+  }
 
-        .hidden {
-            display: none !important;
-        }
+  .role-icon svg { width: 22px; height: 22px; stroke-width: 2.5; }
+  .afiliado-icon svg * { stroke: url(#grad-afiliado) !important; }
+  .empleado-icon svg * { stroke: url(#grad-empleado) !important; }
+  .profesional-icon svg * { stroke: url(#grad-profesional) !important; }
+  .farmacia-icon svg * { stroke: url(#grad-farmacia) !important; }
+  .afiliado-icon svg rect:first-child { fill: var(--color-afiliado); }
+  .empleado-icon svg rect:first-child { fill: var(--color-empleado); }
+  .profesional-icon svg rect:first-child { fill: var(--color-profesional); }
+  .farmacia-icon svg rect:first-child { fill: var(--color-farmacia); }
+  .role-icon svg { width: 22px; height: 22px; }
+  .role-icon svg * { stroke: var(--icon-stroke); }
 
-        .icon {
-            font-size: 1.2em;
-            margin-right: 8px;
-        }
+  .topic-icon { font-size: 22px; }
+  .topic-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .topic-icon-wrap svg { width: 20px; height: 20px; stroke-width: 2; }
 
-        .scrollable-content::-webkit-scrollbar,
-        .content-wrapper::-webkit-scrollbar {
-            width: 8px;
-        }
+  /* ── DUOTONE POR ROL ── */
+  body.afiliado   .topic-icon-wrap { background: rgba(249, 138, 2, 0.1); }
+  body.empleado   .topic-icon-wrap { background: rgba(2, 104, 17, 0.1); }
+  body.prestador  .topic-icon-wrap { background: rgba(2, 84, 143, 0.1); }
+  body.farmacia   .topic-icon-wrap { background: rgba(120, 98, 3, 0.1); }
+  body.afiliado   .topic-icon-wrap svg { stroke: var(--color-afiliado); }
+  body.empleado   .topic-icon-wrap svg { stroke: var(--color-empleado); }
+  body.prestador  .topic-icon-wrap svg { stroke: var(--color-profesional); }
+  body.farmacia   .topic-icon-wrap svg { stroke: var(--color-farmacia); }
+  body.afiliado   .topic-icon-wrap svg path,
+  body.afiliado   .topic-icon-wrap svg rect,
+  body.afiliado   .topic-icon-wrap svg circle { fill: rgba(255,140,0, 0.12); }
+  body.empleado   .topic-icon-wrap svg path,
+  body.empleado   .topic-icon-wrap svg rect,
+  body.empleado   .topic-icon-wrap svg circle { fill: rgba(14, 241, 48, 0.12); }
+  body.prestador  .topic-icon-wrap svg path,
+  body.prestador  .topic-icon-wrap svg rect,
+  body.prestador  .topic-icon-wrap svg circle { fill: rgba(4, 147, 249, 0.12); }
+  body.farmacia   .topic-icon-wrap svg path,
+  body.farmacia   .topic-icon-wrap svg rect,
+  body.farmacia   .topic-icon-wrap svg circle { fill: rgba(239, 198, 13, 0.12); }
 
-        .scrollable-content::-webkit-scrollbar-track,
-        .content-wrapper::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
+  /* ── ASISTENTE CONVERSACIONAL (TELAG BOT) ── */
+  .chat-widget-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--osep-dark) 0%, var(--osep) 100%);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px rgba(74, 10, 73, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1200;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+  }
+  .chat-widget-btn:hover {
+    transform: scale(1.1) translateY(-2px);
+    box-shadow: 0 12px 32px rgba(74, 10, 73, 0.55);
+  }
+  .chat-widget-btn svg {
+    width: 28px;
+    height: 28px;
+    stroke-width: 2.2;
+    stroke: #ffffff;
+  }
 
-        .scrollable-content::-webkit-scrollbar-thumb,
-        .content-wrapper::-webkit-scrollbar-thumb {
-            background: #800080;
-            border-radius: 10px;
-        }
+  .chat-window {
+    display: none;
+    position: fixed;
+    bottom: 96px;
+    right: 24px;
+    width: 395px;
+    max-width: calc(100vw - 32px);
+    height: 560px;
+    max-height: calc(100vh - 120px);
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1.5px solid var(--border2);
+    box-shadow: 0 18px 50px rgba(74, 10, 73, 0.32);
+    z-index: 1200;
+    flex-direction: column;
+    overflow: hidden;
+    animation: chatSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes chatSlideUp {
+    from { opacity: 0; transform: translateY(16px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .chat-window.open { display: flex; }
 
-        .scrollable-content::-webkit-scrollbar-thumb:hover,
-        .content-wrapper::-webkit-scrollbar-thumb:hover {
-            background: #9b30a0;
-        }
+  .chat-header {
+    background: linear-gradient(135deg, var(--osep-dark) 0%, var(--osep) 100%);
+    color: #fff;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  .chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chat-avatar {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255,255,255,0.3);
+  }
+  .chat-avatar svg { stroke: #ffffff; width: 20px; height: 20px; }
+  .chat-title { font-size: 14px; font-weight: 800; letter-spacing: 0.02em; }
+  .chat-subtitle { font-size: 11px; color: rgba(255, 255, 255, 0.78); }
+  .chat-close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0.85;
+    display: flex;
+    padding: 4px;
+    border-radius: 6px;
+    transition: opacity 0.15s, background 0.15s;
+  }
+  .chat-close-btn:hover {
+    opacity: 1;
+    background: rgba(255,255,255,0.15);
+  }
+  .chat-close-btn svg { stroke: #ffffff; }
 
-        .two-column {
-            display: flex;
-            gap: 18px;
-            align-items: flex-start;
-            margin-top: 12px;
-            width: 100%;
-        }
+  .chat-body {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--surface2);
+  }
+  .chat-msg {
+    max-width: 90%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .chat-msg.bot {
+    background: #ffffff;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+    box-shadow: var(--shadow-sm);
+  }
+  .chat-msg.user {
+    background: var(--osep);
+    color: #ffffff;
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+  }
+  .chat-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .chat-action-btn {
+    background: var(--osep-light);
+    color: var(--osep);
+    border: 1px solid rgba(122, 28, 121, 0.25);
+    border-radius: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.15s, transform 0.1s;
+    font-family: inherit;
+    text-align: left;
+  }
+  .chat-action-btn:hover {
+    background: #ebccea;
+    transform: translateY(-1px);
+  }
+  .chat-action-btn.btn-primary-bot {
+    background: var(--osep);
+    color: #fff;
+    border-color: var(--osep);
+  }
+  .chat-action-btn.btn-primary-bot:hover {
+    background: var(--osep-dark);
+  }
+  .chat-action-btn svg {
+    stroke: currentColor;
+    width: 13px;
+    height: 13px;
+  }
 
-        .two-column .left {
-            flex: 0 0 42%;
-            min-width: 260px;
-        }
-
-        .two-column .left .button-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .two-column .right {
-            flex: 1 1 58%;
-            min-width: 300px;
-            max-height: calc(80vh - 120px);
-            overflow-y: auto;
-            padding: 0px;
-        }
-
-        .two-column .right {
-            margin-top: 0 !important;
-            padding-top: 0 !important;
-        }
-
-        .two-column .right .action-steps:first-of-type {
-            margin-top: 0 !important;
-        }
-
-        .two-column .right .action-steps {
-            margin-top: 4px !important;
-        }
-
-        .two-column .left,
-        .two-column .right {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-
-        .two-column .right .action-steps,
-        .two-column .right .info-box,
-        .two-column .right .warning-box {
-            margin-bottom: 12px;
-            border-radius: 10px;
-        }
-
-        .two-column .right .sticky-card {
-            position: sticky;
-            top: 20px;
-        }
-
-        @media (max-width: 900px) {
-            .two-column {
-                flex-direction: column;
-            }
-            .two-column .left .button-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            }
-            .two-column .right {
-                max-height: none;
-                overflow: visible;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .main-card {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        /* MODAL PARA PDFs */
-        .pdf-modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .pdf-modal.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pdf-modal-content {
-            position: relative;
-            width: 90%;
-            height: 90%;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .pdf-modal-header {
-            background: linear-gradient(135deg, #800080 0%, #9b30a0 100%);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .pdf-modal-header h3 {
-            margin: 0;
-            font-size: 1.2em;
-        }
-
-        .pdf-close-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: white;
-            font-size: 1.5em;
-            cursor: pointer;
-            padding: 5px 15px;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
-
-        .pdf-close-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .pdf-iframe {
-            width: 100%;
-            height: calc(100% - 60px);
-            border: none;
-        }
-    </style>
+  .chat-footer {
+    padding: 10px 12px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+  }
+  .chat-input {
+    flex: 1;
+    height: 38px;
+    padding: 0 12px;
+    border-radius: var(--radius);
+    border: 1.5px solid var(--border2);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    background: var(--surface2);
+    color: var(--text);
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .chat-input:focus {
+    border-color: var(--osep);
+    background: #fff;
+  }
+  .chat-send-btn {
+    height: 38px;
+    width: 42px;
+    border-radius: var(--radius);
+    border: none;
+    background: var(--osep);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .chat-send-btn:hover {
+    background: var(--osep-dark);
+    transform: scale(1.04);
+  }
+  .chat-send-btn svg {
+    stroke: #ffffff;
+    width: 17px;
+    height: 17px;
+  }
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <!-- ENCABEZADO -->
-        <div class="header">
-            <h1>🔧 Guía Interactiva de Soporte OSEP</h1>
-            <p>📞 Guía Interactiva de ayuda para operadores - Consultas telefónicas y presenciales</p>
-        </div>
 
-        <!-- BREADCRUMB -->
-        <div id="breadcrumb" class="breadcrumb">
-            <span class="breadcrumb-item">Inicio</span>
-        </div>
-
-        <!-- CONTENEDOR CON SCROLL -->
-        <div class="content-wrapper">
-            <!-- PANTALLA INICIAL -->
-            <div id="screen-inicio" class="main-card">
-                <h2 class="section-title">Seleccione el Contexto de la Consulta</h2>
-                <div class="scrollable-content">
-                    <div class="button-grid">
-                        <button class="btn btn-primary" onclick="selectContexto('afiliado')">
-                            <span class="icon">👤</span>
-                            Afiliado
-                        </button>
-                        <button class="btn btn-primary" onclick="selectContexto('empleado')">
-                            <span class="icon">💼</span>
-                            Empleado
-                        </button>
-                        <button class="btn btn-primary" onclick="selectContexto('farmacia')">
-                            <span class="icon">💊</span>
-                            Prestador - Farmacia
-                        </button>
-                        <button class="btn btn-primary" onclick="selectContexto('profesional')">
-                            <span class="icon">👨‍⚕️</span>
-                            Prestador - Profesional
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANTALLA: AFILIADO -->
-            <div id="screen-afiliado" class="main-card hidden">
-                
-                <h2 class="section-title">Consulta: No puedo ingresar a Mi OSEP</h2>
-                
-                <div class="scrollable-content">
-                    <div class="info-box">
-                        <h3>Paso 1: Verificar instalación de la aplicación</h3>
-                        <p>Pregunte al afiliado: <strong>¿Tiene instalada la app correcta?</strong> (ícono violeta con letras blancas)</p>
-                    </div>
-
-                    <div class="button-grid">
-                        <button class="btn" onclick="showAfiliadoNoApp()">
-                            <span class="icon">❌</span>
-                            NO tiene la app instalada
-                        </button>
-                        <button class="btn" onclick="showAfiliadoSiApp()">
-                            <span class="icon">✅</span>
-                            SÍ tiene la app instalada
-                        </button>
-                    </div>
-
-                    <!-- NO tiene app -->
-                    <div id="afiliado-no-app" class="hidden">
-                        <div class="action-steps">
-                            <h3>Orientación para instalación alternativa</h3>
-                            <p>Recomiende ingresar desde el navegador a: <strong>https://osepmendoza.com.ar/web/</strong></p>
-                            
-                            <h4>Para ANDROID:</h4>
-                            <ol>
-                                <li>Visualizar la pantalla de ingreso</li>
-                                <li>Ir al margen superior derecho</li>
-                                <li>Seleccionar: "Agregar a favoritos ⭐" o "Agregar a pantalla principal"</li>
-                            </ol>
-
-                            <h4>Para IPHONE (Safari):</h4>
-                            <ol>
-                                <li>Ingresar a la página deseada</li>
-                                <li>Tocar el botón "Compartir"</li>
-                                <li>Seleccionar "Añadir a favoritos"</li>
-                                <li>Modificar el nombre si lo desea y tocar "Guardar"</li>
-                            </ol>
-
-                            <a class="guide-link" onclick="mostrarPDF('1 REGISTRO DE USUARIO Y CONTRASEÑA en Android.pdf', 'Guía Rápida - Configurar URL')">📖 Ver Guía Rápida</a>
-                        </div>
-                    </div>
-
-                    <!-- SÍ tiene app -->
-                    <div id="afiliado-si-app" class="hidden">
-                        <div class="info-box">
-                            <h3>Identificar el tipo de error</h3>
-                            <p>¿Qué error aparece cuando intenta ingresar con usuario y contraseña?</p>
-                        </div>
-
-                        <!-- CONTENEDOR DE DOS COLUMNAS -->
-                        <div class="two-column">
-                            <!-- IZQUIERDA: botones -->
-                            <div class="left">
-                                <div class="button-grid">
-                                    <button class="btn" onclick="showAfiliadoError('no-usuario')">
-                                        <span class="icon">👤</span> No tengo usuario
-                                    </button>
-                                    <button class="btn" onclick="showAfiliadoError('credenciales')">
-                                        <span class="icon">🔑</span> Credenciales incorrectas
-                                    </button>
-                                    <button class="btn" onclick="showAfiliadoError('pantalla-blanco')">
-                                        <span class="icon">🖥️</span> Pantalla en blanco
-                                    </button>
-                                    <button class="btn" onclick="showAfiliadoError('no-email')">
-                                        <span class="icon">✉️</span> No llega email
-                                    </button>
-                                    <button class="btn" onclick="showAfiliadoError('datos-invalidos')">
-                                        <span class="icon">⚠️</span> Datos inválidos
-                                    </button>
-                                    <button class="btn" onclick="showAfiliadoError('cerrar-sesion')">
-                                        <span class="icon">↩️</span> Cerrar sesión
-                                    </button>
-                                </div>
-                            </div>
-
-                            <!-- DERECHA: Área de acción -->
-                            <div class="right">
-                                <div id="afiliado-no-usuario" class="action-steps hidden sticky-card">
-                                    <h3>Procedimiento: No tengo usuario</h3>
-                                    <ol>
-                                        <li><strong>Solicitar DNI</strong> y verificar en SISAO /Sistemas de Afiliaciones que exista el afiliado</li>
-                                        <li><strong>Corroborar</strong> que se utilice el número de afiliado vigente</li>
-                                        <li><strong>Identificar:</strong> ¿Tiene usuario generado?
-                                            <ul style="margin-top: 8px;">
-                                                <li><strong>NO:</strong> Orientar al procedimiento para <strong>Crear Usuario</strong></li>
-                                                <li><strong>SÍ:</strong> Pedir correo y guiar a <strong>"¿Olvidó usuario/contraseña?"</strong></li>
-                                            </ul>
-                                        </li>
-                                    </ol>
-                                    <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-4" class="guide-link" target="_blank">📖 Ver Guía para Crear Usuario</a>
-                                    <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-5" class="guide-link" target="_blank">📖 Ver Guía de ¿Olvidó usuario/contraseña?</a>   
-                                </div>
-
-                                <div id="afiliado-credenciales" class="action-steps hidden sticky-card">
-                                    <h3>Procedimiento: Credenciales incorrectas</h3>
-                                    <ol>
-                                        <li><strong>Solicitar DNI</strong> y verificar usuario</li>
-                                        <li><strong>Pedir correo electrónico vigente</strong></li>
-                                        <li><strong>Verificar</strong> en admin o actualizar</li>
-                                        <li><strong>Guiar</strong> a "¿Olvidó usuario/contraseña?"</li>
-                                    </ol>
-                                    <a href="https://portaltic.osep.mendoza.gov.ar/course/view.php?id=14#section-5" class="guide-link" target="_blank">📖 Ver Guía </a>
-                                </div>
-
-                                <div id="afiliado-pantalla-blanco" class="action-steps hidden sticky-card">
-                                    <h3>Solución: Pantalla en blanco</h3>
-                                    <ol>
-                                        <li><strong>Verificar</strong> conexión a internet</li>
-                                        <li><strong>Borrar</strong> caché y cookies</li>
-                                        <li><strong>Reiniciar</strong> el dispositivo</li>
-                                    </ol>
-                                </div>
-
-                                <div id="afiliado-no-email" class="action-steps hidden sticky-card">
-                                    <h3>Procedimiento: No llega email</h3>
-                                    <div class="warning-box">
-                                        <strong>⚠️ IMPORTANTE:</strong> Solo lo gestiona el Afiliado directamente.
-                                    </div>
-                                    <ol>
-                                        <li><strong>Solicitar DNI</strong> y verificar</li>
-                                        <li><strong>Pedir correo vigente</strong></li>
-                                        <li><strong>Verificar/actualizar</strong> en admin</li>
-                                    </ol>
-                                    
-                                </div>
-
-                                <div id="afiliado-datos-invalidos" class="action-steps hidden sticky-card">
-                                    <h3>Solución: Datos inválidos</h3>
-                                    <ol>
-                                        <li><strong>Solicitar DNI</strong> y revisar datos</li>
-                                        <li><strong>Verificar</strong> número de afiliado vigente</li>
-                                        <li><strong>Si error en fecha nacimiento:</strong> orientar a afiliaciones</li>
-                                    </ol>
-                                </div>
-
-                                <div id="afiliado-cerrar-sesion" class="action-steps hidden sticky-card">
-                                    <h3>Solución: Cerrar sesión</h3>
-                                    <ul style="margin-left: 20px; margin-top: 8px;">
-                                        <li>Hacer clic en ícono de "personita"</li>
-                                        <li>Elegir opción "SALIR"</li>
-                                        <li>O tocar rectángulo con flecha (arriba derecha)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANTALLA: EMPLEADO -->
-            <div id="screen-empleado" class="main-card hidden">
-                
-                <h2 class="section-title">Consultas de Empleado</h2>
-                
-                <div class="scrollable-content">
-                    <div class="info-box">
-                        <h3>Seleccione el tipo de consulta</h3>
-                        <p>Elija la opción que corresponda a la consulta del empleado</p>
-                    </div>
-
-                    
-                        <button class="btn" onclick="showEmpleadoConsulta('correo')">
-                            <span class="icon">📧</span>
-                            Correo Electrónico Institucional
-                        </button>
-                        <button class="btn" onclick="showEmpleadoConsulta('sisao')">
-                            <span class="icon">💻</span>
-                            SISAO
-                        </button>
-                        <button class="btn" onclick="showEmpleadoConsulta('agendas')">
-                            <span class="icon">📅</span>
-                            Problemas de Agendas 
-                        </button>
-                        <button class="btn" onclick="showEmpleadoConsulta('pc-tecnico')">
-                            <span class="icon">🔧</span>
-                            Inconvenientes Técnicos PC
-                        </button>
-                        <button class="btn" onclick="showEmpleadoConsulta('gde')">
-                            <span class="icon">📁</span>
-                            GDE
-                        </button>
-                        <button class="btn" onclick="showEmpleadoConsulta('sga')">
-                            <span class="icon">📊</span>
-                            SGA
-                        </button>
-                        <button class="btn" onclick="showEmpleadoConsulta('nextcloud')">
-                            <span class="icon">☁️</span>
-                            Nextcloud
-                        </button>
-                        <button class="btn" onclick="showEmpleadoConsulta('siga')">
-                            <span class="icon">📋</span>
-                            SIGA
-                        </button>
-                                                                  
-
-                    <!-- Correo Institucional -->
-                    <div id="emp-correo" class="hidden">
-                        <div class="action-steps">
-                            <h3>Correo Electrónico Institucional (Zimbra)</h3>
-                            
-                            <div class="info-box">
-                                <h3>Pregunta inicial</h3>
-                                <p><strong>¿Puede acceder a la página de login del Zimbra?</strong></p>
-                            </div>
-                            <div class="info-box">
-                            <h4>SI puede acceder:</h4>
-                            <ol>
-                            </div>
-                                <li>Consultar sobre el usuario que está utilizando tal cual lo escribe (<strong>siempre el propio, nunca se podrá gestionar por otro agente</strong>)</li>
-                                <li>Solicitar DNI y consultar con el administrador de correos o LDAP</li>
-                                <li>¿El usuario ofrecido coincide con el registrado en Zimbra?
-                                    <ul style="margin-top: 8px;">
-                                        <li><strong>SÍ:</strong> Solicitar al administrador de Zimbra el blanqueo de contraseña. Informar que todos los accesos a los servicios LDAP serán actualizados</li>
-                                        <li><strong>NO:</strong> Solicitar que su jefe realice el pedido a través de GDE pidiendo la creación de su cuenta de correo correspondiente</li>
-                                    </ul>
-                                </li>
-                            </ol>
-
-                            <div class="warning-box">
-                                <strong>⚠️ Causas comunes de bloqueo:</strong>
-                                <ul style="margin-left: 20px; margin-top: 8px;">
-                                    <li><strong>Error 400:</strong> El correo está con capacidad máxima y nunca lo han limpiado</li>
-                                    <li><strong>Bloqueo automático:</strong> No ingresar al correo durante más de 3 meses</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- SISAO -->
-                    <div id="emp-sisao" class="hidden">
-                        <div class="action-steps">
-                            <h3>SISAO</h3>
-                            
-                            <div class="info-box">
-                                <h3>Pregunta inicial</h3>
-                                <p><strong>¿En qué instancia no puede ingresar a SISAO?</strong></p>
-                            </div>
-                            
-                            <div class="info-box">
-                            <h4>SI sabe su usuario y correo:</h4>
-                            <p>Si se olvido la contraseña llamar al 0810-810-8222 solicitando el blanqueo de contraseña.</p>
-                            <p>Si lo que solicita es cambiar la contraseña, se realiza unicamente desde el correo institucional.</p>
-
-                            <h4>NO sabe su usuario:</h4>
-                            <ol>
-                                <li>Pedir nombre de usuario para ver si tiene un usuario en SISAO</li>
-                                <li>Consultar si el correo registrado es el correcto o hay que modificar</li>
-                            </ol>
-                            </div>
-                            <h4>Problemas específicos:</h4>
-                            
-                            <div class="info-box">
-                                <h3>No abre la ventana del firmador</h3>
-                                <p>La pantalla se pone en blanco al intentar firmar</p>
-                                <ul style="margin-left: 20px;">
-                                    <li>Debe habilitar las ventanas emergentes en el navegador Chrome</li>
-                                    <li>Restablecer la página (F5)</li>
-                                    <li>Volver a firmar las recetas</li>
-                                </ul>
-                            </div>
-
-                            <div class="info-box">
-                                <h3>No recuerdo la contraseña para firmar</h3>
-                                <p><strong>Solución:</strong> Debe solicitar nuevamente turno para que se le haga nuevamente el proceso de la firma</p>
-                            </div>
-
-                            <div class="info-box">
-                                <h3>Baneo de contraseña</h3>
-                                <p>Debe esperar 15 minutos para que se restablezca la página y pueda volver a firmar</p>
-                            </div>
-
-                            <div class="info-box">
-                                <h3>Pantalla en blanco</h3>
-                                <p>Recomendar que limpie los cookies y caché del navegador</p>
-                            </div>
-
-                            <div class="info-box">
-                                <h3>Cerrar sesión</h3>
-                                <ul style="margin-left: 20px;">
-                                    <li>Hacer clic en personita y elegir la opción SALIR</li>
-                                    <li>O arriba a la derecha tocar el rectángulo con una flecha</li>
-                                </ul>
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                    <!-- PC Técnico -->
-                    <div id="emp-pc-tecnico" class="hidden">
-                        <div class="action-steps">
-                            <h3>Inconvenientes técnicos en su PC de trabajo</h3>
-                            
-                            <p><strong>Indagar en qué instancia no puede realizar en su PC</strong></p>
-
-                            <h4>SI sabe su usuario y correo:</h4>
-                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
-
-                            <h4>NO sabe su usuario:</h4>
-                            <ol>
-                                <li>Pedir nombre de usuario para ver si tiene un usuario en SISAO</li>
-                                <li>Consultar si el correo registrado es el correcto o hay que modificar</li>
-                            </ol>
-                        </div>
-                    </div>
-
-                    <!-- GDE -->
-                    <div id="emp-gde" class="hidden">
-                        <div class="action-steps">
-                            <h3>GDE - Gestión Documental Electrónica</h3>
-                            
-                            <div class="warning-box">
-                                <strong>⚠️ VERIFICAR:</strong> Esta sección requiere verificación con el equipo técnico
-                            </div>
-
-                            <p><strong>Indagar en qué instancia no puede realizar en GDE</strong></p>
-
-                            <h4>SI sabe su usuario y correo:</h4>
-                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
-
-                            <h4>NO sabe su usuario:</h4>
-                            <ol>
-                                <li>Pedir nombre de usuario para ver si tiene un usuario en GDE</li>
-                                <li>Solicitar captura de pantalla para verificar el error</li>
-                            </ol>
-                        </div>
-                    </div>
-
-                    <!-- SGA -->
-                    <div id="emp-sga" class="hidden">
-                        <div class="action-steps">
-                            <h3>SGA - Sistema de Gestión Administrativa</h3>
-                            
-                            <div class="warning-box">
-                                <strong>⚠️ VERIFICAR:</strong> Esta sección requiere verificación con el equipo técnico
-                            </div>
-
-                            <p><strong>Indagar en qué instancia no puede realizar en SGA</strong></p>
-
-                            <h4>SI sabe su usuario y correo:</h4>
-                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
-
-                            <h4>NO sabe su usuario:</h4>
-                            <ol>
-                                <li>Indicar que se debe comunicar a la oficina de Personal</li>
-                                <li>Comunicarse a través de ALMA o la página web</li>
-                                <li>Colocar los datos que solicita la aplicación</li>
-                            </ol>
-                        </div>
-                    </div>
-
-                    <!-- Nextcloud -->
-                    <div id="emp-nextcloud" class="hidden">
-                        <div class="action-steps">
-                            <h3>Nextcloud - Almacenamiento en la Nube</h3>
-                            
-                            <div class="warning-box">
-                                <strong>⚠️ VERIFICAR:</strong> Esta sección requiere verificación con el equipo técnico
-                            </div>
-
-                            <p><strong>Indagar en qué instancia no puede realizar en Nextcloud</strong></p>
-
-                            <h4>SI sabe su usuario y correo:</h4>
-                            <p>Indicar que debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar</p>
-
-                            <h4>NO sabe su usuario:</h4>
-                            <ol>
-                                <li>Pedir nombre de usuario para ver si tiene un usuario en LDAP</li>
-                                <li>Solicitar captura de pantalla para verificar el error</li>
-                            </ol>
-                        </div>
-                    </div>
-
-                    <!-- SIGA -->
-                    <div id="emp-siga" class="hidden">
-                        <div class="action-steps">
-                            <h3>SIGA - Sistema Integrado de Gestión Administrativa</h3>
-                            
-                                <p>    <li> Indagar en qué instancia no puede realizar en SIGA </li> </p>
-                           
-    <p>    <li>  En caso de requerir escalamiento de la solución,  derivar la consultar a <strong> Eugenia Alfonso (eugenia.alfonso@osep.mendoza.gov.ar)</strong> o <strong>Florencia Vincenti (florencia.vincenti@osep.mendoza.gov.ar)</strong> </li></p>                        </div>
-                    </div>
-                    
-                  <!-- Problemas de Agendas -->
-                    <div id="emp-agendas" class="hidden">
-                        <div class="action-steps">
-                            <h3>Problemas de Convenio</h3>
-                                
-                                <ul style="margin-left: 20px;">
-                                    <li>1. Pedir matrícula,revisar en sistemas si tiene registrado usuario y convenio.</li>
-                                    <li>2. Corroborar que el Empleado use el usuario correcto y que este dentro de dicho convenio.</li>
-                                    <li>3. Si el error se encuentra en el convenio, orientar para que solicite la configuración de dicho convenio a Convenios para que corrija ese dato. Llamando a los números <strong>4615876-4615051.</strong></li>
-                                </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANTALLA: FARMACIA -->
-            <div id="screen-farmacia" class="main-card hidden">
-                <button class="btn btn-back" onclick="goBack()">⬅ Volver</button>
-                <h2 class="section-title">Consulta: Problemas con una receta</h2>
-                
-                <div class="scrollable-content">
-                    <div class="info-box">
-                        <h3>Pregunta Inicial</h3>
-                        <p><strong>¿La farmacia ha consumido la receta?</strong></p>
-                    </div>
-
-                    <div class="button-grid">
-                        <button class="btn" onclick="showFarmaciaConsumo('si')">
-                            <span class="icon">✅</span>
-                            SÍ, ya consumió la receta
-                        </button>
-                        <button class="btn" onclick="showFarmaciaConsumo('no')">
-                            <span class="icon">❌</span>
-                            NO, no la ha consumido
-                        </button>
-                    </div>
-
-                    <div id="farmacia-si" class="action-steps hidden">
-                        <h3>Acción: Derivar a Auditoría</h3>
-                        <p><strong>Sugerir y dar contacto</strong> para que se comunique con Auditoría de Farmacias.</p>
-                    </div>
-
-                    <div id="farmacia-no" class="hidden">
-                        <div class="action-steps">
-                            <h3>Procedimiento de verificación en SISAO</h3>
-                            <ol>
-                                <li><strong>Solicitar:</strong> Número de receta y afiliado</li>
-                                <li><strong>Consultar</strong> simulación en SISAO: Farmacia → Receta → Transacción</li>
-                                <li><strong>Leer mensaje</strong> y actuar según corresponda:</li>
-                            </ol>
-                        </div>
-
-                        <div class="button-grid">
-                            <button class="btn" onclick="showFarmaciaError('consumida')">Receta consumida</button>
-                            <button class="btn" onclick="showFarmaciaError('token')">TOKEN inválido</button>
-                            <button class="btn" onclick="showFarmaciaError('prescriptor')">No coincide prescriptor</button>
-                            <button class="btn" onclick="showFarmaciaError('porcentaje')">No coincide porcentaje</button>
-                        </div>
-
-                        <div id="farmacia-receta-consumida" class="info-box hidden">
-                            <h3>Receta ya consumida</h3>
-                            <p><strong>Acción:</strong> Dar lugar y fecha del consumo.</p>
-                        </div>
-
-                        <div id="farmacia-token-invalido" class="info-box hidden">
-                            <h3>TOKEN inválido</h3>
-                            <p><strong>Acción:</strong> Asegurarse de recibir token vigente del afiliado correcto.</p>
-                        </div>
-
-                        <div id="farmacia-no-coincide-prescriptor" class="info-box hidden">
-                            <h3>No coincide prescriptor</h3>
-                            <p><strong>Acción:</strong> Revisar y corregir carga manual en la Farmacia.</p>
-                        </div>
-
-                        <div id="farmacia-no-coincide-porcentaje" class="info-box hidden">
-                            <h3>No coincide porcentaje</h3>
-                            <p><strong>Acción:</strong> Revisar y corregir carga manual en la Farmacia.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANTALLA: PROFESIONAL -->
-            <div id="screen-profesional" class="main-card hidden">
-                <button class="btn btn-back" onclick="goBack()">⬅ Volver</button>
-                <h2 class="section-title">Consulta: No puedo ingresar a SISAO o Firmar</h2>
-                
-                <div class="scrollable-content">
-                    <div class="info-box">
-                        <h3>Pregunta Inicial</h3>
-                        <p><strong>¿Sabe cuál es su usuario y correo registrado?</strong></p>
-                    </div>
-
-                    <div class="button-grid">
-                        <button class="btn" onclick="showProfesionalSabe('si')">
-                            <span class="icon">✅</span>
-                            SÍ, sé mi usuario y correo
-                        </button>
-                        <button class="btn" onclick="showProfesionalSabe('no')">
-                            <span class="icon">❌</span>
-                            NO sé mi usuario/correo
-                        </button>
-                    </div>
-
-                    <div id="profesional-si-sabe" class="action-steps hidden">
-                        <h3>Solución: Recuperación de acceso</h3>
-                        <p><strong>Indicar:</strong> Debe ingresar en "Olvidó usuario y contraseña" para cambiar y poder ingresar.</p>
-                    </div>
-
-                    <div id="profesional-no-sabe" class="hidden">
-                        <div class="action-steps">
-                            <h3>Procedimiento de verificación</h3>
-                            <ol>
-                                <li><strong>Solicitar matrícula</strong> para verificar usuario</li>
-                                <li><strong>Consultar</strong> si correo es correcto o hay que modificar</li>
-                                <li><strong>Verificar</strong> si tiene firma digital registrada</li>
-                            </ol>
-                        </div>
-
-                        <h3 style="color: #800080; margin: 20px 0 10px;">Problemas específicos:</h3>
-                        <div class="button-grid">
-                            <button class="btn" onclick="showProfesionalProblema('usuario')">Usuario/contraseña incorrecta</button>
-                            <button class="btn" onclick="showProfesionalProblema('telefono')">Cambié de teléfono</button>
-                            <button class="btn" onclick="showProfesionalProblema('token')">Recuperar Token</button>
-                            <button class="btn" onclick="showProfesionalProblema('firmador')">No abre firmador</button>
-                            <button class="btn" onclick="showProfesionalProblema('contrasenia')">No recuerdo contraseña firma</button>
-                            <button class="btn" onclick="showProfesionalProblema('baneo')">Baneo de contraseña</button>
-                            <button class="btn" onclick="showProfesionalProblema('pantalla-blanco')">Pantalla en blanco</button>
-                            <button class="btn" onclick="showProfesionalProblema('cerrar-sesion')">Cerrar sesión</button>
-                            <button class="btn" onclick="showProfesionalProblema('olvido-proceso')">Ya hice "Olvidó contraseña"</button>
-                        </div>
-
-                        <div id="prof-usuario-incorrecto" class="action-steps hidden">
-                            <h3>Solución: Usuario/contraseña incorrectos</h3>
-                            <ol>
-                                <li><strong>Solicitar matrícula</strong> y revisar en sistemas</li>
-                                <li><strong>Corroborar</strong> que tenga usuario generado vigente</li>
-                                <li><strong>Orientar</strong> para que se comunique con Oficina de Prestadores</li>
-                                <li><strong>Recuperar</strong> usuario y contraseña mediante "¿Olvidó su usuario y/o contraseña?"</li>
-                            </ol>
-                        </div>
-
-                        <div id="prof-cambio-telefono" class="action-steps hidden">
-                            <h3>Solución: Cambió de teléfono</h3>
-                            <p><strong>Indicar el siguiente procedimiento:</strong></p>
-                            <ul style="margin-left: 20px; margin-top: 8px;">
-                                <li>Ingresar en la esquina superior derecha de la pantalla</li>
-                                <li>Seleccionar la dirección de correo electrónico asociada a la cuenta</li>
-                                <li>Configurar nuevamente la Contraseña de un Solo Uso (OTP)</li>
-                            </ul>
-                        </div>
-
-                        <div id="prof-recuperar-token" class="action-steps hidden">
-                            <h3>Solución: Recuperar Token</h3>
-                            <p><strong>Solicitar envío de email a:</strong></p>
-                            <ul style="margin-left: 20px; margin-top: 8px;">
-                                <li>Dirección: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13607c637c6167764c607a6067767e7260537c6076633d7e767d777c69723d747c653d7261">[email&#160;protected]</a></strong></li>
-                                <li>El usuario recibirá un instructivo por email</li>
-                                <li>Seguir las instrucciones para blanquear el token</li>
-                                <li>Generar un nuevo token siguiendo el proceso indicado</li>
-                            </ul>
-                        </div>
-
-                        <div id="prof-no-abre-firmador" class="action-steps hidden">
-                            <h3>Solución: No abre ventana del firmador</h3>
-                            <p>La pantalla muestra mensaje en blanco al intentar firmar:</p>
-                            <ul style="margin-left: 20px; margin-top: 8px;">
-                                <li>Solicitar que <strong>habilite las ventanas emergentes</strong> en el navegador</li>
-                                <li>En Chrome: verificar configuración de ventanas emergentes</li>
-                                <li><strong>Restablecer la página</strong> (F5 o botón actualizar)</li>
-                                <li>Intentar firmar nuevamente las recetas</li>
-                            </ul>
-                        </div>
-
-                        <div id="prof-olvido-contrasenia" class="action-steps hidden">
-                            <h3>Solución: Olvidó contraseña para firmar</h3>
-                            <p><strong>Proceso requerido:</strong></p>
-                            <ul style="margin-left: 20px; margin-top: 8px;">
-                                <li>Debe <strong>solicitar nuevamente turno presencial</strong></li>
-                                <li>Se realizará el proceso de generación de firma digital nuevamente</li>
-                                <li>Contactar con la Oficina de Prestadores para agendar turno</li>
-                            </ul>
-                        </div>
-
-                        <div id="prof-baneo-contrasenia" class="action-steps hidden">
-                            <h3>Solución: Baneo de contraseña</h3>
-                            <p>Sistema bloqueado temporalmente:</p>
-                            <ul style="margin-left: 20px; margin-top: 8px;">
-                                <li>El sistema muestra mensaje de bloqueo al intentar firmar</li>
-                                <li><strong>Debe esperar 15 minutos</strong> para que se restablezca</li>
-                                <li>No intentar ingresar durante el tiempo de espera</li>
-                                <li>Transcurrido el tiempo, la página se restablecerá automáticamente</li>
-                                <li>Podrá volver a firmar normalmente</li>
-                            </ul>
-                        </div>
-
-                        <div id="prof-pantalla-blanco" class="action-steps hidden">
-                            <h3>Solución: Pantalla en blanco</h3>
-                            <p><strong>Recomendar limpieza de navegador:</strong></p>
-                            <ol>
-                                <li>Limpiar cookies del navegador</li>
-                                <li>Limpiar caché del navegador</li>
-                                <li>Cerrar y volver a abrir el navegador</li>
-                                <li>Intentar ingresar nuevamente a la aplicación</li>
-                            </ol>
-                        </div>
-
-                        <div id="prof-cerrar-sesion" class="action-steps hidden">
-                            <h3>Solución: No sabe cómo cerrar sesión</h3>
-                            <p><strong>Opciones para cerrar sesión:</strong></p>
-                            <ul style="margin-left: 20px; margin-top: 8px;">
-                                <li><strong>Opción 1:</strong> Hacer clic en el ícono de personita y elegir "SALIR"</li>
-                                <li><strong>Opción 2:</strong> En la esquina superior derecha, tocar el rectángulo con flecha</li>
-                                <li><strong>Opción 3:</strong> Buscar el ícono de puerta con flecha para salir</li>
-                            </ul>
-                        </div>
-
-                        <div id="prof-olvido-proceso" class="action-steps hidden">
-                            <h3>Ya realizó "Olvidó usuario/contraseña"</h3>
-                            <div class="info-box">
-                                <h3>¿Qué situación se presenta?</h3>
-                            </div>
-                            <div class="button-grid">
-                                <button class="btn" onclick="showSubProblema('datos-incorrectos')">Le figura "Datos Incorrectos"</button>
-                                <button class="btn" onclick="showSubProblema('no-llega-email')">No le llega el email de recuperación</button>
-                            </div>
-                            
-                            <div id="subprob-datos-incorrectos" class="info-box hidden">
-                                <h3>Datos Incorrectos</h3>
-                                <p><strong>Acción:</strong> Verificar los datos ingresados y asegurar que coincidan con los registrados en el sistema. Si persiste, contactar Oficina de Prestadores.</p>
-                            </div>
-
-                            <div id="subprob-no-llega-email" class="info-box hidden">
-                                <h3>No llega email de recuperación</h3>
-                                <ul style="margin-left: 20px; margin-top: 8px;">
-                                    <li>Verificar carpeta de spam/correo no deseado</li>
-                                    <li>Confirmar que el correo electrónico esté correctamente registrado</li>
-                                    <li>Si el correo es incorrecto, contactar Oficina de Prestadores para actualización</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- MODAL PARA MOSTRAR PDFs -->
-        <div id="pdfModal" class="pdf-modal">
-            <div class="pdf-modal-content">
-                <div class="pdf-modal-header">
-                    <h3 id="pdfTitulo">Guía Rápida</h3>
-                    <button class="pdf-close-btn" onclick="cerrarPDF()">✕</button>
-                </div>
-                <iframe id="pdfIframe" class="pdf-iframe"></iframe>
-            </div>
-        </div>
+<header class="app-header">
+<div class="header-logo">
+  <svg viewBox="0 0 148 48" height="38" width="auto" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+    <defs>
+      <!-- Esfera 3D iluminada del isotipo -->
+      <radialGradient id="osepSphere" cx="38%" cy="32%" r="62%">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="28%" stop-color="#f5e8f4"/>
+        <stop offset="65%" stop-color="#c48bc2"/>
+        <stop offset="90%" stop-color="#721d6e"/>
+        <stop offset="100%" stop-color="#4a0a49"/>
+      </radialGradient>
+    </defs>
+
+    <!-- ISOTIPO OSEP (Persona abrazando esfera) -->
+    <!-- Cabeza -->
+    <ellipse cx="23.5" cy="11.5" rx="3.8" ry="4.8" fill="#6d1b69"/>
+    
+    <!-- Brazo / Espalda envolvente -->
+    <path d="M 28 17.5 C 33 20 34.5 24 34 26.5 C 33.5 28 31 28.5 30 27 C 28.5 25 26.5 22 23 21 C 18 20 14 24 13.5 30 C 13 35 15.5 40 19 43 C 14 41 9.5 35 10 28 C 10.5 20.5 17 15 25 15.5 C 26 15.6 27.2 16.5 28 17.5 Z" fill="#6d1b69"/>
+    
+    <!-- Esfera central -->
+    <circle cx="27" cy="30" r="10.8" fill="url(#osepSphere)"/>
+
+    <!-- TIPOGRAFÍA OSEP (Sans Serif Bold corporativa) -->
+    <text x="47" y="36.5" 
+          font-family="'Nunito Sans', 'Trebuchet MS', Arial, sans-serif" 
+          font-weight="900" 
+          font-size="28.5" 
+          fill="#6d1b69" 
+          letter-spacing="-0.5px">OSEP</text>
+  </svg>
+</div>
+  <div class="header-badge">Gerencia de TIC OSEP</div>
+</header>
+
+<!-- BUSCADOR -->
+<div class="search-card">
+  <div class="search-label">BUSCADOR DE CONSULTAS</div>
+  <div class="search-row">
+    <input
+      class="search-input"
+      id="searchInput"
+      type="text"
+      placeholder="Escribí una palabra, frase o las primeras 4 letras"
+      autocomplete="off"
+    />
+    <button class="search-btn" onclick="doSearch()">Buscar</button>
+  </div>
+  <div class="search-hints">
+    <strong>Sugerencias rápidas:</strong>
+    <div class="hint-tags" id="hintTags"></div>
+  </div>
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<svg width="0" height="0">
+  <defs>
+    <linearGradient id="grad-afiliado" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="20%" stop-color="#7a1c79"/>
+      <stop offset="60%" stop-color="#ff8c00"/>
+    </linearGradient>
+
+    <linearGradient id="grad-empleado" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="20%" stop-color="#7a1c79"/>
+      <stop offset="60%" stop-color="#08f22b"/>
+    </linearGradient>
+
+    <linearGradient id="grad-profesional" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="20%" stop-color="#7a1c79"/>
+      <stop offset="60%" stop-color="#0995f9"/>
+    </linearGradient>
+
+    <linearGradient id="grad-farmacia" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="20%" stop-color="#7a1c79"/>
+      <stop offset="60%" stop-color="#f9d432"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<main class="main-wrap">
+  <div class="workspace">
+    <nav class="roles-sidebar">
+      <div class="section-label">ROL RELACIONADO</div>
+      <div class="role-card" data-role="afiliado" onclick="selectRole('afiliado', this)">
+        <div class="role-name">AFILIADO</div>
+        <div class="role-icon afiliado-icon"><i data-lucide="user-star"></i></div>
+      </div>
+      <div class="role-card" data-role="empleado" onclick="selectRole('empleado', this)">
+        <div class="role-name">EMPLEADO</div>
+        <div class="role-icon empleado-icon"><i data-lucide="square-user-round"></i></div>
+      </div>
+      <div class="role-card" data-role="prestador" onclick="selectRole('prestador', this)">
+        <div class="role-name">PRESTADOR PROFESIONAL</div>
+        <div class="role-icon profesional-icon"><i data-lucide="stethoscope"></i></div>
+      </div>
+      <div class="role-card" data-role="farmacia" onclick="selectRole('farmacia', this)">
+        <div class="role-name">FARMACIA</div>
+        <div class="role-icon farmacia-icon"><i data-lucide="pill-bottle"></i></div>
+      </div>
+      <div class="role-card" onclick="openContentMap(null)" style="background:linear-gradient(135deg,#ffffff);cursor:pointer;margin-top:4px">
+        <div class="role-name" style="color:#67026a;font-size:12px">MAPA DE CONTENIDOS</div>
+        <i data-lucide="map" style="width:22px;height:22px;color:#ef05cf;stroke:#7c0452"></i>
+      </div>
+    </nav>
+
+    <div class="content-col">
+      <!-- ÁRBOL DE DECISIÓN -->
+      <div class="tree-area" id="treeArea"></div>
+      <div class="scroll-fade"></div>
     </div>
+  </div>
+</main>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        let navigationHistory = ['inicio'];
+<footer class="app-footer">
+  TELAG — Soporte de Sistemas - Gerencia de TIC OSEP
+</footer>
 
-        function selectContexto(contexto) {
-            hideAllScreens();
-            document.getElementById('screen-' + contexto).classList.remove('hidden');
-            navigationHistory.push(contexto);
-            updateBreadcrumb(contexto);
+<!-- ── BOTÓN FLOTANTE Y VENTANA DEL ASISTENTE TELAG ── -->
+<div class="chat-widget-btn" id="chatWidgetBtn" onclick="toggleChatWindow()" title="Asistente Conversacional TELAG">
+  <i data-lucide="bot-message-square"></i>
+</div>
+
+<div class="chat-window" id="chatWindow">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <div class="chat-avatar">
+        <i data-lucide="sparkles"></i>
+      </div>
+      <div>
+        <div class="chat-title">Asistente TELAG</div>
+        <div class="chat-subtitle">Soporte TIC OSEP</div>
+      </div>
+    </div>
+    <button class="chat-close-btn" onclick="toggleChatWindow()" title="Cerrar chat">
+      <i data-lucide="x" style="width:18px;height:18px"></i>
+    </button>
+  </div>
+
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">
+      👋 ¡Hola! Soy el asistente conversacional de <strong>TELAG</strong>.<br><br>
+      ¿Sobre qué tema del Mapa de Contenidos necesitas consultar?
+      <div class="chat-actions">
+        <button class="chat-action-btn" onclick="iniciarMenuChat('afiliado')">👤 A. Consultas Afiliados</button>
+        <button class="chat-action-btn" onclick="iniciarMenuChat('empleado')">💼 E. Consultas Empleados</button>
+        <button class="chat-action-btn" onclick="iniciarMenuChat('prestador')">🩺 P. Consultas Prestadores</button>
+        <button class="chat-action-btn" onclick="iniciarMenuChat('farmacia')">💊 F. Consultas Farmacia</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-footer">
+    <input
+      type="text"
+      class="chat-input"
+      id="chatInput"
+      placeholder="Escribí tu consulta..."
+      autocomplete="off"
+    />
+    <button class="chat-send-btn" onclick="sendChatMessage()" title="Enviar mensaje">
+      <i data-lucide="send-horizontal"></i>
+    </button>
+  </div>
+</div>
+
+<script>
+  treeArea.classList.add('dimmed');
+  treeArea.classList.remove('dimmed');
+</script>
+
+<script>
+function onSelectResult(topicId){
+  openFlow(topicId);
+  document.getElementById('searchResults').classList.remove('show');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('treeArea').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
+</script>
+
+<script>
+document.addEventListener('click', function(e) {
+  const popover = document.getElementById('telagPopover');
+  const btn = document.querySelector('.telag-info-btn');
+  if (!btn.contains(e.target)) {
+    popover.classList.remove('open');
+  }
+});
+
+document.getElementById('searchResults').addEventListener('click', function() {
+  setTimeout(() => {
+    document.getElementById('searchResults').classList.remove('show');
+    document.getElementById('searchInput').value = '';
+  }, 150);
+});
+</script>
+
+<script>
+/* =========================================================
+   BASE DE CONOCIMIENTO
+   ========================================================= */
+const searchHistory = {};
+let dynamicTagCount = 0;
+const MAX_DYNAMIC_TAGS = 2;
+
+const BADGE_ROLE_COLORS = {
+  afil: { bg: 'rgba(255,140,0,0.13)',  color: '#a85800', border: 'rgba(255,140,0,0.45)' },
+  empl: { bg: 'rgba(8,200,40,0.10)',   color: '#1a6b30', border: 'rgba(8,200,40,0.40)' },
+  pres: { bg: 'rgba(9,149,249,0.13)',  color: '#185fa5', border: 'rgba(9,149,249,0.45)' },
+  farm: { bg: 'rgba(200,168,0,0.13)',  color: '#6b5200', border: 'rgba(200,168,0,0.45)' },
+};
+
+let KB = [];
+const HINT_TAGS = ['contraseña','correo','token','acceso','SISAO','receta','firma','OTP','farmacia','turno','agenda','celular'];
+const BADGE_MAP = {afil:'badge-afil', empl:'badge-empl', pres:'badge-pres', farm:'badge-farm'};
+const BADGE_LABEL = {afil:'Afiliado', empl:'Empleado', pres:'Prestador', farm:'Farmacia'};
+
+function loadKB(){
+  KB = [
+    /* ── AFILIADOS ── */
+    {id:'acc-portal',     topic:'Acceso al portal / app móvil',              icon:'tv-minimal-play',    badges:['afil'], keys:'acceso portal app movil'},
+    {id:'android',        topic:'Acceso app móvil — Android',                icon:'tv-minimal-play',    badges:['afil'], keys:'acceso app movil android samsung motorola xiaomi play store'},
+    {id:'iphone',         topic:'Acceso app móvil — iPhone / iOS',           icon:'tv-minimal-play',    badges:['afil'], keys:'acceso app movil ios iphone apple safari instalar pantalla inicio'},
+    {id:'olvido-cred',    topic:'Olvidé mi usuario y/o contraseña',          icon:'user-round-key',     badges:['afil'], keys:'olvide usuario contrasena clave crear nuevo registrar credenciales'},
+    {id:'cam-email-afil', topic:'Cambiar correo vinculado a Mi OSEP',        icon:'mail-x',             badges:['afil'], keys:'correo email cambiar actualizar credencial bloqueado habilitado mail'},
+    {id:'error400-afil',  topic:'Error 400 / pantalla en blanco',            icon:'globe-x',            badges:['afil'], keys:'error 400 blanco pantalla cache limpiar navegador'},
+    {id:'vincular-tel',   topic:'Vincular número de teléfono',               icon:'monitor-smartphone', badges:['afil'], keys:'telefono celular vincular whatsapp alma token movil'},
+    {id:'grupo-fam',      topic:'Grupo familiar / gestión de menores',       icon:'users',              badges:['afil'], keys:'grupo familiar menor hijo edad gestion titular chicos 13 anos'},
+    {id:'turnos-afil',    topic:'Sacar / reservar turnos',                   icon:'calendar-search',    badges:['afil'], keys:'turno reservar sacar solicitar profesional agenda disponibilidad turnos'},
+    {id:'informes-afil',  topic:'No puedo ver mis informes / estudios',      icon:'book-text',          badges:['afil'], keys:'informe estudio ver confidencialidad efector prestador estudios'},
+    {id:'sga-afil',       topic:'SGA — Sistema de Gestión Administrativa',   icon:'timer-reset',        badges:['afil'], keys:'sga acceso licencia rrhh reparticion'},
+
+    /* ── EMPLEADOS ── */
+    {id:'acc-serv-empl',  topic:'Problemas de acceso al portal / servicios', icon:'layout-grid',        badges:['empl'], keys:'acceso portal servicios error 400 blanco mesa ayuda pedido grabar noc'},
+    {id:'sisao-empl',     topic:'SISAO — acceso y errores',                  icon:'goal',               badges:['empl','pres'], keys:'sisao acceso error permisos gde tic04 login sisao empleado'},
+    {id:'firma-empl',     topic:'Firma digital — contraseña / PIN / OTP',    icon:'file-pen',           badges:['empl'], keys:'firma digital pin otp contrasena baneada bloqueada authenticator google celular cambio blanqueo renovar turno alma'},
+    {id:'receta-empl',    topic:'No puedo firmar / prescribir recetas',      icon:'pencil-off',         badges:['empl'], keys:'receta firmar prescribir token validar afiliado diagnostico medicamento grabar'},
+    {id:'agenda-empl',    topic:'No puedo ver / gestionar agendas (empleado)',icon:'calendar-off',      badges:['empl'], keys:'agenda ver gestionar ubicacion sisao call center turnos'},
+    {id:'gde-empl',       topic:'GDE — Gestión documental electrónica',      icon:'file-stack',         badges:['empl'], keys:'gde gestion documental electronica autocapacitacion'},
+    {id:'correo-empl',    topic:'Correo institucional',                      icon:'mails',              badges:['empl'], keys:'correo institucional zimbra ldap login acceso carpeta grupal gde tic04 mail'},
+    {id:'nextcloud-empl', topic:'Carpetas compartidas / Nextcloud',          icon:'monitor-cloud',      badges:['empl'], keys:'nextcloud carpeta compartida nc.osep gtic referente autocapacitacion'},
+    {id:'siga-empl',      topic:'SIGA — Florencia Vicenti',                  icon:'picture-in-picture', badges:['empl'], keys:'siga sistema integrado gestion florencia vicenti acceso'},
+    {id:'afiliaciones-empl',topic:'Sistema de Afiliaciones — Guadalupe Herrera',icon:'users-round',    badges:['empl'], keys:'afiliaciones sistema guadalupe herrera acceso gestion'},
+    {id:'sga-empl',       topic:'SGA — Sistema de Gestión Administrativa',   icon:'timer-reset',        badges:['empl'], keys:'sga acceso licencia rrhh reparticion'},
+
+    /* ── PRESTADORES ── */
+    {id:'acc-sisao-pres', topic:'No puedo acceder a SISAO (prestador)',      icon:'goal',               badges:['pres'], keys:'sisao acceso prestador credenciales matricula usuario login'},
+    {id:'permisos-pres',  topic:'Faltan permisos para prescribir',           icon:'shield-off',         badges:['pres'], keys:'permisos accesos faltan prescribir receta prestadores email'},
+    {id:'receta-pres',    topic:'No puedo firmar / prescribir recetas (prestador)', icon:'pencil-off',  badges:['pres'], keys:'receta firmar prescribir token validar afiliado diagnostico medicamento grabar firma'},
+    {id:'agenda-pres',    topic:'No puedo ver / gestionar agendas (prestador)',icon:'calendar-off',     badges:['pres'], keys:'agenda ver gestionar ubicacion sisao call center turnos prestador'},
+    {id:'firma-pres',     topic:'Firma digital (prestador)',                 icon:'file-pen',           badges:['pres'], keys:'firma digital pin contrasena baneada bloqueada renovar alma turno prestador'},
+    {id:'otp-pres',       topic:'Cambié de celular / perdí el token OTP',    icon:'smartphone-nfc',     badges:['pres'], keys:'otp token celular cambio authenticator google gmail restaurar blanqueo 24 horas'},
+
+    /* ── FARMACIA ── */
+    {id:'receta-farm',    topic:'Errores frecuentes al gestionar recetas en SISAO',      icon:'pill-bottle',        badges:['farm'], keys:'receta error sisao farmacia consumir transaccion token porcentaje cobertura profesional medicamento prescriptor simulacion'},
+    {id:'auditoria-farm', topic:'Cambios sobre recetas ya consumidas', icon:'phone-forwarded',    badges:['farm'], keys:'auditoria receta consumida derivar anular 3480406 farmacia'},
+  ];
+}  
+
+function trackDynamicHint(q, role) {
+  if (HINT_TAGS.some(t => t.toLowerCase() === q)) return;
+  if (searchHistory[q] && searchHistory[q].added) return;
+  if (dynamicTagCount >= MAX_DYNAMIC_TAGS) return;
+
+  if (!searchHistory[q]) searchHistory[q] = { count: 0, added: false, role };
+  searchHistory[q].count++;
+
+  if (searchHistory[q].count >= 2) {
+    addDynamicHintTag(q, role);
+    searchHistory[q].added = true;
+    dynamicTagCount++;
+  }
+}
+
+function addDynamicHintTag(q, role) {
+  const colors = BADGE_ROLE_COLORS[role] || {
+    bg: 'var(--osep-light)', color: 'var(--osep)', border: 'rgba(122,28,121,0.2)'
+  };
+  const wrap = document.getElementById('hintTags');
+  const el = document.createElement('span');
+  el.className = 'hint-tag hint-tag-dynamic';
+  el.setAttribute('data-query', q);
+  el.innerHTML = `<span style="font-size:9px;margin-right:3px;vertical-align:middle">✦</span>${q}`;
+  el.style.background   = colors.bg;
+  el.style.color        = colors.color;
+  el.style.borderColor  = colors.border;
+  el.onclick = () => {
+    document.getElementById('searchInput').value = q;
+    doSearch();
+  };
+  wrap.appendChild(el);
+}
+
+function renderIcon(icon){
+  return `<i data-lucide="${icon}" class="topic-icon"></i>`;
+}
+
+/* =========================================================
+   MENÚS POR ROL
+   ========================================================= */
+const TOPICS = {
+  afiliado: [
+    {id:'acc-portal',    label:'Acceso al portal / app móvil', icon:'tv-minimal-play'},
+    {id:'olvido-cred',   label:'Relacionado con usuarios y/o contraseña', icon:'user-round-key'},
+    {id:'cam-email-afil',label:'Cambiar correo vinculado a Mi OSEP', icon:'mail-x'},
+    {id:'error400-afil', label:'Error 400 / pantalla en blanco', icon:'globe-x'},
+    {id:'vincular-tel',  label:'Vincular número de teléfono', icon:'monitor-smartphone'},
+    {id:'grupo-fam',     label:'Grupo familiar / gestión de menores', icon:'users'},
+    {id:'turnos-afil',   label:'Sacar / reservar turnos', icon:'calendar-search'},
+    {id:'informes-afil', label:'No puedo ver mis informes / estudios', icon:'book-text'},
+    {id:'sga-afil',     label:'SGA-Sistema de Gestión Administrativa', icon:'timer-reset'},
+  ],
+  empleado: [
+    {id:'acc-serv-empl', label:'Problemas de acceso al portal / servicios', icon:'layout-grid'},
+    {id:'sisao-empl',    label:'SISAO — acceso y errores', icon:'goal'},
+    {id:'firma-empl',    label:'Firma digital — contraseña / PIN / OTP', icon:'file-pen'},
+    {id:'receta-empl',   label:'No puedo firmar / prescribir recetas', icon:'pencil-off'},
+    {id:'agenda-empl',   label:'No puedo ver / gestionar agendas', icon:'calendar-off'},
+    {id:'gde-empl',      label:'GDE — Gestión documental', icon:'file-stack'},
+    {id:'correo-empl',   label:'Correo institucional', icon:'mails'},
+    {id:'nextcloud-empl',label:'Carpetas compartidas / Nextcloud', icon:'monitor-cloud'},
+    {id:'siga-empl',     label:'SIGA — Sistema integrado de gestión', icon:'picture-in-picture'},
+    {id:'afiliaciones-empl', label:'Sistema de Afiliaciones', icon:'users-round'},
+    {id:'sga-empl',     label:'SGA', icon:'timer-reset'},
+  ],
+  prestador: [
+    {id:'acc-sisao-pres',label:'No puedo acceder a SISAO', icon:'goal'},
+    {id:'permisos-pres', label:'Faltan permisos / accesos', icon:'user-round-cog'},
+    {id:'receta-pres',   label:'No puedo firmar / prescribir recetas', icon:'pencil-off'},
+    {id:'agenda-pres',   label:'No puedo ver / gestionar agendas', icon:'calendar-off'},
+    {id:'firma-pres',    label:'Firma digital — contraseña / PIN / OTP', icon:'file-pen'},
+    {id:'otp-pres',      label:'Cambié de celular / perdí el token OTP', icon:'tablet-smartphone'},
+  ],
+  farmacia: [
+    {id:'receta-farm',   label:'Errores eventuales al consumir recetas en SISAO', icon:'captions-off'},
+    {id:'auditoria-farm',label:'Operar receta ya consumida', icon:'captions'},
+  ],
+};
+
+/* =========================================================
+   FLUJOS DE DECISIÓN
+   ========================================================= */
+const FLOWS = {
+  /* ── AFILIADOS ── */
+  'acc-portal': {
+    title: 'Acceso al portal / app móvil',
+    steps: [
+      {type:'q', text:'¿En qué tipo de dispositivo está el afiliado?', choices:[
+        {label:'Celular o tablet', sub:'Samsung, iPhone u otra marca', icon:'smartphone', dot:'neu', next:'celular-q'},
+        {label:'PC con Windows', sub:'Computadora de escritorio o notebook', icon:'monitor', dot:'neu', next:'pc'},
+      ]},
+      {id:'celular-q', type:'q',
+        note:`<div class="box-label">Dato clave para identificar el celular</div>
+          <strong>Android</strong> — cualquier marca que <em>no</em> sea Iphone (Apple): Samsung, Motorola, Xiaomi, LG, Nokia, etc.<br><br>
+          <strong>iPhone</strong> — es la única marca de Apple. Tiene el logo de la manzanita mordida en la parte trasera.`,
+        text:'¿Cuál es la marca del celular?',
+        choices:[
+          {label:'Android', sub:'Samsung, Motorola, Xiaomi, LG u otra (no Apple)', icon:'smartphone', dot:'neu', next:'android'},
+          {label:'iPhone', sub:'iPhone (Apple)— logo de manzana mordida', icon:'tablet-smartphone', dot:'neu', next:'iphone'},
+        ]
+      },
+      {id:'pc', type:'action', html:`
+        <div class="box-label">Acción</div>
+        <ol class="steps-list">
+          <li><span class="step-num">1</span><span>Orientar al usuario a ingresar por navegador a <a class="link-chip" href="https://osepmendoza.com.ar" target="_blank">osepmendoza.com.ar</a> y presionar Enter.</span></li>
+          <li><span class="step-num">2</span><span>Buscar en la página el botón de "<strong>Ingresá</strong>" y hacer clic en él.</span></li>
+          <li><span class="step-num">3</span><span>El usuario visualizará el Portal de Autogestión de Osep. En el navegador puede seleccionar <em>"Agregar a pantalla de inicio / Crear acceso directo"</em> en el escritorio.</span></li>
+        </ol>
+      `},
+    ]
+  },
+
+  'android': {
+    title: 'Acceso app móvil — Android',
+    steps: [{type:'action', html:`
+      <div class="box-label">Acción</div>
+      Guiar al afiliado para descargar la app desde <strong>Play Store</strong>.<br>
+      Para una mejor orientación, regirse por la <strong>Guía Rápida para el Afiliado -></strong>.
+      <button class="btn-icon" style="margin-left:6px" onclick="abrirPdf('appmovil_en_android.pdf', 'App Móvil en Android')">
+        <i data-lucide="newspaper"></i> Guía PDF
+      </button>
+    `}]
+  },
+
+  'iphone': {
+    title: 'Acceso app móvil — iOS (iPhone)',
+    steps: [{type:'action', html:`
+      <div class="box-label">Acción</div>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span><span>En el navegador de iPhone <strong>Safari</strong> buscar la página <a class="link-chip" href="https://osepmendoza.com.ar" target="_blank">osepmendoza.com.ar</a>.</span></li>
+        <li><span class="step-num">2</span><span>Hacer clic en el botón <strong>Ingresá</strong> para visualizar el Portal de Autogestión.</span></li>
+        <li><span class="step-num">3</span><span>En la barra inferior de Safari, tocar el ícono de compartir y seleccionar <strong>"Agregar a pantalla de inicio"</strong>.</span></li>
+      </ol>
+      <button class="btn-icon" style="margin-top:8px" onclick="abrirPdf('appmovile_en_IOS.pdf', 'App Móvil en iOS')">
+        <i data-lucide="newspaper"></i> Guía iPhone PDF
+      </button>
+    `}]
+  },
+
+  'olvido-cred': {
+    title: 'Relacionado con usuarios y/o contraseña',
+    steps: [
+      {type:'info', html:`
+        <div class="box-label">Antes de continuar</div>
+        Solicitar el <strong>DNI</strong> del afiliado. Verificar en SISAO:<br>
+        Menú lateral <strong>Seguridad</strong> → <strong>Consulta usuario afiliados</strong> → ícono <i data-lucide="list-plus" style="width:16px;height:16px;vertical-align:middle;"></i> → ingresar DNI → <strong>Aceptar</strong>.
+        <button class="btn-icon" style="margin-left:6px" onclick="abrirPdf('o_ver_usuario.pdf', 'Ver Usuario SISAO')">
+          <i data-lucide="map-pin"></i>
+        </button>
+      `},
+      {type:'q', text:'¿El afiliado tiene usuario registrado en el sistema?', choices:[
+        {label:'SÍ, tiene usuario', dot:'si', next:'tiene-user'},
+        {label:'NO, no tiene usuario', dot:'no', next:'no-user'},
+      ]},
+      {id:'no-user', type:'action', html:`
+        <div class="box-label">Acción</div>
+        Orientar al afiliado a crear su usuario desde la opción <strong>"Crear usuario"</strong> en la pantalla de acceso del Portal de Autogestión.<br><br>
+        <button class="btn-icon" onclick="abrirPdf('nuevo_usuario_afiliado.pdf', 'Nuevo Usuario Afiliado')">
+          <i data-lucide="newspaper"></i> Guía Nuevo Usuario
+        </button>
+      `},
+      {id:'tiene-user', type:'action', html:`
+        <div class="box-label">Acción</div>
+        Guiar al afiliado a hacer clic en <strong>"¿Olvidó su usuario y/o contraseña?"</strong> en la pantalla de login.<br><br>
+        <button class="btn-icon" onclick="abrirPdf('recuperar-usuario.pdf', 'Recuperar Contraseña')">
+          <i data-lucide="newspaper"></i> Guía Recuperar Clave
+        </button>
+      `},
+    ]
+  },
+
+  'cam-email-afil': {
+    title: 'Cambio de correo vinculado a Mi OSEP',
+    steps: [
+      {type:'info', html:`
+        <div class="box-label">Importante — Verificar identidad</div>
+        Esta gestión debe ser solicitada <strong>únicamente por el afiliado en primera persona</strong>. Verificar identidad pidiendo número de <strong>credencial OSEP</strong> y DNI.<br><br>
+        1. Buscar el DNI en SISAO (Seguridad → Consulta usuario afiliados) y copiar el Login del usuario activo.<br>
+        2. Ingresar al <strong>Administrador de Seguridad</strong> y buscar el Login.
+      `},
+      {type:'q', text:'¿El usuario aparece en el listado?', choices:[
+        {label:'SÍ, está habilitado', dot:'si', next:'habilitado'},
+        {label:'NO, está bloqueado (sin registros)', dot:'no', next:'bloqueado'},
+      ]},
+      {id:'habilitado', type:'action', html:`
+        <div class="box-label">Acción</div>
+        Hacer clic en el <strong>lápiz anaranjado</strong> a la derecha del registro → cambiar la dirección de correo → clic en <strong>Guardar</strong>.
+        <button class="btn-icon" style="margin-left:6px" onclick="abrirPdf('o_admin_cambio_correo_h.pdf', 'Cambio Correo Habilitado')">
+          <i data-lucide="map-pin"></i>
+        </button>
+      `},
+      {id:'bloqueado', type:'action', html:`
+        <div class="box-label">Acción</div>
+        Ir al menú <strong>"Usuarios Bloqueados"</strong> → buscar el usuario → hacer clic en <strong>HABILITAR</strong> → luego ir a <strong>Administrar Usuarios</strong> y editar el correo.
+        <button class="btn-icon" style="margin-left:6px" onclick="abrirPdf('o_admin_cambio_correo_b.pdf', 'Cambio Correo Bloqueado')">
+          <i data-lucide="map-pin"></i>
+        </button>
+      `},
+    ]
+  },
+
+  'error400-afil': {
+    title: 'Error 400 / pantalla en blanco',
+    steps: [
+      {type:'q', text:'¿Qué inconveniente presenta el afiliado?', choices:[
+        {label:'Error 400 en pantalla', dot:'no', next:'e400'},
+        {label:'Pantalla en blanco', dot:'no', next:'blanco'},
+      ]},
+      {id:'e400', type:'action', html:`
+        <div class="box-label">Acción</div>
+        Indicar al afiliado que es un <strong>inconveniente momentáneo</strong>. Solicitar que aguarde unos instantes. Si es recurrente, consultar al <strong>NOC</strong>.
+      `},
+      {id:'blanco', type:'action', html:`
+        <div class="box-label">Acción — Limpiar caché del navegador</div>
+        <strong>Chrome / Edge / Firefox:</strong> <kbd>Ctrl+Shift+Delete</kbd> → seleccionar Caché → <strong>Eliminar datos</strong>.<br>
+        <strong>En móvil:</strong> Configuración → Aplicaciones → Navegador → Almacenamiento → <strong>Borrar caché</strong>.
+      `},
+    ]
+  },
+
+  'vincular-tel': {
+    title: 'Vincular número de teléfono',
+    steps: [
+      {type:'action', html:`
+        <div class="box-label">Acción</div>
+        1. Ingresar a <strong>Mi OSEP</strong> (portal de autogestión).<br>
+        2. Ir al segundo grupo de íconos → <strong>"Datos de Contacto"</strong>.<br>
+        3. Incorporar el número de móvil con el <strong>prefijo de área</strong> correspondiente.
+        <button class="btn-icon" style="margin-top:8px" onclick="abrirPdf('vincular_telefono.pdf', 'Vincular Teléfono')">
+          <i data-lucide="newspaper"></i> Guía Vincular Teléfono
+        </button>
+      `},
+    ]
+  },
+
+  'grupo-fam': {
+    title: 'Grupo familiar / gestión de menores',
+    steps: [
+      {type:'q', text:'¿Qué edad tiene el menor?', choices:[
+        {label:'Hasta 12 años (inclusive)', dot:'neu', next:'menor13'},
+        {label:'13 años o más', dot:'neu', next:'mayor13'},
+      ]},
+      {id:'menor13', type:'action', html:`
+        <div class="box-label">Acción — Menor hasta 12 años</div>
+        Se gestionan desde la cuenta del <strong>Titular</strong> desplegando la flecha del grupo familiar a la derecha de sus datos en el portal.
+      `},
+      {id:'mayor13', type:'action', html:`
+        <div class="box-label">Acción — Desde 13 años</div>
+        Desde los 13 años deben generar y gestionar sus <strong>propias credenciales</strong> de forma autónoma.
+      `},
+    ]
+  },
+
+  'turnos-afil': {
+    title: 'Sacar / reservar turnos',
+    steps: [
+      {type:'action', html:`
+        <div class="box-label">Acción — Desde el portal</div>
+        1. Iniciar sesión en el Portal de Autogestión → <strong>"Solicitar Turno"</strong>.<br>
+        2. Elegir Servicio, Zona y Departamento o buscar por profesional.<br>
+        3. Seleccionar turno en indicador verde → <strong>Grabar</strong>.<br>
+        <button class="btn-icon" style="margin-top:8px" onclick="abrirPdf('sacar_turnos.pdf', 'Sacar Turnos')">
+          <i data-lucide="newspaper"></i> Guía Turnos PDF
+        </button>
+      `},
+    ]
+  },
+
+  'informes-afil': {
+    title: 'No puedo ver mis informes / estudios',
+    steps: [
+      {type:'action', html:`
+        <div class="box-label">Acción</div>
+        Por cuestiones de confidencialidad médica, el afiliado debe solicitar el reenvío del informe directamente al <strong>efector o prestador</strong> que lo realizó.
+      `},
+    ]
+  },
+
+  'sga-afil': {
+    title: 'SGA',
+    steps: [
+      {type:'action', html:`
+        <div class="box-label">Acción</div>
+        Por consultas sobre acceso a SGA o gestión interna de servicios, dirigirse al área de <strong>Recursos Humanos (RR HH)</strong> de su repartición.
+      `},
+    ]
+  },
+
+  /* ── EMPLEADOS ── */
+  'tecnica-empl': {
+    title: 'Consulta técnica (Mesa de Ayuda)',
+    steps: [{type:'action', html:`
+      <div class="box-label">Acción</div>
+      Ingresar a SISAO con credenciales LDAP → menú lateral → <strong>Mesa de Ayuda</strong> → <strong>Agregar Pedido</strong> → Cargar datos y hacer clic en <strong>Grabar</strong>.
+    `}]
+  },
+
+  'acc-serv-empl': {
+    title: 'Problemas de acceso al portal / servicios',
+    steps: [
+      {type:'q', text:'¿El error 400 aparece en una sola PC o en todo el sector?', choices:[
+        {label:'Solo en esa PC', dot:'si', next:'e400-solo'},
+        {label:'En todas las PC del sector', dot:'no', next:'e400-todas'},
+      ]},
+      {id:'e400-solo', type:'action', html:`Generar pedido en <strong>SISAO → Mesa de Ayuda</strong> para asistencia técnica de ese puesto.`},
+      {id:'e400-todas', type:'escalate', html:`Escalar inmediatamente al <strong>NOC</strong> informando área, servicio y afectación general.`},
+    ]
+  },
+
+  'sisao-empl': {
+    title: 'SISAO — acceso y errores',
+    steps: [
+      {type:'action', html:`
+        <div class="box-label">Acceso y permisos</div>
+        • URL directa: <a class="link-chip" href="https://www.osep.mendoza.gov.ar/webapp_pri/action/index" target="_blank">SISAO OSEP</a><br>
+        • Para solicitar permisos faltantes: enviar <strong>nota por GDE a TIC04</strong> firmada por el Jefe Oficial del Sector.
+      `},
+    ]
+  },
+
+  'firma-empl': {
+    title: 'Firma digital — contraseña / PIN / OTP',
+    steps: [
+      {type:'info', html:`
+        <div class="box-label">Verificación previa</div>
+        Confirmar identidad en <a class="link-chip" href="https://firmar.gob.ar/RA/getCertificates" target="_blank">firmar.gob.ar</a> ingresando CUIL y correo.
+      `},
+      {type:'action', html:`
+        • <strong>Contraseña / PIN:</strong> Mínimo 8 caracteres (mayús, minús, número). PIN generalmente igual a contraseña.<br>
+        • <strong>Recupero OTP:</strong> Restaurar en Google Authenticator con cuenta Gmail. Si no aparece, solicitar <strong>blanqueo de OTP</strong> a Oficiales de Registro (24 hs).<br>
+        • <strong>Turno presencial:</strong> Solicitar por WhatsApp ALMA escribiendo "Hola" y luego "Firma Digital".
+      `},
+    ]
+  },
+
+  'receta-empl': {
+    title: 'No puedo firmar / prescribir recetas',
+    steps: [{type:'action', html:`
+      Verificar dos condiciones: <strong>1) Permiso habilitado</strong> y <strong>2) Firma Digital vigente</strong>.<br>
+      • Validar afiliado con TOKEN (vigencia de 30 minutos).<br>
+      • Para patología y medicamento ingresar las <strong>primeras 4 letras</strong> y presionar la lupa.<br>
+      • Asegurar que la opción <strong>Firma Digital</strong> esté seleccionada en "SÍ".
+    `}]
+  },
+
+  'agenda-empl': {
+    title: 'No puedo ver / gestionar agendas',
+    steps: [{type:'action', html:`Verificar la ubicación correcta en SISAO (desplegable superior derecho). Si persiste, comunicarse con el Call Center de Turnos.`}]
+  },
+
+  'gde-empl': {
+    title: 'GDE — Gestión documental electrónica',
+    steps: [{type:'action', html:`Consultar el <a class="link-chip" href="https://portaltic.osep.mendoza.gov.ar/enrol/index.php?id=4" target="_blank">Portal de Autocapacitación GDE</a>.`}]
+  },
+
+  'correo-empl': {
+    title: 'Correo institucional',
+    steps: [{type:'action', html:`Acceder con credenciales LDAP en <a class="link-chip" href="https://www.osep.mendoza.gov.ar/correo/login.php" target="_blank">Correo OSEP</a>. Solicitud de carpetas grupales: por GDE a TIC04.`}]
+  },
+
+  'nextcloud-empl': {
+    title: 'Carpetas compartidas / Nextcloud',
+    steps: [{type:'action', html:`Acceder en <a class="link-chip" href="https://nc.osep.mendoza.gov.ar/login" target="_blank">Nextcloud OSEP</a> o consultar autocapacitación.`}]
+  },
+
+  'siga-empl': {
+    title: 'SIGA',
+    steps: [{type:'action', html:`Consultas sobre SIGA: dirigirse a la agente <strong>Florencia Vicenti</strong>.`}]
+  },
+
+  'afiliaciones-empl': {
+    title: 'Sistema de Afiliaciones',
+    steps: [{type:'action', html:`Consultas sobre Afiliaciones: dirigirse a la agente <strong>Guadalupe Herrera</strong>.`}]
+  },
+
+  'sga-empl': {
+    title: 'SGA',
+    steps: [{type:'action', html:`Consultas sobre SGA: dirigirse a Recursos Humanos (RR HH).`}]
+  },
+
+  /* ── PRESTADORES ── */
+  'acc-sisao-pres': {
+    title: 'No puedo acceder a SISAO (prestador)',
+    steps: [{type:'action', html:`
+      Verificar usuario por matrícula en SISAO → Seguridad → Prestadores.<br>
+      Si no tiene usuario registrado, derivar a: <a class="link-chip" href="mailto:prestadoresosep@osep.mendoza.gov.ar">prestadoresosep@osep.mendoza.gov.ar</a>.
+    `}]
+  },
+
+  'permisos-pres': {
+    title: 'Faltan permisos / accesos (prestador)',
+    steps: [{type:'action', html:`El profesional debe solicitar permisos al área de Prestadores: <a class="link-chip" href="mailto:prestadoresosep@osep.mendoza.gov.ar">prestadoresosep@osep.mendoza.gov.ar</a>.`}]
+  },
+
+  'receta-pres': {
+    title: 'No puedo firmar / prescribir recetas (prestador)',
+    steps: [{type:'action', html:`
+      1. Verificar permisos con Prestadores y firma vigente en firmar.gob.ar.<br>
+      2. Pedir nuevo TOKEN al afiliado si falla la validación (30 min de validez).<br>
+      3. Buscar diagnósticos y medicamentos con las primeras 4 letras + lupa.<br>
+      4. Asegurar que Firma Digital esté en "SÍ".
+    `}]
+  },
+
+  'agenda-pres': {
+    title: 'Agendas (prestador)',
+    steps: [{type:'action', html:`Verificar ubicación en SISAO o contactar al Call Center de Turnos: (0261) 4615909 / 4615912 en días hábiles.`}]
+  },
+
+  'firma-pres': {
+    title: 'Firma digital (prestador)',
+    steps: [{type:'action', html:`Verificar certificado en firmar.gob.ar. Turnos presenciales de OSEP se solicitan por WhatsApp ALMA ("Firma Digital").`}]
+  },
+
+  'otp-pres': {
+    title: 'Cambié de celular / perdí el token OTP',
+    steps: [{type:'action', html:`Restaurar Google Authenticator con Gmail o solicitar Blanqueo de OTP a los Oficiales de Registro (ventana de 24 horas).`}]
+  },
+
+  /* ── FARMACIAS ── */
+  'receta-farm': {
+    title: 'Errores frecuentes al operar recetas en SISAO',
+    steps: [
+      {type:'info', html:`Pedir el número de receta → SISAO → Farmacia → Consultar → Transacciones → Buscar.`},
+      {type:'action', html:`
+        • <strong>No figuran transacciones:</strong> Consultar por DNI/afiliado para evitar errores de tipeo.<br>
+        • <strong>No se puede determinar afiliado:</strong> Solicitar nuevo TOKEN al afiliado (30 min vigencia).<br>
+        • <strong>Porcentaje de cobertura no coincide:</strong> Verificar datos en SISAO → Farmacia → Consultar y corregir.<br>
+        • <strong>No coincide profesional / prescriptor:</strong> Corregir con los datos del formulario de consulta.
+      `}
+    ]
+  },
+
+  'auditoria-farm': {
+    title: 'Derivar a Auditoría de Farmacia',
+    steps: [{type:'escalate', html:`Recetas ya consumidas para anulación: contactar a Auditoría de Farmacia al <strong>(0261) 3480406</strong> (lunes a viernes de 8 a 15 hs).`}]
+  }
+};
+
+/* =========================================================
+   ESTADO Y NAVEGACIÓN
+   ========================================================= */
+let currentRole = null;
+let flowStack = [];
+let mapEntryRole = null;
+let openedFromMap = false;
+let lastOpenedMapSection = null;
+
+const ROLE_NAMES = {afiliado:'Afiliado', empleado:'Empleado', prestador:'Prestador', farmacia:'Farmacia'};
+
+function newConsultation(){
+  flowStack = [];
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').classList.remove('show');
+  document.getElementById('treeArea').classList.remove('show');
+  document.getElementById('treeArea').innerHTML = '';
+  const defaultRole = 'afiliado';
+  document.querySelectorAll('.role-card').forEach(c => c.classList.remove('active'));
+  const defaultCard = document.querySelector('[data-role="afiliado"]');
+  if(defaultCard) defaultCard.classList.add('active');
+  currentRole = defaultRole;
+  renderTopicList(defaultRole);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+(function buildHints(){
+  const wrap = document.getElementById('hintTags');
+  HINT_TAGS.forEach(t => {
+    const el = document.createElement('span');
+    el.className = 'hint-tag';
+    el.textContent = t;
+    el.onclick = () => {
+      document.getElementById('searchInput').value = t;
+      doSearch();
+    };
+    wrap.appendChild(el);
+  });
+})();
+
+function doSearch(){
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const res = document.getElementById('searchResults');
+  if(!q){ res.classList.remove('show'); return; }
+
+  const matches = KB.filter(item => {
+    const kws = item.keys.split(' ');
+    return kws.some(k => {
+      if(k.length === 0) return false;
+      if(q.length >= 4) return k.startsWith(q.substring(0,4)) || q.startsWith(k.substring(0,4));
+      return k.startsWith(q);
+    }) || item.topic.toLowerCase().includes(q);
+  });
+
+  if(!matches.length){
+    res.innerHTML = '<div class="no-result">Sin resultados para "<strong>' + q + '</strong>". Probá con otra palabra clave o elegí el perfil del consultante.</div>';
+  } else {
+    res.innerHTML = matches.map(m => {
+      const badges = m.badges.map(b =>
+        `<span class="result-badge ${BADGE_MAP[b]}">${BADGE_LABEL[b]}</span>`
+      ).join('');
+      return `<div class="result-item" onclick="loadFlowById('${m.id}')">
+      <span class="result-icon">${renderIcon(m.icon)}</span>
+      <div style="flex:1"><span class="result-topic">${m.topic}</span>${badges}</div>
+      </div>`;
+    }).join('');
+    setTimeout(() => { lucide.createIcons(); }, 0);
+    const firstRole = matches[0].badges[0];
+    trackDynamicHint(q, firstRole);
+  }
+  res.classList.add('show');
+}
+
+document.getElementById('searchInput').addEventListener('keyup', e => {
+  if(e.key === 'Enter') doSearch();
+  if(document.getElementById('searchInput').value.length >= 4) doSearch();
+  if(document.getElementById('searchInput').value.length === 0) document.getElementById('searchResults').classList.remove('show');
+});
+
+function selectRole(role, el){
+  currentRole = role;
+  document.querySelectorAll('.role-card').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderTopicList(role);
+  document.getElementById('treeArea').scrollIntoView({behavior:'smooth', block:'start'});
+  document.body.classList.remove('afiliado','empleado','prestador','farmacia');
+  document.body.classList.add(role);
+}
+
+const CONTENT_MAP = [
+  {
+    role:'afiliado', cls:'map-sec-afil', code:'A', label:'Consultas de Afiliados', icon:'user-star',
+    groups:[
+      { label:'Mi OSEP — App y Portal', items:[
+        {code:'A.1.1', label:'Acceso app móvil Android / iPhone / PC', id:'acc-portal'},
+        {code:'A.2',   label:'Usuario y contraseña — olvido / nuevo usuario', id:'olvido-cred'},
+        {code:'A.3',   label:'Cambio de correo vinculado a Mi OSEP', id:'cam-email-afil'},
+        {code:'A.4',   label:'Vincular número de teléfono', id:'vincular-tel'},
+      ]},
+      { label:'Gestión de cuenta', items:[
+        {code:'A.5',   label:'Grupo familiar / gestión de menores', id:'grupo-fam'},
+        {code:'A.6',   label:'Sacar / reservar turnos', id:'turnos-afil'},
+        {code:'A.7',   label:'No puedo ver informes / estudios', id:'informes-afil'},
+        {code:'A.8',   label:'SGA — Sistema de Gestión Administrativa', id:'sga-afil'},
+      ]},
+      { label:'Errores técnicos', items:[
+        {code:'A.9.1', label:'Error 400 en pantalla', id:'error400-afil'},
+        {code:'A.9.2', label:'Pantalla en blanco — limpiar caché', id:'error400-afil'},
+      ]},
+    ]
+  },
+  {
+    role:'empleado', cls:'map-sec-empl', code:'E', label:'Consultas de Empleados', icon:'square-user-round',
+    groups:[
+      { label:'Soporte técnico y portal', items:[
+        {code:'E.1',     label:'Consulta técnica — PC, redes, Internet (Mesa de Ayuda)', id:'tecnica-empl'},
+        {code:'E.2.1',   label:'Problemas de acceso al Portal de Servicios', id:'acc-serv-empl'},
+        {code:'E.2.2',   label:'SISAO — acceso, errores y permisos', id:'sisao-empl'},
+      ]},
+      { label:'Sistemas internos', items:[
+        {code:'E.2.4',   label:'Correo institucional — acceso y carpetas grupales', id:'correo-empl'},
+        {code:'E.2.6',   label:'Carpetas compartidas / Nextcloud', id:'nextcloud-empl'},
+        {code:'E.2.6',   label:'SGA — Sistema de Gestión Administrativa', id:'sga-empl'},
+        {code:'E.2.7',   label:'SIGA — Sistema integrado de gestión (Florencia Vicenti)', id:'siga-empl'},
+        {code:'E.2.8',   label:'Sistema de Afiliaciones (Guadalupe Herrera)', id:'afiliaciones-empl'},
+      ]},
+      { label:'Firma Digital', items:[
+        {code:'E.2.3',     label:'Firma digital — contraseña / PIN', id:'firma-empl'},
+        {code:'E.2.3.1.3', label:'Cambio de celular — recupero OTP (Google Authenticator)', id:'firma-empl'},
+      ]},
+    ]
+  },
+  {
+    role:'prestador', cls:'map-sec-pres', code:'P', label:'Consultas de Prestadores', icon:'stethoscope',
+    groups:[
+      { label:'SISAO — Acceso y permisos', items:[
+        {code:'P.1.1', label:'No puedo acceder a SISAO', id:'acc-sisao-pres'},
+        {code:'P.1.2', label:'Faltan permisos para prescribir recetas / prácticas', id:'permisos-pres'},
+        {code:'P.1.4', label:'No puedo ver / gestionar agendas', id:'agenda-pres'},
+      ]},
+      { label:'Recetas y prescripción', items:[
+        {code:'P.1.3',     label:'No puedo firmar / prescribir recetas', id:'receta-pres'},
+      ]},
+      { label:'Firma Digital', items:[
+        {code:'P.2',   label:'Firma digital — contraseña / PIN', id:'firma-pres'},
+        {code:'P.2.3', label:'Cambio de celular — recupero OTP', id:'otp-pres'},
+      ]},
+    ]
+  },
+  {
+    role:'farmacia', cls:'map-sec-farm', code:'F', label:'Consultas de Farmacia', icon:'pill-bottle',
+    groups:[
+      { label:'Recetas en SISAO', items:[
+        {code:'F.1',     label:'Receta ya consumida — derivar a Auditoría de Farmacia', id:'auditoria-farm'},
+        {code:'F.2',     label:'Error al consumir receta en SISAO', id:'receta-farm'},
+      ]},
+    ]
+  },
+];
+
+function toggleMapSection(header){
+  const section = header.closest('.map-section');
+  section.classList.toggle('open');
+  if(section.classList.contains('open')){
+    lastOpenedMapSection = section.dataset.section;
+  }
+}
+
+function openContentMap(highlightRole){
+  mapEntryRole = highlightRole;
+  openedFromMap = true;
+  const area = document.getElementById('treeArea');
+  area.classList.add('show');
+  area.innerHTML = `
+  <div class="tree-header">
+    <div class="breadcrumb">
+      <span>Inicio</span><span class="bc-sep">›</span>
+      <span class="bc-current">Mapa de contenidos</span>
+    </div>
+    <button class="map-toggle-btn" onclick="closeContentMap()" style="margin-top:5px; display:block; align-items:center;gap:5px; margin-left:auto;">
+      <i data-lucide="eye-closed" style="width:12px;height:11px"></i>  Cerrar mapa
+    </button>
+  </div>
+  <div class="content-map">
+    ${CONTENT_MAP.map(sec => `
+      <div class="map-section ${sec.cls}${highlightRole===sec.role?' open':''}" data-section="${sec.role}">
+        <div class="map-section-header" onclick="toggleMapSection(this)">
+          <div class="map-section-badge"><i data-lucide="${sec.icon}" style="width:13px;height:13px"></i></div>
+          <span class="map-section-title">${sec.code}. ${sec.label}</span>
+          <span class="map-section-count">${sec.groups.reduce((a,g)=>a+g.items.length,0)} temas</span>
+          <svg class="map-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="map-items">
+          ${sec.groups.map(g=>`
+            <div class="map-group-label">${g.label}</div>
+            ${g.items.map(item=>`
+              <button class="map-item-btn" onclick="selectRoleAndFlow('${sec.role}','${item.id}')">
+                <span class="map-item-code">${item.code}</span>
+                <span class="map-item-label">${item.label}</span>
+                <span class="map-item-arrow">›</span>
+              </button>
+            `).join('')}
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
+  </div>
+  <div style="margin-top:16px">
+    <button class="btn-secondary" onclick="goBack()">← Volver</button>
+    <button class="btn-nueva" onclick="newConsultation()"> Nueva consulta</button>
+  </div>`;
+
+  if(lastOpenedMapSection){
+    const target = document.querySelector(`.map-section[data-section="${lastOpenedMapSection}"]`);
+    if(target){
+      target.classList.add('open');
+      target.scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+    }
+  }
+  lucide.createIcons();
+  area.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function closeContentMap(){
+  openedFromMap = false;
+  mapEntryRole = null;
+  if(currentRole) renderTopicList(currentRole);
+  else {
+    document.getElementById('treeArea').classList.remove('show');
+    document.getElementById('treeArea').innerHTML = '';
+  }
+}
+
+function selectRoleAndFlow(role, flowId){
+  currentRole = role;
+  document.querySelectorAll('.role-card').forEach(c=>c.classList.remove('active'));
+  const card = document.querySelector(`[data-role="${role}"]`);
+  if(card) card.classList.add('active');
+  document.body.classList.remove('afiliado','empleado','prestador','farmacia');
+  document.body.classList.add(role);
+  loadFlowById(flowId);
+}
+
+function renderTopicList(role){
+  const area = document.getElementById('treeArea');
+  area.classList.add('show');
+  flowStack = [];
+  const topics = TOPICS[role];
+  area.innerHTML = `
+  <div class="tree-header">
+    <div class="breadcrumb">
+      <span>Consultas Frecuentes </span>
+      <span class="bc-sep">›</span>
+      <span class="bc-current">${ROLE_NAMES[role]}</span>
+    </div>
+    <button class="map-toggle-btn" onclick="openContentMap('${role}')" style="margin-top:6px;display:block; align-items:center;gap:5px;  margin-left:auto;">
+      <i data-lucide="map" style="width:12px;height:12px"></i> Ver mapa de contenidos completo
+    </button>
+  </div>
+  <div class="tree-topic-list">
+    ${topics.map((t) => `
+      <button class="topic-btn" onclick="loadFlowById('${t.id}')">
+        <span class="topic-icon-wrap">${renderIcon(t.icon)}</span>
+        <span>${t.label}</span>
+      </button>
+    `).join('')}
+  </div>`;
+  lucide.createIcons();  
+}
+
+function loadFlowById(id){
+  if(FLOWS[id]){
+    flowStack = [{id, stepIdx:0}];
+    renderStep();
+    document.getElementById('treeArea').scrollIntoView({behavior:'smooth', block:'start'});
+    return;
+  }
+
+  for(const flowKey in FLOWS){
+    const flow = FLOWS[flowKey];
+    if(!flow.steps) continue;
+    const stepIndex = flow.steps.findIndex(s => s.id === id);
+    if(stepIndex !== -1){
+      flowStack = [{ id: flowKey, stepIdx: stepIndex }];
+      renderStep();
+      document.getElementById('treeArea').scrollIntoView({behavior:'smooth', block:'start'});
+      return;
+    }
+  }
+}
+
+function renderStep(){
+  const area = document.getElementById('treeArea');
+  area.classList.add('show');
+  area.scrollTop = 0;
+  const ctx = flowStack[flowStack.length - 1];
+  const flow = FLOWS[ctx.id];
+  const step = flow.steps[ctx.stepIdx];
+
+  let breadcrumbHtml = `<div class="tree-header"><div class="breadcrumb">`;
+  if(currentRole){
+    breadcrumbHtml += `<span class="bc-link" onclick="renderTopicList('${currentRole}')">${ROLE_NAMES[currentRole]}</span><span class="bc-sep">›</span>`;
+  }
+  breadcrumbHtml += `<span class="bc-current">${flow.title}</span></div></div>`;
+
+  let contentHtml = '';
+
+  if(step.type === 'info'){
+    contentHtml = `
+      <div class="info-box">${step.html}</div>
+      <div class="action-footer">
+        <button class="btn-secondary" onclick="goBack()">← Volver</button>
+       ${openedFromMap ? `<button class="btn-secondary" onclick="goBackToMap()"><i data-lucide="map" style="width:13px;height:13px;vertical-align:-2px"></i> Índice del mapa</button>` : ''}
+        <button class="btn-nueva" onclick="advanceStep()">Continuar →</button>
+      </div>`;
+  } else if(step.type === 'action'){
+    contentHtml = `
+      <div class="action-box">${step.html}</div>
+      <div class="action-footer">
+        <button class="btn-secondary" onclick="goBack()">← Volver</button>
+        ${openedFromMap ? `<button class="btn-secondary" onclick="goBackToMap()"><i data-lucide="map" style="width:13px;height:13px;vertical-align:-2px"></i> Índice del mapa</button>` : ''}
+        <button class="btn-nueva" onclick="newConsultation()"> Nueva consulta</button>
+      </div>`;
+  } else if(step.type === 'escalate'){
+    contentHtml = `
+      <div class="escalate-box">${step.html}</div>
+      <div class="action-footer">
+        <button class="btn-secondary" onclick="goBack()">← Volver</button>
+       ${openedFromMap ? `<button class="btn-secondary" onclick="goBackToMap()"><i data-lucide="map" style="width:13px;height:13px;vertical-align:-2px"></i> Índice del mapa</button>` : ''}
+        <button class="btn-nueva" onclick="newConsultation()"> Nueva consulta</button>
+      </div>`;
+  } else if(step.type === 'q'){
+    const choicesHtml = step.choices.map(c => {
+      const cls = c.dot === 'si' ? 'choice-si' : c.dot === 'no' ? 'choice-no' : '';
+      const dotHtml = c.dot === 'si'
+        ? '<span class="choice-dot-si"></span>'
+        : c.dot === 'no'
+        ? '<span class="choice-dot-no"></span>'
+        : '<span class="choice-dot-neu"></span>';
+      const iconPart = c.icon
+        ? `<span class="topic-icon-wrap" style="flex-shrink:0"><i data-lucide="${c.icon}"></i></span>`
+        : dotHtml;
+      const subHtml = c.sub
+        ? `<small style="display:block;font-weight:400;color:var(--text3);line-height:1.3;margin-top:2px">${c.sub}</small>`
+        : '';
+      return `<button class="choice-btn ${cls}" onclick="chooseOption('${c.next}')">${iconPart}<span>${c.label}${subHtml}</span></button>`;
+    }).join('');
+    const noteHtml = step.note ? `<div class="info-box">${step.note}</div>` : '';
+    contentHtml = `
+      ${noteHtml}<div class="step-q">${step.text}</div>
+      <div class="step-choices">${choicesHtml}</div>
+      <div class="action-footer" style="margin-top:10px">
+        <button class="btn-secondary" onclick="goBack()">← Volver</button>
+       ${openedFromMap ? `<button class="btn-secondary" onclick="goBackToMap()"><i data-lucide="map" style="width:13px;height:13px;vertical-align:-2px"></i> Índice del mapa</button>` : ''}
+        <button class="btn-nueva" onclick="newConsultation()"> Nueva consulta</button>
+      </div>`;
+  }
+
+  area.innerHTML = breadcrumbHtml + contentHtml;
+  lucide.createIcons();
+}
+
+function advanceStep(){
+  const ctx = flowStack[flowStack.length - 1];
+  const flow = FLOWS[ctx.id];
+  if(ctx.stepIdx < flow.steps.length - 1){
+    ctx.stepIdx++;
+    renderStep();
+  }
+}
+
+function chooseOption(nextId){
+  const ctx = flowStack[flowStack.length - 1];
+  const flow = FLOWS[ctx.id];
+  const targetIdx = flow.steps.findIndex(s => s.id === nextId);
+  if(targetIdx !== -1){
+    flowStack.push({id: ctx.id, stepIdx: targetIdx});
+    renderStep();
+  } else if(FLOWS[nextId]){
+    flowStack.push({id: nextId, stepIdx: 0});
+    renderStep();
+  }
+}
+
+function goBackToMap(){
+  openContentMap(mapEntryRole);
+}
+
+function goBack(){
+  if(flowStack.length > 1){
+    flowStack.pop();
+    renderStep();
+  } else if(currentRole){
+    renderTopicList(currentRole);
+  } else {
+    document.getElementById('treeArea').classList.remove('show');
+  }
+}
+
+/* ── MODAL DE PDF ── */
+function abrirPdf(rutaPdf, titulo) {
+  document.getElementById('pdfModalFrame').src = rutaPdf + '#toolbar=0&navpanes=0';
+  document.getElementById('pdfModalTitle').textContent = titulo || 'Guía Rápida';
+  const dl = document.getElementById('pdfDownloadLink');
+  dl.href = rutaPdf;
+  dl.download = rutaPdf.split('/').pop();
+  document.getElementById('pdfModal').classList.add('open');
+  lucide.createIcons();
+}
+
+function cerrarPdfModal(event) {
+  if (event.target === document.getElementById('pdfModal')) {
+    document.getElementById('pdfModal').classList.remove('open');
+    document.getElementById('pdfModalFrame').src = '';
+  }
+}
+
+/* ── POPOVER TELAG ── */
+function toggleTelagInfo(e) {
+  e.stopPropagation();
+  const popover = document.getElementById('telagPopover');
+  const btn = e.currentTarget;
+
+  if (popover.classList.contains('open')) {
+    popover.classList.remove('open');
+    return;
+  }
+
+  const rect = btn.getBoundingClientRect();
+  popover.style.top  = (rect.bottom + 8) + 'px';
+  popover.style.left = rect.left + 'px';
+
+  popover.classList.add('open');
+}
+
+document.addEventListener('click', function(e) {
+  const popover = document.getElementById('telagPopover');
+  const btn = document.querySelector('.telag-info-btn');
+  if (!btn.contains(e.target)) {
+    popover.classList.remove('open');
+  }
+});
+
+/* =========================================================
+   ASISTENTE CONVERSACIONAL BASADO EN MAPA DE CONTENIDOS
+   ========================================================= */
+function toggleChatWindow() {
+  const win = document.getElementById('chatWindow');
+  win.classList.toggle('open');
+  if (win.classList.contains('open')) {
+    document.getElementById('chatInput').focus();
+    lucide.createIcons();
+  }
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const txt = input.value.trim();
+  if (!txt) return;
+
+  appendMessage(txt, 'user');
+  input.value = '';
+
+  setTimeout(() => {
+    procesarConversacionMapa(txt.toLowerCase());
+  }, 200);
+}
+
+document.getElementById('chatInput').addEventListener('keyup', function(e) {
+  if (e.key === 'Enter') sendChatMessage();
+});
+
+function appendMessage(htmlContent, sender) {
+  const body = document.getElementById('chatBody');
+  const msg = document.createElement('div');
+  msg.className = `chat-msg ${sender}`;
+  msg.innerHTML = htmlContent;
+  body.appendChild(msg);
+  body.scrollTop = body.scrollHeight;
+  lucide.createIcons();
+}
+
+function iniciarMenuChat(rol) {
+  const seccion = CONTENT_MAP.find(s => s.role === rol);
+  if (!seccion) return;
+
+  let opcionesHtml = seccion.groups.map(g => {
+    return g.items.map(item => 
+      `<button class="chat-action-btn" onclick="responderDesdeMapa('${item.id}', '${seccion.role}')">
+        <strong>${item.code}</strong> ${item.label}
+      </button>`
+    ).join('');
+  }).join('');
+
+  appendMessage(`
+    <strong>${seccion.code}. ${seccion.label}</strong><br>
+    Seleccioná el tema del Mapa de Contenidos:
+    <div class="chat-actions">
+      ${opcionesHtml}
+    </div>`, 'bot');
+}
+
+function procesarConversacionMapa(query) {
+  if (query.includes('correo') || query.includes('mail') || query.includes('cambiar mail')) {
+    appendMessage(`
+      ✉️ <strong>Cambio de Correo Electrónico:</strong><br>
+      ¿Para quién deseas realizar el cambio de correo?
+      <div class="chat-actions">
+        <button class="chat-action-btn btn-primary-bot" onclick="responderDesdeMapa('cam-email-afil', 'afiliado')">👤 A.3 Afiliado (Mi OSEP)</button>
+        <button class="chat-action-btn" onclick="responderDesdeMapa('correo-empl', 'empleado')">💼 E.2.4 Empleado (Institucional)</button>
+      </div>`, 'bot');
+    return;
+  }
+
+  if (query.includes('firma') || query.includes('pin') || query.includes('firmar')) {
+    appendMessage(`
+      ✍️ <strong>Firma Digital / PIN:</strong><br>
+      ¿Cuál es el procedimiento a consultar?
+      <div class="chat-actions">
+        <button class="chat-action-btn" onclick="responderDesdeMapa('firma-empl', 'empleado')">🔑 E.2.3 Olvido de PIN / Contraseña</button>
+        <button class="chat-action-btn" onclick="responderDesdeMapa('otp-pres', 'prestador')">📱 P.2.3 Cambio de celular / OTP</button>
+        <button class="chat-action-btn" onclick="responderDesdeMapa('receta-pres', 'prestador')">💊 P.1.3 Error al firmar receta</button>
+      </div>`, 'bot');
+    return;
+  }
+
+  if (query.includes('receta') || query.includes('prescribir') || query.includes('medicamento')) {
+    appendMessage(`
+      💊 <strong>Gestión de Recetas:</strong><br>
+      ¿Desde qué ámbito se presenta el problema?
+      <div class="chat-actions">
+        <button class="chat-action-btn btn-primary-bot" onclick="responderDesdeMapa('receta-pres', 'prestador')">🩺 P.1.3 Prescribir / Firmar Recetas</button>
+        <button class="chat-action-btn" onclick="responderDesdeMapa('receta-farm', 'farmacia')">🏪 F.2 Errores al consumir en Farmacia</button>
+        <button class="chat-action-btn" onclick="responderDesdeMapa('auditoria-farm', 'farmacia')">📞 F.1 Anular receta consumida</button>
+      </div>`, 'bot');
+    return;
+  }
+
+  if (query.includes('contraseña') || query.includes('clave') || query.includes('usuario') || query.includes('login')) {
+    responderDesdeMapa('olvido-cred', 'afiliado');
+    return;
+  }
+
+  if (query.includes('android') || query.includes('samsung') || query.includes('motorola') || query.includes('xiaomi')) {
+    responderDesdeMapa('android', 'afiliado');
+    return;
+  }
+
+  if (query.includes('iphone') || query.includes('ios') || query.includes('apple') || query.includes('safari')) {
+    responderDesdeMapa('iphone', 'afiliado');
+    return;
+  }
+
+  if (query.includes('400') || query.includes('blanco') || query.includes('cache')) {
+    responderDesdeMapa('error400-afil', 'afiliado');
+    return;
+  }
+
+  if (query.includes('auditoria') || query.includes('anular')) {
+    responderDesdeMapa('auditoria-farm', 'farmacia');
+    return;
+  }
+
+  const words = query.split(/\s+/).filter(w => w.length >= 3);
+  let encontrado = null;
+  let rolEncontrado = null;
+
+  for (const sec of CONTENT_MAP) {
+    for (const group of sec.groups) {
+      for (const item of group.items) {
+        const itemText = (item.code + ' ' + item.label + ' ' + group.label).toLowerCase();
+        const coincideExacto = itemText.includes(query);
+        const coincidePalabras = words.some(w => itemText.includes(w));
+        
+        if (coincideExacto || coincidePalabras) {
+          encontrado = item;
+          rolEncontrado = sec.role;
+          break;
         }
+      }
+      if (encontrado) break;
+    }
+    if (encontrado) break;
+  }
 
-        function goBack() {
-            if (navigationHistory.length > 1) {
-                hideAllScreens();
-                hideAllSubsections();
-                
-                navigationHistory.pop();
-                
-                const previousScreen = navigationHistory[navigationHistory.length - 1];
-                if (previousScreen === 'inicio') {
-                    document.getElementById('screen-inicio').classList.remove('hidden');
-                    document.getElementById('breadcrumb').classList.remove('active');
-                } else {
-                    document.getElementById('screen-' + previousScreen).classList.remove('hidden');
-                    updateBreadcrumb(previousScreen);
-                }
-            }
-        }
+  if (encontrado) {
+    responderDesdeMapa(encontrado.id, rolEncontrado);
+  } else {
+    appendMessage(`
+      No encontré un tema en el Mapa de Contenidos para "<em>${query}</em>".<br><br>
+      Elegí una sección del mapa para consultar:
+      <div class="chat-actions">
+        <button class="chat-action-btn" onclick="iniciarMenuChat('afiliado')">👤 A. Consultas Afiliados</button>
+        <button class="chat-action-btn" onclick="iniciarMenuChat('empleado')">💼 E. Consultas Empleados</button>
+        <button class="chat-action-btn" onclick="iniciarMenuChat('prestador')">🩺 P. Consultas Prestadores</button>
+        <button class="chat-action-btn" onclick="iniciarMenuChat('farmacia')">💊 F. Consultas Farmacia</button>
+      </div>`, 'bot');
+  }
+}
 
-        function hideAllScreens() {
-            const screens = ['inicio', 'afiliado', 'empleado', 'farmacia', 'profesional'];
-            screens.forEach(screen => {
-                document.getElementById('screen-' + screen).classList.add('hidden');
-            });
-        }
+function responderDesdeMapa(id, rol) {
+  let html = '';
 
-        function hideAllSubsections() {
-            document.querySelectorAll('.action-steps, .info-box').forEach(el => {
-                if (el.id && el.id !== 'breadcrumb' && !el.parentElement.classList.contains('info-box')) {
-                    el.classList.add('hidden');
-                }
-            });
-        }
+  if (id === 'acc-portal' || id === 'android') {
+    html = `
+      📱 <strong>A.1.1 Acceso App Móvil — Android:</strong><br>
+      Guiar al afiliado para descargar la app desde <strong>Play Store</strong> buscando "Mi OSEP".
+      <div class="chat-actions">
+        <button class="chat-action-btn btn-primary-bot" onclick="abrirPdf('appmovil_en_android.pdf', 'App Android')">
+          <i data-lucide="newspaper"></i> Guía Rápida PDF
+        </button>
+      </div>`;
+  } else if (id === 'iphone') {
+    html = `
+      🍏 <strong>A.1.1 Acceso App Móvil — iPhone / iOS:</strong><br>
+      1. Entrar por Safari a <em>osepmendoza.com.ar</em>.<br>
+      2. Tocar <strong>Ingresá</strong>.<br>
+      3. Tocar el ícono de compartir y seleccionar <strong>"Agregar a pantalla de inicio"</strong>.
+      <div class="chat-actions">
+        <button class="chat-action-btn btn-primary-bot" onclick="abrirPdf('appmovile_en_IOS.pdf', 'App iOS')">
+          <i data-lucide="newspaper"></i> Guía iPhone PDF
+        </button>
+      </div>`;
+  } else if (id === 'olvido-cred') {
+    html = `
+      🔑 <strong>A.2 Usuario y Contraseña:</strong><br>
+      • Solicitar DNI y verificar en SISAO (Seguridad → Consulta usuario afiliados).<br>
+      • Si tiene usuario: guiar a <em>"¿Olvidó su usuario y/o contraseña?"</em>.<br>
+      • Si no tiene usuario: seleccionar <em>"Crear usuario"</em> en el Portal.
+      <div class="chat-actions">
+        <button class="chat-action-btn" onclick="abrirPdf('nuevo_usuario_afiliado.pdf', 'Nuevo Usuario')">
+          <i data-lucide="newspaper"></i> Guía Nuevo Usuario
+        </button>
+        <button class="chat-action-btn" onclick="abrirPdf('recuperar-usuario.pdf', 'Recuperar Contraseña')">
+          <i data-lucide="newspaper"></i> Guía Recuperar Clave
+        </button>
+      </div>`;
+  } else if (id === 'cam-email-afil') {
+    html = `
+      ✉️ <strong>A.3 Cambio de Correo Vinculado:</strong><br>
+      1. Trámite personal en 1ra persona. Solicitar credencial OSEP y DNI.<br>
+      2. Buscar en SISAO y copiar el usuario.<br>
+      3. En el <strong>Administrador de Seguridad</strong>:<br>
+      • Si está <em>Habilitado</em>: editar en el lápiz naranja y Guardar.<br>
+      • Si está <em>Bloqueado</em>: ir a "Usuarios Bloqueados" y hacer clic en HABILITAR.
+      <div class="chat-actions">
+        <button class="chat-action-btn" onclick="abrirPdf('o_admin_cambio_correo_h.pdf', 'Guía Habilitado')">
+          <i data-lucide="newspaper"></i> Guía Usuario Habilitado
+        </button>
+        <button class="chat-action-btn" onclick="abrirPdf('o_admin_cambio_correo_b.pdf', 'Guía Bloqueado')">
+          <i data-lucide="newspaper"></i> Guía Usuario Bloqueado
+        </button>
+      </div>`;
+  } else if (id === 'vincular-tel') {
+    html = `
+      📞 <strong>A.4 Vincular Teléfono:</strong><br>
+      Ingresar a <strong>Mi OSEP</strong> → segundo grupo de íconos → <strong>"Datos de Contacto"</strong> → cargar número móvil con prefijo.
+      <div class="chat-actions">
+        <button class="chat-action-btn btn-primary-bot" onclick="abrirPdf('vincular_telefono.pdf', 'Vincular Teléfono')">
+          <i data-lucide="newspaper"></i> Guía Teléfono PDF
+        </button>
+      </div>`;
+  } else if (id === 'grupo-fam') {
+    html = `
+      👨‍👩‍👧 <strong>A.5 Grupo Familiar / Menores:</strong><br>
+      • <strong>Hasta 12 años:</strong> Se gestionan desde la cuenta del Titular desde la flecha a la derecha de sus datos.<br>
+      • <strong>Desde 13 años:</strong> Deben generar y gestionar credenciales de forma autónoma.`;
+  } else if (id === 'turnos-afil') {
+    html = `
+      📅 <strong>A.6 Sacar / Reservar Turnos:</strong><br>
+      Iniciar sesión en el Portal de Autogestión → <strong>Solicitar Turno</strong> → filtrar por Servicio/Zona o profesional → elegir indicador verde y Grabar.
+      <div class="chat-actions">
+        <button class="chat-action-btn btn-primary-bot" onclick="abrirPdf('sacar_turnos.pdf', 'Sacar Turnos')">
+          <i data-lucide="newspaper"></i> Guía Turnos PDF
+        </button>
+      </div>`;
+  } else if (id === 'informes-afil') {
+    html = `
+      📄 <strong>A.7 Informes y Estudios:</strong><br>
+      Por cuestiones de confidencialidad médica, el afiliado debe solicitar el reenvío directamente al efector o prestador que realizó el estudio.`;
+  } else if (id === 'tecnica-empl') {
+    html = `
+      🛠️ <strong>E.1 Mesa de Ayuda (Soporte Técnico):</strong><br>
+      Ingresar a SISAO con LDAP → menú <strong>Mesa de Ayuda</strong> → <strong>Agregar Pedido</strong> → Cargar datos y Grabar.`;
+  } else if (id === 'acc-serv-empl') {
+    html = `
+      💻 <strong>E.2.1 Acceso a Servicios / Error 400:</strong><br>
+      • <strong>Una sola PC:</strong> Generar pedido en SISAO → Mesa de Ayuda.<br>
+      • <strong>Todo el sector:</strong> Escalar de inmediato al <strong>NOC</strong> informando servicio y área afectada.`;
+  } else if (id === 'sisao-empl') {
+    html = `
+      🎯 <strong>E.2.2 SISAO y Permisos:</strong><br>
+      • Acceso directo: <em>https://www.osep.mendoza.gov.ar/webapp_pri/action/index</em><br>
+      • Solicitud de permisos: Enviar <strong>nota por GDE a TIC04</strong> firmada por el Jefe de Sector.`;
+  } else if (id === 'firma-empl' || id === 'firma-pres') {
+    html = `
+      ✍️ <strong>E.2.3 / P.2 Firma Digital y PIN:</strong><br>
+      • Consultar vigencia en <em>firmar.gob.ar/RA/getCertificates</em> con CUIL y correo.<br>
+      • Contraseña mín. 8 caracteres (mayús, minús, núm).<br>
+      • Turno presencial en OSEP: solicitar por WhatsApp ALMA ("Firma Digital").`;
+  } else if (id === 'otp-pres') {
+    html = `
+      📱 <strong>E.2.3.1.3 / P.2.3 Cambio de Celular y Token OTP:</strong><br>
+      1. Restaurar cuentas en Google Authenticator con cuenta de Gmail.<br>
+      2. Si no aparece: solicitar <strong>blanqueo de OTP</strong> a Oficiales de Registro (plazo de 24 hs).`;
+  } else if (id === 'correo-empl') {
+    html = `
+      📧 <strong>E.2.4 Correo Institucional:</strong><br>
+      Ingresar con credenciales LDAP en <em>https://www.osep.mendoza.gov.ar/correo/login.php</em>. Permisos a carpetas grupales se piden por GDE a TIC04.`;
+  } else if (id === 'nextcloud-empl') {
+    html = `
+      ☁️ <strong>E.2.6 Nextcloud / Carpetas Compartidas:</strong><br>
+      Acceder en <em>https://nc.osep.mendoza.gov.ar/login</em> o consultar en el Portal de Autocapacitación.`;
+  } else if (id === 'siga-empl') {
+    html = `
+      👥 <strong>E.2.7 SIGA:</strong><br>
+      Por consultas sobre acceso a SIGA o gestión interna, dirigirse a la agente <strong>Florencia Vicenti</strong>.`;
+  } else if (id === 'afiliaciones-empl') {
+    html = `
+      👥 <strong>E.2.8 Sistema de Afiliaciones:</strong><br>
+      Por consultas sobre accesos o gestión, dirigirse a la agente <strong>Guadalupe Herrera</strong>.`;
+  } else if (id === 'sga-empl' || id === 'sga-afil') {
+    html = `
+      ⏱️ <strong>SGA — Sistema de Gestión Administrativa:</strong><br>
+      Por consultas sobre acceso o licencias, dirigirse al área de <strong>Recursos Humanos (RR HH)</strong> de su repartición.`;
+  } else if (id === 'acc-sisao-pres' || id === 'permisos-pres') {
+    html = `
+      🩺 <strong>P.1.1 / P.1.2 SISAO Prestadores y Permisos:</strong><br>
+      Verificar usuario por matrícula en SISAO. Si no posee usuario o permisos, contactar a: <em>prestadoresosep@osep.mendoza.gov.ar</em>.`;
+  } else if (id === 'receta-pres' || id === 'receta-empl') {
+    html = `
+      💊 <strong>P.1.3 Prescripción de Recetas:</strong><br>
+      • Requiere <strong>Permiso habilitado</strong> y <strong>Firma Digital vigente</strong>.<br>
+      • Validar afiliado con TOKEN (vigencia 30 min).<br>
+      • Buscar patología y medicamento con las <strong>primeras 4 letras + lupa</strong>.<br>
+      • Verificar que Firma Digital esté en "SÍ".`;
+  } else if (id === 'agenda-pres' || id === 'agenda-empl') {
+    html = `
+      📅 <strong>P.1.4 Gestión de Agendas:</strong><br>
+      Verificar ubicación activa en el desplegable superior de SISAO o contactar al Call Center de Turnos: (0261) 4615909 / 4615912.`;
+  } else if (id === 'receta-farm' || id === 'con-transaccion' || id === 'sin-transaccion' || id === 'farm-token' || id === 'farm-cobertura' || id === 'farm-datos') {
+    html = `
+      💊 <strong>F.2 Errores al Consumir Recetas (Farmacia):</strong><br>
+      Buscar en SISAO (Farmacia → Transacciones → nro de receta):<br>
+      • <em>Sin transacciones:</em> Buscar en su sistema por DNI del afiliado.<br>
+      • <em>No determina afiliado:</em> Solicitar nuevo TOKEN al afiliado.<br>
+      • <em>Porcentaje/Profesional no coincide:</em> Consultar receta en SISAO y corregir carga.`;
+  } else if (id === 'auditoria-farm') {
+    html = `
+      📞 <strong>F.1 Anulación de Receta Consumida:</strong><br>
+      Contactar telefónicamente a Auditoría de Farmacia de OSEP al <strong>(0261) 3480406</strong> (lunes a viernes de 8 a 15 hs).`;
+  } else if (id === 'error400-afil') {
+    html = `
+      ⚠️ <strong>A.9 Errores Técnicos:</strong><br>
+      • Pantalla en blanco: Limpiar caché con <kbd>Ctrl+Shift+Delete</kbd>.<br>
+      • Error 400 recurrente: Informar al NOC.`;
+  } else {
+    html = `
+      📋 <strong>Tema del Mapa de Contenidos:</strong><br>
+      Procedimiento registrado en el sistema.`;
+  }
 
-        function updateBreadcrumb(current) {
-            const breadcrumb = document.getElementById('breadcrumb');
-            const titles = {
-                'afiliado': 'Afiliado',
-                'empleado': 'Empleado',
-                'farmacia': 'Prestador - Farmacia',
-                'profesional': 'Prestador - Profesional'
-            };
+  appendMessage(html, 'bot');
+}
 
-            const botonVolver = ['empleado', 'afiliado'].includes(current)
-    ? `<button class="btn btn-back" onclick="goBack()">⬅ Volver</button>`
-    : '';
+/* Inicialización */
+(function initDefault(){
+  loadKB();
+  const card = document.querySelector('[data-role="afiliado"]');
+  if(card){
+    card.classList.add('active');
+    currentRole = 'afiliado';
+    document.body.classList.add('afiliado');
+    renderTopicList('afiliado');
+    lucide.createIcons();
+  }
+})();
+</script>
 
-        breadcrumb.innerHTML =
-    '<button class="btn btn-back" onclick="goBack()">⬅ Volver</button>' +
-    '<span class="breadcrumb-item">Inicio</span>' +
-    '<span class="breadcrumb-item current">' + titles[current] + '</span>';
-            breadcrumb.classList.add('active');
-        }
+<!-- MODAL VISOR DE PDF -->
+<div class="pdf-modal-overlay" id="pdfModal" onclick="cerrarPdfModal(event)">
+  <div class="pdf-modal-box">
+    <div class="pdf-modal-header">
+      <span class="pdf-modal-title" id="pdfModalTitle">Documento</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <a id="pdfDownloadLink" href="#" download
+          style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;
+                 color:var(--osep);background:var(--osep-light);border:1px solid rgba(122,28,121,0.25);
+                 border-radius:20px;padding:4px 12px;text-decoration:none;transition:background .15s"
+          onmouseover="this.style.background='#ebccea'" onmouseout="this.style.background='var(--osep-light)'">
+          <i data-lucide="download" style="width:13px;height:13px"></i> Descargar
+        </a>
+        <button class="pdf-modal-close"
+          onclick="document.getElementById('pdfModal').classList.remove('open');
+                   document.getElementById('pdfModalFrame').src='';">
+          Cerrar
+        </button>
+      </div>
+    </div>
+    <iframe class="pdf-modal-frame" id="pdfModalFrame" src=""></iframe>
+  </div>
+</div>
 
-        // FUNCIONES SECCIÓN AFILIADO
-        function showAfiliadoNoApp() {
-            document.getElementById('afiliado-si-app').classList.add('hidden');
-            document.getElementById('afiliado-no-app').classList.remove('hidden');
-        }
+<div class="telag-popover" id="telagPopover">
+  <div class="telag-popover-title">¿Qué significa TELAG?</div>
+  <div class="telag-popover-body">
+    <em>Telag</em> (te-lag) es un vocablo huarpe que significa <em>semilla en germinación</em>.<br><br>
+    La semilla que nace pequeña y crece con cuidado. Perfecta metáfora para el conocimiento que se planta, se riega con uso diario y se convierte en algo grande.
+  </div>
+</div>
 
-        function showAfiliadoSiApp() {
-            document.getElementById('afiliado-no-app').classList.add('hidden');
-            document.getElementById('afiliado-si-app').classList.remove('hidden');
-        }
-
-        function showAfiliadoError(tipo) {
-            const errores = [
-                'afiliado-no-usuario',
-                'afiliado-credenciales',
-                'afiliado-pantalla-blanco',
-                'afiliado-no-email',
-                'afiliado-datos-invalidos',
-                'afiliado-cerrar-sesion'
-            ];
-            errores.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.add('hidden');
-            });
-            const target = document.getElementById('afiliado-' + tipo);
-            if (target) target.classList.remove('hidden');
-        }
-
-        // FUNCIONES SECCIÓN EMPLEADO
-        function showEmpleadoConsulta(tipo) {
-            const consultas = [
-            'emp-correo',
-            'emp-sisao',
-            'emp-pc-tecnico',
-            'emp-gde',
-            'emp-sga',
-            'emp-nextcloud',
-            'emp-siga',
-            'emp-agendas'  
-        ];
-            consultas.forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-            document.getElementById('emp-' + tipo).classList.remove('hidden');
-        }
-
-        // FUNCIONES SECCIÓN FARMACIA
-        function showFarmaciaConsumo(respuesta) {
-            if (respuesta === 'si') {
-                document.getElementById('farmacia-no').classList.add('hidden');
-                document.getElementById('farmacia-si').classList.remove('hidden');
-            } else {
-                document.getElementById('farmacia-si').classList.add('hidden');
-                document.getElementById('farmacia-no').classList.remove('hidden');
-            }
-        }
-
-        function showFarmaciaError(tipo) {
-            const mensajes = [
-                'farmacia-receta-consumida',
-                'farmacia-token-invalido',
-                'farmacia-no-coincide-prescriptor',
-                'farmacia-no-coincide-porcentaje'
-            ];
-            mensajes.forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-
-            const idMap = {
-                'consumida': 'farmacia-receta-consumida',
-                'token': 'farmacia-token-invalido',
-                'prescriptor': 'farmacia-no-coincide-prescriptor',
-                'porcentaje': 'farmacia-no-coincide-porcentaje'
-            };
-            document.getElementById(idMap[tipo]).classList.remove('hidden');
-        }
-
-        // FUNCIONES SECCIÓN PROFESIONAL
-        function showProfesionalSabe(respuesta) {
-            if (respuesta === 'si') {
-                document.getElementById('profesional-no-sabe').classList.add('hidden');
-                document.getElementById('profesional-si-sabe').classList.remove('hidden');
-            } else {
-                document.getElementById('profesional-si-sabe').classList.add('hidden');
-                document.getElementById('profesional-no-sabe').classList.remove('hidden');
-            }
-        }
-
-        function showProfesionalProblema(tipo) {
-            const allProblemas = [
-                'prof-usuario-incorrecto',
-                'prof-cambio-telefono',
-                'prof-recuperar-token',
-                'prof-no-abre-firmador',
-                'prof-olvido-contrasenia',
-                'prof-baneo-contrasenia',
-                'prof-pantalla-blanco',
-                'prof-cerrar-sesion',
-                'prof-olvido-proceso'
-            ];
-            
-            allProblemas.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.classList.add('hidden');
-                }
-            });
-
-            const idMap = {
-                'usuario': 'prof-usuario-incorrecto',
-                'telefono': 'prof-cambio-telefono',
-                'token': 'prof-recuperar-token',
-                'firmador': 'prof-no-abre-firmador',
-                'contrasenia': 'prof-olvido-contrasenia',
-                'baneo': 'prof-baneo-contrasenia',
-                'pantalla-blanco': 'prof-pantalla-blanco',
-                'cerrar-sesion': 'prof-cerrar-sesion',
-                'olvido-proceso': 'prof-olvido-proceso'
-            };
-            
-            const targetId = idMap[tipo];
-            if (targetId) {
-                document.getElementById(targetId).classList.remove('hidden');
-            }
-        }
-
-        function showSubProblema(tipo) {
-            document.getElementById('subprob-datos-incorrectos').classList.add('hidden');
-            document.getElementById('subprob-no-llega-email').classList.add('hidden');
-            
-            if (tipo === 'datos-incorrectos') {
-                document.getElementById('subprob-datos-incorrectos').classList.remove('hidden');
-            } else if (tipo === 'no-llega-email') {
-                document.getElementById('subprob-no-llega-email').classList.remove('hidden');
-            }
-        }
-
-        // INICIALIZACIÓN
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('✅ Guía Interactiva OSEP cargada correctamente');
-        });
-
-        // FUNCIÓN PARA MOSTRAR PDFs EN MODAL
-        function mostrarPDF(nombreArchivo, titulo) {
-            const modal = document.getElementById('pdfModal');
-            const iframe = document.getElementById('pdfIframe');
-            const tituloElement = document.getElementById('pdfTitulo');
-            
-            // Configurar título y ruta del PDF
-            tituloElement.textContent = titulo;
-            iframe.src = nombreArchivo;
-            
-            // Mostrar modal
-            modal.classList.add('active');
-        }
-
-        function cerrarPDF() {
-            const modal = document.getElementById('pdfModal');
-            const iframe = document.getElementById('pdfIframe');
-            
-            // Ocultar modal y limpiar iframe
-            modal.classList.remove('active');
-            iframe.src = '';
-        }
-
-        // Cerrar modal al hacer clic fuera del contenido
-        document.addEventListener('click', function(event) {
-            const modal = document.getElementById('pdfModal');
-            if (event.target === modal) {
-                cerrarPDF();
-            }
-        });
-    </script>
 </body>
 </html>
-                
-
-
-
-
-  <!-- !Problemas de Convenios</h3>   Línea 882: Cambia el título 
-                            <ol>                                                 
-                            
